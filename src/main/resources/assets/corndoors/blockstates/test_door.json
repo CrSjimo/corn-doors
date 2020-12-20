@@ -1,0 +1,53 @@
+{
+    "variants" :{
+        "a=1,b=0" :{
+            "model":"corndoors:block/naive_a1r_b1l"
+        },
+        "a=2,b=0" :{
+            "model":"corndoors:block/naive_a2r"
+        },
+        "a=3,b=0" :{
+            "model":"corndoors:block/naive_a3r_b3l"
+        },
+        "a=4,b=0" :{
+            "model":"corndoors:block/naive_a4r_b4l"
+        },
+        "a=5,b=0" :{
+            "model":"corndoors:block/naive_a1l_b1r"
+        },
+        "a=6,b=0" :{
+            "model":"corndoors:block/naive_b2r"
+        },
+        "a=7,b=0" :{
+            "model":"corndoors:block/naive_a3l_b3r"
+        },
+        "a=8,b=0" :{
+            "model":"corndoors:block/naive_a4l_b4r"
+        },
+
+        "a=1,b=1" :{
+            "model":"corndoors:block/naive_a1l_b1r"
+        },
+        "a=2,b=1" :{
+            "model":"corndoors:block/naive_a2l"
+        },
+        "a=3,b=1" :{
+            "model":"corndoors:block/naive_a3l_b3r"
+        },
+        "a=4,b=1" :{
+            "model":"corndoors:block/naive_a4l_b4r"
+        },
+        "a=5,b=1" :{
+            "model":"corndoors:block/naive_a1r_b1l"
+        },
+        "a=6,b=1" :{
+            "model":"corndoors:block/naive_b2l"
+        },
+        "a=7,b=1" :{
+            "model":"corndoors:block/naive_a3r_b3l"
+        },
+        "a=8,b=1" :{
+            "model":"corndoors:block/naive_a4r_b4l"
+        }
+    }
+}
