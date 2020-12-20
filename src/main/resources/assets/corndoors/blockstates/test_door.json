@@ -48,6 +48,9 @@
         },
         "a=8,b=1" :{
             "model":"corndoors:block/naive_a4r_b4l"
+        },
+        "b=2" :{
+            "model":"corndoors:block/naive_panel"
         }
     }
 }

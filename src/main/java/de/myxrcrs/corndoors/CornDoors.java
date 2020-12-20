@@ -4,6 +4,8 @@ import de.myxrcrs.corndoors.init.InitBlocks;
 import de.myxrcrs.corndoors.init.InitItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
@@ -86,6 +88,10 @@ public class CornDoors
         public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
             // register a new block here
             LOGGER.info("HELLO from Register Block");
+        }
+        @SubscribeEvent
+        public static void onRenderTypeSetup(FMLClientSetupEvent event) {
+            RenderTypeLookup.setRenderLayer(InitBlocks.TEST_DOOR.get(), RenderType.getCutout());
         }
     }
     // public static final ItemGroup ITEM_GROUP = new ItemGroup("corndoors") {

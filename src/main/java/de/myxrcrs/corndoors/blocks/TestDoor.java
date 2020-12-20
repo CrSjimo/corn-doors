@@ -13,10 +13,10 @@ import net.minecraft.world.IBlockReader;
 public class TestDoor extends Block {
 
     public static final IntegerProperty A = IntegerProperty.create("a", 1, 8);
-    public static final IntegerProperty B = IntegerProperty.create("b", 0, 1);
+    public static final IntegerProperty B = IntegerProperty.create("b", 0, 2);
     
     public TestDoor(){
-        super(Block.Properties.create(Material.WOOD));
+        super(Block.Properties.create(Material.WOOD).notSolid());
         this.setDefaultState(this.getDefaultState().with(A, 1).with(B, 0));
     }
 
