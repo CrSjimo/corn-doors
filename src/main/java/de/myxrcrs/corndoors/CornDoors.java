@@ -91,7 +91,7 @@ public class CornDoors
         }
         @SubscribeEvent
         public static void onRenderTypeSetup(FMLClientSetupEvent event) {
-            RenderTypeLookup.setRenderLayer(InitBlocks.TEST_DOOR.get(), RenderType.getCutout());
+            RenderTypeLookup.setRenderLayer(InitBlocks.NAIVE_DOOR.get(), RenderType.getCutout());
         }
     }
     // public static final ItemGroup ITEM_GROUP = new ItemGroup("corndoors") {

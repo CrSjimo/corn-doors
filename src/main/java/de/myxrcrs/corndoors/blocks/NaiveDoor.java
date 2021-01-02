@@ -26,13 +26,13 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class TestDoor extends AbstractDoor {
+public class NaiveDoor extends AbstractDoor {
 
     public static final IntegerProperty HORIZONTAL_POS = createHorizontalPosProperty(2);
     public static final IntegerProperty VERTICAL_POS = createVerticalPosProperty(4);
     public static final EnumProperty<DoorHingeSide> HINGE = BlockStateProperties.DOOR_HINGE;
     
-    public TestDoor(){
+    public NaiveDoor(){
         super(Block.Properties.create(Material.WOOD).notSolid(),false);
         this.setDefaultState(this.getDefaultState()
             .with(IS_OPENED, false)
@@ -48,11 +48,11 @@ public class TestDoor extends AbstractDoor {
             if(toggleDoor(worldIn, pos, state, HORIZONTAL_POS, VERTICAL_POS, state.get(HINGE))){
                 return ActionResultType.SUCCESS;
             }else{
-                return ActionResultType.FAIL;
+                return ActionResultType.CONSUME;
             }
         }catch(Exception e){
             LOGGER.error(e);
-            return ActionResultType.FAIL;
+            return ActionResultType.CONSUME;
         }
         
     }
@@ -61,35 +61,23 @@ public class TestDoor extends AbstractDoor {
     @Nullable
     public BlockState getStateForPlacement(BlockItemUseContext context){
         try{
-            Direction facing = context.getPlacementHorizontalFacing().getOpposite();
-            Triple<BlockPos,BlockPos,double[][]> leftHingeRange = getDoorRange(facing, context.getPos(), DoorHingeSide.LEFT, getSize(HORIZONTAL_POS), getSize(VERTICAL_POS), 0, 0);
-            Triple<BlockPos,BlockPos,double[][]> rightHingeRange = getDoorRange(facing, context.getPos(), DoorHingeSide.LEFT, getSize(HORIZONTAL_POS), getSize(VERTICAL_POS), 0, 0);
-            boolean canLeftHinge = iterateRange(leftHingeRange,(x,y,z)->{
-                if(!canTogglePos(context.getWorld(), new BlockPos(x,y,z))){
-                    return false;
-                }
-                return true;
-            });
-            if(canLeftHinge){
-                //TODO fill the range
-                return this.getDefaultState();
-            }
-            boolean canRightHinge = iterateRange(rightHingeRange,(x,y,z)->{
-                if(!canTogglePos(context.getWorld(), new BlockPos(x,y,z))){
-                    return false;
-                }
-                return true;
-            });
-            if(canRightHinge){
-                //TODO fill the range
-                return this.getDefaultState();
-            }
-            return Blocks.AIR.getDefaultState();
+            onPlaced(context, HORIZONTAL_POS, VERTICAL_POS, HINGE);
+            return null;
         }catch(Exception e){
             LOGGER.error(e);
-            return Blocks.AIR.getDefaultState();
+            return null;
         }
         
+    }
+
+    @Override
+    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+        try{
+            onHarvested(worldIn, state, pos, HORIZONTAL_POS, VERTICAL_POS, state.get(HINGE), state.get(FACING));
+        }catch(Exception e){
+            LOGGER.error(e);
+        }
+        super.onBlockHarvested(worldIn, pos, state, player);
     }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {

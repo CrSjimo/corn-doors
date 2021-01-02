@@ -16,6 +16,7 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.HorizontalBlock;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.IntegerProperty;
@@ -126,17 +127,18 @@ public abstract class AbstractDoor extends Block {
         Triple<BlockPos,BlockPos,double[][]> range = getDoorRange(state.get(FACING), pos, side, width, height, horizontalPos, verticalPos);
         ArrayList<Triple<BlockPos,BlockState,RotateTarget>> rotates = new ArrayList<>();
         if(!iterateRange(range, (x,y,z)->{
-            LOGGER.info(x+" "+y+" "+z);
             BlockPos currentPos = new BlockPos(x,y,z);
             BlockState currentState = world.getBlockState(currentPos);
-            //TODO check whether current state is air and trigger block harvest
+            if(currentState.getBlock()!=this){
+                this.onHarvested(world, state, pos, HORIZONTAL_POS, VERTICAL_POS, side, state.get(FACING));
+                return false;
+            }
             RotateTarget rotateTarget = getRotateTarget(currentState,currentPos,currentState.get(HORIZONTAL_POS),side);
             if(!canTogglePos(world, rotateTarget.pos))return false;
             rotates.add(Triple.of(currentPos,currentState,rotateTarget));
             return true;
         }))return false;
         
-        LOGGER.info(rotates);
         Iterator<Triple<BlockPos,BlockState,RotateTarget>> ptr = rotates.iterator();
         while(ptr.hasNext()){
             Triple<BlockPos,BlockState,RotateTarget> p = ptr.next();
@@ -174,6 +176,67 @@ public abstract class AbstractDoor extends Block {
 
     public int getSize(IntegerProperty p){
         return p.getAllowedValues().size();
+    }
+
+    public void fillRange(World world, Triple<BlockPos,BlockPos,double[][]> range, BlockState state, IntegerProperty HORIZONTAL_POS, IntegerProperty VERTICAL_POS)throws Exception{
+        iterateRange(range, (x,y,z)->{
+            int horizontalPos = Math.abs(x-range.getLeft().getX())+Math.abs(z-range.getLeft().getZ());
+            int verticalPos = y-range.getLeft().getY();
+            return world.setBlockState(new BlockPos(x,y,z), state.with(HORIZONTAL_POS,horizontalPos).with(VERTICAL_POS, verticalPos));
+        });
+    }
+
+    public void onPlaced(BlockItemUseContext context, IntegerProperty HORIZONTAL_POS, IntegerProperty VERTICAL_POS, EnumProperty<DoorHingeSide> HINGE)throws Exception{
+        Direction facing = context.getPlacementHorizontalFacing().getOpposite();
+        Triple<BlockPos,BlockPos,double[][]> leftHingeRange = getDoorRange(facing, context.getPos(), DoorHingeSide.LEFT, getSize(HORIZONTAL_POS), getSize(VERTICAL_POS), 0, 0);
+        Triple<BlockPos,BlockPos,double[][]> rightHingeRange = getDoorRange(facing, context.getPos(), DoorHingeSide.RIGHT, getSize(HORIZONTAL_POS), getSize(VERTICAL_POS), 0, 0);
+        boolean canLeftHinge = iterateRange(leftHingeRange,(x,y,z)->{
+            if(!canTogglePos(context.getWorld(), new BlockPos(x,y,z))){
+                return false;
+            }
+            return true;
+        });
+        if(canLeftHinge){
+            fillRange(
+                context.getWorld(),
+                leftHingeRange,
+                this.getDefaultState()
+                    .with(FACING, facing)
+                    .with(HINGE, DoorHingeSide.LEFT),
+                HORIZONTAL_POS,
+                VERTICAL_POS
+            );
+            return;
+        }
+        boolean canRightHinge = iterateRange(rightHingeRange,(x,y,z)->{
+            if(!canTogglePos(context.getWorld(), new BlockPos(x,y,z))){
+                return false;
+            }
+            return true;
+        });
+        if(canRightHinge){
+            fillRange(
+                context.getWorld(),
+                rightHingeRange,
+                this.getDefaultState()
+                    .with(FACING, facing)
+                    .with(HINGE, DoorHingeSide.RIGHT),
+                HORIZONTAL_POS,
+                VERTICAL_POS
+            );
+            return;
+        }
+    }
+
+    public void onHarvested(World world, BlockState state, BlockPos pos, IntegerProperty HORIZONTAL_POS, IntegerProperty VERTICAL_POS, DoorHingeSide side, Direction facing)throws Exception{
+        Triple<BlockPos,BlockPos,double[][]> range = getDoorRange(facing, pos, side, getSize(HORIZONTAL_POS), getSize(VERTICAL_POS), state.get(HORIZONTAL_POS), state.get(VERTICAL_POS));
+        iterateRange(range, (x,y,z)->{
+            BlockPos currentPos = new BlockPos(x,y,z);
+            if(world.getBlockState(currentPos).getBlock()==this){
+                world.setBlockState(currentPos, Blocks.AIR.getDefaultState());
+            }
+            return true;
+        });
     }
 
     public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
