@@ -2,9 +2,12 @@ package de.myxrcrs.corndoors.blocks;
 
 import javax.annotation.Nullable;
 
+import org.apache.commons.lang3.tuple.Triple;
+
 import de.myxrcrs.util.RotateTarget;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
+import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
@@ -56,11 +59,37 @@ public class TestDoor extends AbstractDoor {
 
     @Override
     @Nullable
-    //TODO
     public BlockState getStateForPlacement(BlockItemUseContext context){
-        Direction facing = context.getPlacementHorizontalFacing().getOpposite();
+        try{
+            Direction facing = context.getPlacementHorizontalFacing().getOpposite();
+            Triple<BlockPos,BlockPos,double[][]> leftHingeRange = getDoorRange(facing, context.getPos(), DoorHingeSide.LEFT, getSize(HORIZONTAL_POS), getSize(VERTICAL_POS), 0, 0);
+            Triple<BlockPos,BlockPos,double[][]> rightHingeRange = getDoorRange(facing, context.getPos(), DoorHingeSide.LEFT, getSize(HORIZONTAL_POS), getSize(VERTICAL_POS), 0, 0);
+            boolean canLeftHinge = iterateRange(leftHingeRange,(x,y,z)->{
+                if(!canTogglePos(context.getWorld(), new BlockPos(x,y,z))){
+                    return false;
+                }
+                return true;
+            });
+            if(canLeftHinge){
+                //TODO fill the range
+                return this.getDefaultState();
+            }
+            boolean canRightHinge = iterateRange(rightHingeRange,(x,y,z)->{
+                if(!canTogglePos(context.getWorld(), new BlockPos(x,y,z))){
+                    return false;
+                }
+                return true;
+            });
+            if(canRightHinge){
+                //TODO fill the range
+                return this.getDefaultState();
+            }
+            return Blocks.AIR.getDefaultState();
+        }catch(Exception e){
+            LOGGER.error(e);
+            return Blocks.AIR.getDefaultState();
+        }
         
-        return this.getDefaultState();
     }
 
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {

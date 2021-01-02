@@ -120,22 +120,16 @@ public abstract class AbstractDoor extends Block {
 
         int horizontalPos = state.get(HORIZONTAL_POS);
         int verticalPos = state.get(VERTICAL_POS);
-        int width = HORIZONTAL_POS.getAllowedValues().size();
-        int height = VERTICAL_POS.getAllowedValues().size();
+        int width = getSize(HORIZONTAL_POS);
+        int height = getSize(VERTICAL_POS);
 
         Triple<BlockPos,BlockPos,double[][]> range = getDoorRange(state.get(FACING), pos, side, width, height, horizontalPos, verticalPos);
-
-        BlockPos fromPos = range.getLeft();
-        BlockPos toPos = range.getMiddle();
-        double[][] v = range.getRight();
-        LOGGER.info(fromPos);
-        LOGGER.info(toPos);
-        LOGGER.info(v[0][0]+" "+v[0][1]);
         ArrayList<Triple<BlockPos,BlockState,RotateTarget>> rotates = new ArrayList<>();
-        if(!iterateRange(fromPos, toPos, v, (x,y,z)->{
+        if(!iterateRange(range, (x,y,z)->{
             LOGGER.info(x+" "+y+" "+z);
             BlockPos currentPos = new BlockPos(x,y,z);
             BlockState currentState = world.getBlockState(currentPos);
+            //TODO check whether current state is air and trigger block harvest
             RotateTarget rotateTarget = getRotateTarget(currentState,currentPos,currentState.get(HORIZONTAL_POS),side);
             if(!canTogglePos(world, rotateTarget.pos))return false;
             rotates.add(Triple.of(currentPos,currentState,rotateTarget));
@@ -151,7 +145,10 @@ public abstract class AbstractDoor extends Block {
         return true;
     }
 
-    public boolean iterateRange(BlockPos fromPos, BlockPos toPos, double[][] v, RangeIterationConsumer func)throws Exception{
+    public boolean iterateRange(Triple<BlockPos,BlockPos,double[][]>range, RangeIterationConsumer func)throws Exception{
+        BlockPos fromPos = range.getLeft();
+        BlockPos toPos = range.getMiddle();
+        double[][] v = range.getRight();
         boolean xOnce = false;
         for(int x = fromPos.getX() ; x != toPos.getX() || (v[0][0]==0&&!xOnce) ; x-=(int)v[0][0]){
             for(int y = fromPos.getY() ; y != toPos.getY() ; y++){
@@ -173,6 +170,10 @@ public abstract class AbstractDoor extends Block {
     public void toggleDoorPos(World world, BlockPos pos, BlockState state, RotateTarget rotateTarget){
         world.setBlockState(rotateTarget.pos, state.with(FACING, rotateTarget.facing).cycle(IS_OPENED));
         world.setBlockState(pos, Blocks.AIR.getDefaultState());
+    }
+
+    public int getSize(IntegerProperty p){
+        return p.getAllowedValues().size();
     }
 
     public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
