@@ -69,7 +69,7 @@ public class Matrix {
         return c;
     }
 
-    public static double[][] directionToMatrix(Direction facing){
+    public static double[][] horizontalDirectionToMatrix(Direction facing){
         switch(facing){
             case NORTH: return new double[][]{{0,-1}};
             case EAST: return new double[][]{{1,0}};
@@ -77,6 +77,13 @@ public class Matrix {
             case WEST: return new double[][]{{-1,0}};
             default: return new double[][]{{0,-1}};
         }
+    }
+
+    public static Direction matrixToHorizontalDirection(double[][] mat)throws Exception{
+        if(mat.length!=1)throw new Exception("Rows Exception.");
+        if(mat[0].length!=2)throw new Exception("Columns Exception.");
+        if((mat[0][0]==0)==(mat[0][1]==0))throw new Exception("Matrix Exception.");
+        return mat[0][0]==0 ? (mat[0][1]>0 ? Direction.SOUTH : Direction.NORTH) : (mat[0][0]>0 ? Direction.EAST : Direction.WEST);
     }
 
 }
