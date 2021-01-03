@@ -6,11 +6,23 @@
         "vertical_pos=1,horizontal_pos=0,hinge=right,facing=north" :{
             "model":"corndoors:block/naive_a2r"
         },
-        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=north" :{
+        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=north,window=glass" :{
             "model":"corndoors:block/naive_a3r_b3l"
         },
-        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=north" :{
+        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=north,window=glass" :{
             "model":"corndoors:block/naive_a4r_b4l"
+        },
+        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=north,window=none" :{
+            "model":"corndoors:block/naive_a3r_b3l_window_none"
+        },
+        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=north,window=none" :{
+            "model":"corndoors:block/naive_a4r_b4l_window_none"
+        },
+        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=north,window=film" :{
+            "model":"corndoors:block/naive_a3r_b3l_window_film"
+        },
+        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=north,window=film" :{
+            "model":"corndoors:block/naive_a4r_b4l_window_film"
         },
         "vertical_pos=0,horizontal_pos=1,hinge=right,facing=north" :{
             "model":"corndoors:block/naive_a1l_b1r"
@@ -18,11 +30,23 @@
         "vertical_pos=1,horizontal_pos=1,hinge=right,facing=north" :{
             "model":"corndoors:block/naive_b2r"
         },
-        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=north" :{
+        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=north,window=glass" :{
             "model":"corndoors:block/naive_a3l_b3r"
         },
-        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=north" :{
+        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=north,window=glass" :{
             "model":"corndoors:block/naive_a4l_b4r"
+        },
+        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=north,window=none" :{
+            "model":"corndoors:block/naive_a3l_b3r_window_none"
+        },
+        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=north,window=none" :{
+            "model":"corndoors:block/naive_a4l_b4r_window_none"
+        },
+        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=north,window=film" :{
+            "model":"corndoors:block/naive_a3l_b3r_window_film"
+        },
+        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=north,window=film" :{
+            "model":"corndoors:block/naive_a4l_b4r_window_film"
         },
 
         "vertical_pos=0,horizontal_pos=0,hinge=left,facing=north" :{
@@ -31,11 +55,23 @@
         "vertical_pos=1,horizontal_pos=0,hinge=left,facing=north" :{
             "model":"corndoors:block/naive_a2l"
         },
-        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=north" :{
+        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=north,window=glass" :{
             "model":"corndoors:block/naive_a3l_b3r"
         },
-        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=north" :{
+        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=north,window=glass" :{
             "model":"corndoors:block/naive_a4l_b4r"
+        },
+        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=north,window=none" :{
+            "model":"corndoors:block/naive_a3l_b3r_window_none"
+        },
+        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=north,window=none" :{
+            "model":"corndoors:block/naive_a4l_b4r_window_none"
+        },
+        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=north,window=film" :{
+            "model":"corndoors:block/naive_a3l_b3r_window_film"
+        },
+        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=north,window=film" :{
+            "model":"corndoors:block/naive_a4l_b4r_window_film"
         },
         "vertical_pos=0,horizontal_pos=1,hinge=left,facing=north" :{
             "model":"corndoors:block/naive_a1r_b1l"
@@ -43,11 +79,23 @@
         "vertical_pos=1,horizontal_pos=1,hinge=left,facing=north" :{
             "model":"corndoors:block/naive_b2l"
         },
-        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=north" :{
+        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=north,window=glass" :{
             "model":"corndoors:block/naive_a3r_b3l"
         },
-        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=north" :{
+        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=north,window=glass" :{
             "model":"corndoors:block/naive_a4r_b4l"
+        },
+        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=north,window=none" :{
+            "model":"corndoors:block/naive_a3r_b3l_window_none"
+        },
+        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=north,window=none" :{
+            "model":"corndoors:block/naive_a4r_b4l_window_none"
+        },
+        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=north,window=film" :{
+            "model":"corndoors:block/naive_a3r_b3l_window_film"
+        },
+        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=north,window=film" :{
+            "model":"corndoors:block/naive_a4r_b4l_window_film"
         },
 
 
@@ -59,13 +107,29 @@
             "y": 90,
             "model":"corndoors:block/naive_a2r"
         },
-        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=east" :{
+        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=east,window=glass" :{
             "y": 90,
             "model":"corndoors:block/naive_a3r_b3l"
         },
-        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=east" :{
+        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=east,window=glass" :{
             "y": 90,
             "model":"corndoors:block/naive_a4r_b4l"
+        },
+        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=east,window=none" :{
+            "y": 90,
+            "model":"corndoors:block/naive_a3r_b3l_window_none"
+        },
+        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=east,window=none" :{
+            "y": 90,
+            "model":"corndoors:block/naive_a4r_b4l_window_none"
+        },
+        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=east,window=film" :{
+            "y": 90,
+            "model":"corndoors:block/naive_a3r_b3l_window_film"
+        },
+        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=east,window=film" :{
+            "y": 90,
+            "model":"corndoors:block/naive_a4r_b4l_window_film"
         },
         "vertical_pos=0,horizontal_pos=1,hinge=right,facing=east" :{
             "y": 90,
@@ -75,13 +139,29 @@
             "y": 90,
             "model":"corndoors:block/naive_b2r"
         },
-        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=east" :{
+        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=east,window=glass" :{
             "y": 90,
             "model":"corndoors:block/naive_a3l_b3r"
         },
-        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=east" :{
+        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=east,window=glass" :{
             "y": 90,
             "model":"corndoors:block/naive_a4l_b4r"
+        },
+        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=east,window=none" :{
+            "y": 90,
+            "model":"corndoors:block/naive_a3l_b3r_window_none"
+        },
+        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=east,window=none" :{
+            "y": 90,
+            "model":"corndoors:block/naive_a4l_b4r_window_none"
+        },
+        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=east,window=film" :{
+            "y": 90,
+            "model":"corndoors:block/naive_a3l_b3r_window_film"
+        },
+        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=east,window=film" :{
+            "y": 90,
+            "model":"corndoors:block/naive_a4l_b4r_window_film"
         },
 
         "vertical_pos=0,horizontal_pos=0,hinge=left,facing=east" :{
@@ -92,13 +172,29 @@
             "y": 90,
             "model":"corndoors:block/naive_a2l"
         },
-        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=east" :{
+        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=east,window=glass" :{
             "y": 90,
             "model":"corndoors:block/naive_a3l_b3r"
         },
-        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=east" :{
+        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=east,window=glass" :{
             "y": 90,
             "model":"corndoors:block/naive_a4l_b4r"
+        },
+        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=east,window=none" :{
+            "y": 90,
+            "model":"corndoors:block/naive_a3l_b3r_window_none"
+        },
+        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=east,window=none" :{
+            "y": 90,
+            "model":"corndoors:block/naive_a4l_b4r_window_none"
+        },
+        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=east,window=film" :{
+            "y": 90,
+            "model":"corndoors:block/naive_a3l_b3r_window_film"
+        },
+        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=east,window=film" :{
+            "y": 90,
+            "model":"corndoors:block/naive_a4l_b4r_window_film"
         },
         "vertical_pos=0,horizontal_pos=1,hinge=left,facing=east" :{
             "y": 90,
@@ -108,13 +204,29 @@
             "y": 90,
             "model":"corndoors:block/naive_b2l"
         },
-        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=east" :{
+        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=east,window=glass" :{
             "y": 90,
             "model":"corndoors:block/naive_a3r_b3l"
         },
-        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=east" :{
+        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=east,window=glass" :{
             "y": 90,
             "model":"corndoors:block/naive_a4r_b4l"
+        },
+        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=east,window=none" :{
+            "y": 90,
+            "model":"corndoors:block/naive_a3r_b3l_window_none"
+        },
+        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=east,window=none" :{
+            "y": 90,
+            "model":"corndoors:block/naive_a4r_b4l_window_none"
+        },
+        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=east,window=film" :{
+            "y": 90,
+            "model":"corndoors:block/naive_a3r_b3l_window_film"
+        },
+        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=east,window=film" :{
+            "y": 90,
+            "model":"corndoors:block/naive_a4r_b4l_window_film"
         },
 
 
@@ -126,13 +238,29 @@
             "y": 180,
             "model":"corndoors:block/naive_a2r"
         },
-        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=south" :{
+        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=south,window=glass" :{
             "y": 180,
             "model":"corndoors:block/naive_a3r_b3l"
         },
-        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=south" :{
+        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=south,window=glass" :{
             "y": 180,
             "model":"corndoors:block/naive_a4r_b4l"
+        },
+        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=south,window=none" :{
+            "y": 180,
+            "model":"corndoors:block/naive_a3r_b3l_window_none"
+        },
+        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=south,window=none" :{
+            "y": 180,
+            "model":"corndoors:block/naive_a4r_b4l_window_none"
+        },
+        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=south,window=film" :{
+            "y": 180,
+            "model":"corndoors:block/naive_a3r_b3l_window_film"
+        },
+        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=south,window=film" :{
+            "y": 180,
+            "model":"corndoors:block/naive_a4r_b4l_window_film"
         },
         "vertical_pos=0,horizontal_pos=1,hinge=right,facing=south" :{
             "y": 180,
@@ -142,13 +270,29 @@
             "y": 180,
             "model":"corndoors:block/naive_b2r"
         },
-        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=south" :{
+        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=south,window=glass" :{
             "y": 180,
             "model":"corndoors:block/naive_a3l_b3r"
         },
-        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=south" :{
+        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=south,window=glass" :{
             "y": 180,
             "model":"corndoors:block/naive_a4l_b4r"
+        },
+        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=south,window=none" :{
+            "y": 180,
+            "model":"corndoors:block/naive_a3l_b3r_window_none"
+        },
+        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=south,window=none" :{
+            "y": 180,
+            "model":"corndoors:block/naive_a4l_b4r_window_none"
+        },
+        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=south,window=film" :{
+            "y": 180,
+            "model":"corndoors:block/naive_a3l_b3r_window_film"
+        },
+        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=south,window=film" :{
+            "y": 180,
+            "model":"corndoors:block/naive_a4l_b4r_window_film"
         },
 
         "vertical_pos=0,horizontal_pos=0,hinge=left,facing=south" :{
@@ -159,13 +303,29 @@
             "y": 180,
             "model":"corndoors:block/naive_a2l"
         },
-        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=south" :{
+        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=south,window=glass" :{
             "y": 180,
             "model":"corndoors:block/naive_a3l_b3r"
         },
-        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=south" :{
+        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=south,window=glass" :{
             "y": 180,
             "model":"corndoors:block/naive_a4l_b4r"
+        },
+        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=south,window=none" :{
+            "y": 180,
+            "model":"corndoors:block/naive_a3l_b3r_window_none"
+        },
+        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=south,window=none" :{
+            "y": 180,
+            "model":"corndoors:block/naive_a4l_b4r_window_none"
+        },
+        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=south,window=film" :{
+            "y": 180,
+            "model":"corndoors:block/naive_a3l_b3r_window_film"
+        },
+        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=south,window=film" :{
+            "y": 180,
+            "model":"corndoors:block/naive_a4l_b4r_window_film"
         },
         "vertical_pos=0,horizontal_pos=1,hinge=left,facing=south" :{
             "y": 180,
@@ -175,13 +335,29 @@
             "y": 180,
             "model":"corndoors:block/naive_b2l"
         },
-        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=south" :{
+        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=south,window=glass" :{
             "y": 180,
             "model":"corndoors:block/naive_a3r_b3l"
         },
-        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=south" :{
+        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=south,window=glass" :{
             "y": 180,
             "model":"corndoors:block/naive_a4r_b4l"
+        },
+        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=south,window=none" :{
+            "y": 180,
+            "model":"corndoors:block/naive_a3r_b3l_window_none"
+        },
+        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=south,window=none" :{
+            "y": 180,
+            "model":"corndoors:block/naive_a4r_b4l_window_none"
+        },
+        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=south,window=film" :{
+            "y": 180,
+            "model":"corndoors:block/naive_a3r_b3l_window_film"
+        },
+        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=south,window=film" :{
+            "y": 180,
+            "model":"corndoors:block/naive_a4r_b4l_window_film"
         },
 
 
@@ -193,13 +369,29 @@
             "y": 270,
             "model":"corndoors:block/naive_a2r"
         },
-        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=west" :{
+        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=west,window=glass" :{
             "y": 270,
             "model":"corndoors:block/naive_a3r_b3l"
         },
-        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=west" :{
+        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=west,window=glass" :{
             "y": 270,
             "model":"corndoors:block/naive_a4r_b4l"
+        },
+        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=west,window=none" :{
+            "y": 270,
+            "model":"corndoors:block/naive_a3r_b3l_window_none"
+        },
+        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=west,window=none" :{
+            "y": 270,
+            "model":"corndoors:block/naive_a4r_b4l_window_none"
+        },
+        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=west,window=film" :{
+            "y": 270,
+            "model":"corndoors:block/naive_a3r_b3l_window_film"
+        },
+        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=west,window=film" :{
+            "y": 270,
+            "model":"corndoors:block/naive_a4r_b4l_window_film"
         },
         "vertical_pos=0,horizontal_pos=1,hinge=right,facing=west" :{
             "y": 270,
@@ -209,13 +401,29 @@
             "y": 270,
             "model":"corndoors:block/naive_b2r"
         },
-        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=west" :{
+        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=west,window=glass" :{
             "y": 270,
             "model":"corndoors:block/naive_a3l_b3r"
         },
-        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=west" :{
+        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=west,window=glass" :{
             "y": 270,
             "model":"corndoors:block/naive_a4l_b4r"
+        },
+        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=west,window=none" :{
+            "y": 270,
+            "model":"corndoors:block/naive_a3l_b3r_window_none"
+        },
+        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=west,window=none" :{
+            "y": 270,
+            "model":"corndoors:block/naive_a4l_b4r_window_none"
+        },
+        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=west,window=film" :{
+            "y": 270,
+            "model":"corndoors:block/naive_a3l_b3r_window_film"
+        },
+        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=west,window=film" :{
+            "y": 270,
+            "model":"corndoors:block/naive_a4l_b4r_window_film"
         },
 
         "vertical_pos=0,horizontal_pos=0,hinge=left,facing=west" :{
@@ -226,13 +434,29 @@
             "y": 270,
             "model":"corndoors:block/naive_a2l"
         },
-        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=west" :{
+        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=west,window=glass" :{
             "y": 270,
             "model":"corndoors:block/naive_a3l_b3r"
         },
-        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=west" :{
+        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=west,window=glass" :{
             "y": 270,
             "model":"corndoors:block/naive_a4l_b4r"
+        },
+        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=west,window=none" :{
+            "y": 270,
+            "model":"corndoors:block/naive_a3l_b3r_window_none"
+        },
+        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=west,window=none" :{
+            "y": 270,
+            "model":"corndoors:block/naive_a4l_b4r_window_none"
+        },
+        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=west,window=film" :{
+            "y": 270,
+            "model":"corndoors:block/naive_a3l_b3r_window_film"
+        },
+        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=west,window=film" :{
+            "y": 270,
+            "model":"corndoors:block/naive_a4l_b4r_window_film"
         },
         "vertical_pos=0,horizontal_pos=1,hinge=left,facing=west" :{
             "y": 270,
@@ -242,13 +466,29 @@
             "y": 270,
             "model":"corndoors:block/naive_b2l"
         },
-        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=west" :{
+        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=west,window=glass" :{
             "y": 270,
             "model":"corndoors:block/naive_a3r_b3l"
         },
-        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=west" :{
+        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=west,window=glass" :{
             "y": 270,
             "model":"corndoors:block/naive_a4r_b4l"
+        },
+        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=west,window=none" :{
+            "y": 270,
+            "model":"corndoors:block/naive_a3r_b3l_window_none"
+        },
+        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=west,window=none" :{
+            "y": 270,
+            "model":"corndoors:block/naive_a4r_b4l_window_none"
+        },
+        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=west,window=film" :{
+            "y": 270,
+            "model":"corndoors:block/naive_a3r_b3l_window_film"
+        },
+        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=west,window=film" :{
+            "y": 270,
+            "model":"corndoors:block/naive_a4r_b4l_window_film"
         }
     }
 }

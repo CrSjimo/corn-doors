@@ -44,15 +44,23 @@ public abstract class AbstractDoor extends Block {
 
     public static final BooleanProperty IS_OPENED = BooleanProperty.create("is_opened");
     public static final EnumProperty<Direction> FACING = HorizontalBlock.HORIZONTAL_FACING;
+    public static final EnumProperty<DoorHingeSide> HINGE = BlockStateProperties.DOOR_HINGE;
 
     public boolean rotateWithinHinge;
 
-    public AbstractDoor(Properties props, boolean rotateWithinHinge){
+    public final IntegerProperty HORIZONTAL_POS;
+    public final IntegerProperty VERTICAL_POS;
+
+    public AbstractDoor(Properties props, boolean rotateWithinHinge, IntegerProperty horizontalPosProp, IntegerProperty verticalPosProp){
         super(props);
+        this.HORIZONTAL_POS = horizontalPosProp;
+        this.VERTICAL_POS = verticalPosProp;
         this.rotateWithinHinge = rotateWithinHinge;
     }
 
-    public RotateTarget getRotateTarget(BlockState state, BlockPos pos, int horizontalPos, DoorHingeSide side)throws Exception{
+    public RotateTarget getRotateTarget(BlockState state, BlockPos pos)throws Exception{
+        int horizontalPos = state.get(HORIZONTAL_POS);
+        DoorHingeSide side = state.get(HINGE);
         final double[][] hL = 
             {{ 0, 1},
             { -1, 0}};
@@ -116,26 +124,30 @@ public abstract class AbstractDoor extends Block {
             return Triple.of(fromPos, toPos,v);
     }
 
-    public boolean toggleDoor(World world, BlockPos pos, BlockState state, IntegerProperty HORIZONTAL_POS, IntegerProperty VERTICAL_POS, DoorHingeSide side)throws Exception {
+    public boolean toggleDoor(World world, BlockPos pos, BlockState state)throws Exception {
         
 
         int horizontalPos = state.get(HORIZONTAL_POS);
         int verticalPos = state.get(VERTICAL_POS);
         int width = getSize(HORIZONTAL_POS);
         int height = getSize(VERTICAL_POS);
+        DoorHingeSide side = state.get(HINGE);
 
         Triple<BlockPos,BlockPos,double[][]> range = getDoorRange(state.get(FACING), pos, side, width, height, horizontalPos, verticalPos);
         ArrayList<Triple<BlockPos,BlockState,RotateTarget>> rotates = new ArrayList<>();
+        BlockState stateTemplate = world.getBlockState(range.getLeft());
         if(!iterateRange(range, (x,y,z)->{
+            int currentHorizontalPos = Math.abs(x-range.getLeft().getX())+Math.abs(z-range.getLeft().getZ());
+            int currentVerticalPos = y-range.getLeft().getY();
             BlockPos currentPos = new BlockPos(x,y,z);
             BlockState currentState = world.getBlockState(currentPos);
             if(currentState.getBlock()!=this){
-                this.onHarvested(world, state, pos, HORIZONTAL_POS, VERTICAL_POS, side, state.get(FACING));
+                this.onHarvested(world, state, pos);
                 return false;
             }
-            RotateTarget rotateTarget = getRotateTarget(currentState,currentPos,currentState.get(HORIZONTAL_POS),side);
+            RotateTarget rotateTarget = getRotateTarget(currentState,currentPos);
             if(!canTogglePos(world, rotateTarget.pos))return false;
-            rotates.add(Triple.of(currentPos,currentState,rotateTarget));
+            rotates.add(Triple.of(currentPos,stateTemplate.with(HORIZONTAL_POS, currentHorizontalPos).with(VERTICAL_POS, currentVerticalPos),rotateTarget));
             return true;
         }))return false;
         
@@ -178,15 +190,15 @@ public abstract class AbstractDoor extends Block {
         return p.getAllowedValues().size();
     }
 
-    public void fillRange(World world, Triple<BlockPos,BlockPos,double[][]> range, BlockState state, IntegerProperty HORIZONTAL_POS, IntegerProperty VERTICAL_POS)throws Exception{
+    public void fillRange(World world, Triple<BlockPos,BlockPos,double[][]> range, BlockState stateTemplate)throws Exception{
         iterateRange(range, (x,y,z)->{
             int horizontalPos = Math.abs(x-range.getLeft().getX())+Math.abs(z-range.getLeft().getZ());
             int verticalPos = y-range.getLeft().getY();
-            return world.setBlockState(new BlockPos(x,y,z), state.with(HORIZONTAL_POS,horizontalPos).with(VERTICAL_POS, verticalPos));
+            return world.setBlockState(new BlockPos(x,y,z), stateTemplate.with(HORIZONTAL_POS,horizontalPos).with(VERTICAL_POS, verticalPos));
         });
     }
 
-    public void onPlaced(BlockItemUseContext context, IntegerProperty HORIZONTAL_POS, IntegerProperty VERTICAL_POS, EnumProperty<DoorHingeSide> HINGE)throws Exception{
+    public void onPlaced(BlockItemUseContext context, BlockState stateTemplate)throws Exception{
         Direction facing = context.getPlacementHorizontalFacing().getOpposite();
         Triple<BlockPos,BlockPos,double[][]> leftHingeRange = getDoorRange(facing, context.getPos(), DoorHingeSide.LEFT, getSize(HORIZONTAL_POS), getSize(VERTICAL_POS), 0, 0);
         Triple<BlockPos,BlockPos,double[][]> rightHingeRange = getDoorRange(facing, context.getPos(), DoorHingeSide.RIGHT, getSize(HORIZONTAL_POS), getSize(VERTICAL_POS), 0, 0);
@@ -200,11 +212,9 @@ public abstract class AbstractDoor extends Block {
             fillRange(
                 context.getWorld(),
                 leftHingeRange,
-                this.getDefaultState()
+                stateTemplate
                     .with(FACING, facing)
-                    .with(HINGE, DoorHingeSide.LEFT),
-                HORIZONTAL_POS,
-                VERTICAL_POS
+                    .with(HINGE, DoorHingeSide.LEFT)
             );
             return;
         }
@@ -218,18 +228,16 @@ public abstract class AbstractDoor extends Block {
             fillRange(
                 context.getWorld(),
                 rightHingeRange,
-                this.getDefaultState()
+                stateTemplate
                     .with(FACING, facing)
-                    .with(HINGE, DoorHingeSide.RIGHT),
-                HORIZONTAL_POS,
-                VERTICAL_POS
+                    .with(HINGE, DoorHingeSide.RIGHT)
             );
             return;
         }
     }
 
-    public void onHarvested(World world, BlockState state, BlockPos pos, IntegerProperty HORIZONTAL_POS, IntegerProperty VERTICAL_POS, DoorHingeSide side, Direction facing)throws Exception{
-        Triple<BlockPos,BlockPos,double[][]> range = getDoorRange(facing, pos, side, getSize(HORIZONTAL_POS), getSize(VERTICAL_POS), state.get(HORIZONTAL_POS), state.get(VERTICAL_POS));
+    public void onHarvested(World world, BlockState state, BlockPos pos)throws Exception{
+        Triple<BlockPos,BlockPos,double[][]> range = getDoorRange(state.get(FACING), pos, state.get(HINGE), getSize(HORIZONTAL_POS), getSize(VERTICAL_POS), state.get(HORIZONTAL_POS), state.get(VERTICAL_POS));
         iterateRange(range, (x,y,z)->{
             BlockPos currentPos = new BlockPos(x,y,z);
             if(world.getBlockState(currentPos).getBlock()==this){
