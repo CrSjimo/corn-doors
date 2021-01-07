@@ -37,7 +37,7 @@ public class NaiveDoor extends AbstractDoor {
     public static final EnumProperty<DoorWindowType> WINDOW = EnumProperty.create("window", DoorWindowType.class);
     
     public NaiveDoor(){
-        super(Block.Properties.create(Material.WOOD).notSolid(),false,HORIZONTAL_POS,VERTICAL_POS);
+        super(Block.Properties.create(Material.WOOD).notSolid(),false,HORIZONTAL_POS,VERTICAL_POS,null);
         this.setDefaultState(this.getDefaultState()
             .with(IS_OPENED, false)
             .with(FACING, Direction.NORTH)

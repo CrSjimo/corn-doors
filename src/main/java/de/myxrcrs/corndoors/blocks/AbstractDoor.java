@@ -3,6 +3,7 @@ package de.myxrcrs.corndoors.blocks;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.function.Consumer;
+import javax.annotation.Nullable;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
@@ -47,26 +48,24 @@ public abstract class AbstractDoor extends Block {
     public static final EnumProperty<DoorHingeSide> HINGE = BlockStateProperties.DOOR_HINGE;
 
     public boolean rotateWithinHinge;
+    @Nullable public AbstractDualDoorEdge correspondingDualDoorEdgeBlock;
 
     public final IntegerProperty HORIZONTAL_POS;
     public final IntegerProperty VERTICAL_POS;
 
-    public AbstractDoor(Properties props, boolean rotateWithinHinge, IntegerProperty horizontalPosProp, IntegerProperty verticalPosProp){
+    public AbstractDoor(Properties props, boolean rotateWithinHinge, IntegerProperty horizontalPosProp, IntegerProperty verticalPosProp, @Nullable AbstractDualDoorEdge correspondingDualDoorEdgeBlock){
         super(props);
         this.HORIZONTAL_POS = horizontalPosProp;
         this.VERTICAL_POS = verticalPosProp;
         this.rotateWithinHinge = rotateWithinHinge;
+        this.correspondingDualDoorEdgeBlock = correspondingDualDoorEdgeBlock;
     }
 
     public RotateTarget getRotateTarget(BlockState state, BlockPos pos)throws Exception{
-        int horizontalPos = state.get(HORIZONTAL_POS);
-        DoorHingeSide side = state.get(HINGE);
-        final double[][] hL = 
-            {{ 0, 1},
-            { -1, 0}};
-        final double[][] hR = 
-            {{ 0,-1},
-            {  1, 0}};
+        return getRotateTarget(state.get(FACING), state.get(HORIZONTAL_POS), state.get(HINGE), state.get(IS_OPENED), pos);
+    }
+
+    public RotateTarget getRotateTarget(Direction facing, int horizontalPos, DoorHingeSide side, boolean isOpened, BlockPos pos)throws Exception{
         final double[][] rL = 
             {{ 0, 1, 0, 0},
             { -1, 0, 0, 0},
@@ -78,16 +77,16 @@ public abstract class AbstractDoor extends Block {
             {  1, 1, 1, 0},
             { -1, 1, 0, 1}};
         double[][] a = {{pos.getX(),pos.getZ()}};
-        double[][] u = Matrix.horizontalDirectionToMatrix(state.get(FACING));
+        double[][] u = Matrix.horizontalDirectionToMatrix(facing);
         boolean flag = side == DoorHingeSide.LEFT;
-        boolean flag2 = state.get(IS_OPENED);
-        double[][] v = Matrix.mul(u,flag?hL:hR);
+        boolean flag2 = isOpened;
+        double[][] v = Matrix.getHingeVector(u, side);
         double[][] center = Matrix.add(a,Matrix.mul(v,horizontalPos));
         if(!rotateWithinHinge){
             center = Matrix.add(center,Matrix.mul(Matrix.add(u,v),0.5));
         }
         double[][] target = Matrix.mul(new double[][]{{pos.getX(),pos.getZ(),center[0][0],center[0][1]}},flag!=flag2?rL:rR);
-        return new RotateTarget(Matrix.matrixToHorizontalDirection(Matrix.mul(v,flag2?-1:1)),new BlockPos(target[0][0],pos.getY(),target[0][1]));
+        return new RotateTarget(Matrix.matrixToHorizontalDirection(Matrix.mul(v,flag2?-1:1)),new BlockPos(target[0][0],pos.getY(),target[0][1]),side);
     }
 
     public static VoxelShape generateBoundaryBox(BlockState state, double thickness){
@@ -103,6 +102,14 @@ public abstract class AbstractDoor extends Block {
             case WEST:
                 return Block.makeCuboidShape(0, 0, 0, thickness, 16, 16);
         }
+    }
+
+    public BlockPos getNeighborDualDoorEdgePos(BlockPos pos, BlockState state, DoorHingeSide side)throws Exception{
+        double[][] a = {{pos.getX(),pos.getY()}};
+        double[][] u = Matrix.horizontalDirectionToMatrix(state.get(FACING));
+        double[][] v = Matrix.getHingeVector(u, side == DoorHingeSide.LEFT ? DoorHingeSide.RIGHT : DoorHingeSide.LEFT);
+        double[][] b = Matrix.add(a, v);
+        return new BlockPos(b[0][0],pos.getY(),b[0][1]);
     }
 
     public Triple<BlockPos,BlockPos,double[][]> getDoorRange(Direction facing, BlockPos pos, DoorHingeSide side, int width, int height, int horizontalPos, int verticalPos)throws Exception {
@@ -140,21 +147,37 @@ public abstract class AbstractDoor extends Block {
             int currentHorizontalPos = Math.abs(x-range.getLeft().getX())+Math.abs(z-range.getLeft().getZ());
             int currentVerticalPos = y-range.getLeft().getY();
             BlockPos currentPos = new BlockPos(x,y,z);
-            BlockState currentState = world.getBlockState(currentPos);
+            BlockState currentState = stateTemplate.with(HORIZONTAL_POS, currentHorizontalPos).with(VERTICAL_POS, currentVerticalPos);
             if(currentState.getBlock()!=this){
                 this.onHarvested(world, state, pos);
                 return false;
             }
             RotateTarget rotateTarget = getRotateTarget(currentState,currentPos);
             if(!canTogglePos(world, rotateTarget.pos))return false;
-            rotates.add(Triple.of(currentPos,stateTemplate.with(HORIZONTAL_POS, currentHorizontalPos).with(VERTICAL_POS, currentVerticalPos),rotateTarget));
+            if(correspondingDualDoorEdgeBlock != null && currentHorizontalPos == width){
+                BlockPos edgePos = getNeighborDualDoorEdgePos(currentPos, currentState, side);
+                BlockState edgeState = world.getBlockState(edgePos);
+                if(edgeState.getBlock()!=correspondingDualDoorEdgeBlock){
+                    this.onHarvested(world, state, pos);
+                    return false;
+                }
+                RotateTarget edgeRotateTarget = getRotateTarget(currentState.get(FACING), horizontalPos+1, side, currentState.get(IS_OPENED), edgePos);
+                if(!canTogglePos(world, edgeRotateTarget.pos))return false;
+                rotates.add(Triple.of(edgePos,edgeState,edgeRotateTarget));
+            }
+            rotates.add(Triple.of(currentPos,currentState,rotateTarget));
             return true;
         }))return false;
         
         Iterator<Triple<BlockPos,BlockState,RotateTarget>> ptr = rotates.iterator();
         while(ptr.hasNext()){
             Triple<BlockPos,BlockState,RotateTarget> p = ptr.next();
-            toggleDoorPos(world, p.getLeft(), p.getMiddle(), p.getRight());
+            if(p.getMiddle().getBlock()==this){
+                toggleDoorPos(world, p.getLeft(), p.getMiddle(), p.getRight());
+            }else{
+
+            }
+            
         }
         return true;
     }
@@ -181,9 +204,9 @@ public abstract class AbstractDoor extends Block {
         return world.isAirBlock(target);
     }
 
-    public void toggleDoorPos(World world, BlockPos pos, BlockState state, RotateTarget rotateTarget){
-        world.setBlockState(rotateTarget.pos, state.with(FACING, rotateTarget.facing).cycle(IS_OPENED));
-        world.setBlockState(pos, Blocks.AIR.getDefaultState());
+    public boolean toggleDoorPos(World world, BlockPos pos, BlockState state, RotateTarget rotateTarget){
+        return world.setBlockState(rotateTarget.pos, state.with(FACING, rotateTarget.facing).cycle(IS_OPENED))
+            && world.setBlockState(pos, Blocks.AIR.getDefaultState());
     }
 
     public int getSize(IntegerProperty p){

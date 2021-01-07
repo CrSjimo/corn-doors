@@ -1,5 +1,6 @@
 package de.myxrcrs.util;
 
+import net.minecraft.state.properties.DoorHingeSide;
 import net.minecraft.util.Direction;
 
 public class Matrix {
@@ -84,6 +85,17 @@ public class Matrix {
         if(mat[0].length!=2)throw new Exception("Columns Exception.");
         if((mat[0][0]==0)==(mat[0][1]==0))throw new Exception("Matrix Exception.");
         return mat[0][0]==0 ? (mat[0][1]>0 ? Direction.SOUTH : Direction.NORTH) : (mat[0][0]>0 ? Direction.EAST : Direction.WEST);
+    }
+
+    public static final double[][] HINGE_LEFT = 
+            {{ 0, 1},
+            { -1, 0}};
+    public static final double[][] HINGE_RIGHT = 
+            {{ 0,-1},
+            {  1, 0}};
+
+    public static double[][] getHingeVector(double[][] u, DoorHingeSide side)throws Exception{
+        return Matrix.mul(u,side == DoorHingeSide.LEFT?HINGE_LEFT:HINGE_RIGHT);
     }
 
 }
