@@ -15,7 +15,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public abstract class AbstractDualDoorEdge extends Block {
+public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implements IRotateDoor {
 
     public static EnumProperty<Direction> FACING = HorizontalBlock.HORIZONTAL_FACING;
     public static EnumProperty<DualDoorEdgePart> PART = EnumProperty.create("part", DualDoorEdgePart.class);

@@ -47,23 +47,6 @@ public class NaiveDoor extends AbstractDoor {
             .with(WINDOW,DoorWindowType.GLASS));
     }
 
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if(handIn == Hand.OFF_HAND)return ActionResultType.PASS;
-        try{
-            boolean opened = state.get(IS_OPENED);
-            if(toggleDoor(worldIn, pos, state)){
-                worldIn.playEvent(player, opened ? 1012 : 1006, pos, 0);
-                return ActionResultType.SUCCESS;
-            }else{
-                return ActionResultType.CONSUME;
-            }
-        }catch(Exception e){
-            LOGGER.error(e);
-            return ActionResultType.CONSUME;
-        }
-        
-    }
-
     @Override
     @Nullable
     public BlockState getStateForPlacement(BlockItemUseContext context){
@@ -78,15 +61,6 @@ public class NaiveDoor extends AbstractDoor {
     }
 
     @Override
-    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-        try{
-            onHarvested(worldIn, state, pos);
-        }catch(Exception e){
-            LOGGER.error(e);
-        }
-        super.onBlockHarvested(worldIn, pos, state, player);
-    }
-
     public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
         return generateBoundaryBox(state, 3);
     }

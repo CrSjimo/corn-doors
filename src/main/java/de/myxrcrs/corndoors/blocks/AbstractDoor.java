@@ -33,7 +33,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public abstract class AbstractDoor extends Block {
+public abstract class AbstractDoor extends AbstractTemplateDoor implements IRotateDoor {
 
     protected static IntegerProperty createHorizontalPosProperty(int width){
         return IntegerProperty.create("horizontal_pos", 0, width-1);
@@ -43,8 +43,7 @@ public abstract class AbstractDoor extends Block {
         return IntegerProperty.create("vertical_pos", 0, height-1);
     }
 
-    public static final BooleanProperty IS_OPENED = BooleanProperty.create("is_opened");
-    public static final EnumProperty<Direction> FACING = HorizontalBlock.HORIZONTAL_FACING;
+    
     public static final EnumProperty<DoorHingeSide> HINGE = BlockStateProperties.DOOR_HINGE;
 
     public boolean rotateWithinHinge;
@@ -172,11 +171,8 @@ public abstract class AbstractDoor extends Block {
         Iterator<Triple<BlockPos,BlockState,RotateTarget>> ptr = rotates.iterator();
         while(ptr.hasNext()){
             Triple<BlockPos,BlockState,RotateTarget> p = ptr.next();
-            if(p.getMiddle().getBlock()==this){
-                toggleDoorPos(world, p.getLeft(), p.getMiddle(), p.getRight());
-            }else{
-
-            }
+            IRotateDoor door = (IRotateDoor) p.getMiddle().getBlock();
+            door.toggleDoorPos(world, p.getLeft(), p.getMiddle(), p.getRight());
             
         }
         return true;
