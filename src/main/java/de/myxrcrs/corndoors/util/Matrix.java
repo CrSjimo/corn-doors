@@ -1,4 +1,4 @@
-package de.myxrcrs.util;
+package de.myxrcrs.corndoors.util;
 
 import net.minecraft.state.properties.DoorHingeSide;
 import net.minecraft.util.Direction;

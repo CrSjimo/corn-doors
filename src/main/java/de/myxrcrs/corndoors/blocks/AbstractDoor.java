@@ -8,9 +8,9 @@ import javax.annotation.Nullable;
 import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 
-import de.myxrcrs.util.Matrix;
-import de.myxrcrs.util.RangeIterationConsumer;
-import de.myxrcrs.util.RotateTarget;
+import de.myxrcrs.corndoors.util.Matrix;
+import de.myxrcrs.corndoors.util.RangeIterationConsumer;
+import de.myxrcrs.corndoors.util.RotateTarget;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -29,6 +29,7 @@ import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
@@ -51,11 +52,17 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
 
     public final IntegerProperty HORIZONTAL_POS;
     public final IntegerProperty VERTICAL_POS;
+    public final double thickness;
 
-    public AbstractDoor(Properties props, boolean rotateWithinHinge, IntegerProperty horizontalPosProp, IntegerProperty verticalPosProp, @Nullable AbstractDualDoorEdge correspondingDualDoorEdgeBlock){
+    public AbstractDoor(Properties props, boolean rotateWithinHinge, IntegerProperty horizontalPosProp, IntegerProperty verticalPosProp, double thickness){
+        this(props, rotateWithinHinge, horizontalPosProp, verticalPosProp, thickness, null);
+    }
+
+    public AbstractDoor(Properties props, boolean rotateWithinHinge, IntegerProperty horizontalPosProp, IntegerProperty verticalPosProp, double thickness, @Nullable AbstractDualDoorEdge correspondingDualDoorEdgeBlock){
         super(props);
         this.HORIZONTAL_POS = horizontalPosProp;
         this.VERTICAL_POS = verticalPosProp;
+        this.thickness = thickness;
         this.rotateWithinHinge = rotateWithinHinge;
         this.correspondingDualDoorEdgeBlock = correspondingDualDoorEdgeBlock;
     }
@@ -88,19 +95,24 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
         return new RotateTarget(Matrix.matrixToHorizontalDirection(Matrix.mul(v,flag2?-1:1)),new BlockPos(target[0][0],pos.getY(),target[0][1]),side);
     }
 
-    public static VoxelShape generateBoundaryBox(BlockState state, double thickness){
+    public VoxelShape generateBoundaryBox(BlockState state){
         Direction facing = state.get(FACING);
         switch(facing){
             case NORTH:
             default:
-                return Block.makeCuboidShape(0, 0, 0, 16, 16, thickness);
+                return rotateWithinHinge ? Block.makeCuboidShape(0, 0, 8-0.5*thickness, 16, 16, 8+0.5*thickness) : Block.makeCuboidShape(0, 0, 0, 16, 16, thickness);
             case SOUTH:
-                return Block.makeCuboidShape(0, 0, 16-thickness, 16, 16, 16);
+                return rotateWithinHinge ? Block.makeCuboidShape(0, 0, 8-0.5*thickness, 16, 16, 8+0.5*thickness) : Block.makeCuboidShape(0, 0, 16-thickness, 16, 16, 16);
             case EAST:
-                return Block.makeCuboidShape(16-thickness, 0, 0, 16, 16, 16);
+                return rotateWithinHinge ? Block.makeCuboidShape(8-0.5*thickness, 0, 0, 8+0.5*thickness, 16, 16) : Block.makeCuboidShape(16-thickness, 0, 0, 16, 16, 16);
             case WEST:
-                return Block.makeCuboidShape(0, 0, 0, thickness, 16, 16);
+                return rotateWithinHinge ? Block.makeCuboidShape(8-0.5*thickness, 0, 0, 8+0.5*thickness, 16, 16) : Block.makeCuboidShape(0, 0, 0, thickness, 16, 16);
         }
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        return generateBoundaryBox(state);
     }
 
     public BlockPos getNeighborDualDoorEdgePos(BlockPos pos, BlockState state, DoorHingeSide side)throws Exception{
@@ -152,7 +164,7 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
                 return false;
             }
             RotateTarget rotateTarget = getRotateTarget(currentState,currentPos);
-            if(!canTogglePos(world, rotateTarget.pos))return false;
+            if((!rotateWithinHinge||x!=range.getLeft().getX())&&!canTogglePos(world, rotateTarget.pos))return false;
             if(correspondingDualDoorEdgeBlock != null && currentHorizontalPos == width){
                 BlockPos edgePos = getNeighborDualDoorEdgePos(currentPos, currentState, side);
                 BlockState edgeState = world.getBlockState(edgePos);
@@ -201,8 +213,8 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
     }
 
     public boolean toggleDoorPos(World world, BlockPos pos, BlockState state, RotateTarget rotateTarget){
-        return world.setBlockState(rotateTarget.pos, state.with(FACING, rotateTarget.facing).cycle(IS_OPENED))
-            && world.setBlockState(pos, Blocks.AIR.getDefaultState());
+        return world.setBlockState(pos, Blocks.AIR.getDefaultState())
+            && world.setBlockState(rotateTarget.pos, state.with(FACING, rotateTarget.facing).cycle(IS_OPENED));
     }
 
     public int getSize(IntegerProperty p){

@@ -6,7 +6,7 @@ import org.apache.commons.lang3.tuple.Triple;
 
 import de.myxrcrs.corndoors.init.InitItems;
 import de.myxrcrs.corndoors.items.NaiveDoorItem;
-import de.myxrcrs.util.RotateTarget;
+import de.myxrcrs.corndoors.util.RotateTarget;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -37,7 +37,7 @@ public class NaiveDoor extends AbstractDoor {
     public static final EnumProperty<DoorWindowType> WINDOW = EnumProperty.create("window", DoorWindowType.class);
     
     public NaiveDoor(){
-        super(Block.Properties.create(Material.WOOD).notSolid(),false,HORIZONTAL_POS,VERTICAL_POS,null);
+        super(Block.Properties.create(Material.WOOD).notSolid(),false,HORIZONTAL_POS,VERTICAL_POS,3);
         this.setDefaultState(this.getDefaultState()
             .with(IS_OPENED, false)
             .with(FACING, Direction.NORTH)
@@ -58,11 +58,6 @@ public class NaiveDoor extends AbstractDoor {
             LOGGER.error(e);
             return null;
         }
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return generateBoundaryBox(state, 3);
     }
 
     @Override

@@ -2,8 +2,8 @@ package de.myxrcrs.corndoors.blocks;
 
 import javax.annotation.Nullable;
 
-import de.myxrcrs.util.Matrix;
-import de.myxrcrs.util.RotateTarget;
+import de.myxrcrs.corndoors.util.Matrix;
+import de.myxrcrs.corndoors.util.RotateTarget;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
