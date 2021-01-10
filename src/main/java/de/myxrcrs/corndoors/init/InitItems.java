@@ -5,6 +5,7 @@ import de.myxrcrs.corndoors.blocks.DoorWindowType;
 import de.myxrcrs.corndoors.items.NaiveDoorItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.Item.Properties;
 import net.minecraftforge.event.RegistryEvent.Register;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -15,4 +16,5 @@ public class InitItems {
     public static final RegistryObject<BlockItem> NAIVE_DOOR_GLASS = ITEMS.register("naive_door_glass",()->new NaiveDoorItem(DoorWindowType.GLASS));
     public static final RegistryObject<BlockItem> NAIVE_DOOR_FILM = ITEMS.register("naive_door_film",()->new NaiveDoorItem(DoorWindowType.FILM));
     public static final RegistryObject<BlockItem> NAIVE_DOOR_NONE = ITEMS.register("naive_door_none",()->new NaiveDoorItem(DoorWindowType.NONE));
+    public static final RegistryObject<BlockItem> GLASS_DOOR = ITEMS.register("glass_door",()->new BlockItem(InitBlocks.GLASS_DOOR.get(), new Properties()));
 }
