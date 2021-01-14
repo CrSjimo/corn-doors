@@ -10,6 +10,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.EnumProperty;
+import net.minecraft.state.properties.DoorHingeSide;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
@@ -35,27 +36,11 @@ public abstract class AbstractTemplateDoor extends Block {
         }
     }
 
-    abstract public boolean toggleDoor(World world, BlockPos pos, BlockState state)throws Exception;
+    abstract public boolean toggleDoor(World world, BlockPos pos, BlockState state, DoorHingeSide side)throws Exception;
 
     abstract public void onHarvested(World world, BlockState state, BlockPos pos)throws Exception;
 
     abstract public void onPlaced(BlockItemUseContext context, BlockState stateTemplate)throws Exception;
-
-    @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if(handIn == Hand.OFF_HAND)return ActionResultType.PASS;
-        try{
-            if(toggleDoor(worldIn, pos, state)){
-                worldIn.playEvent(player, getToggleSound(state), pos, 0);
-                return ActionResultType.SUCCESS;
-            }else{
-                return ActionResultType.CONSUME;
-            }
-        }catch(Exception e){
-            LOGGER.error(e);
-            return ActionResultType.CONSUME;
-        }
-    }
 
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {

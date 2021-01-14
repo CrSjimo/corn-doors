@@ -11,6 +11,7 @@ import org.apache.commons.lang3.tuple.Triple;
 import de.myxrcrs.corndoors.util.Matrix;
 import de.myxrcrs.corndoors.util.RangeIterationConsumer;
 import de.myxrcrs.corndoors.util.RotateTarget;
+import de.myxrcrs.corndoors.util.Zero;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
@@ -21,6 +22,7 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.IntegerProperty;
+import net.minecraft.state.Property;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoorHingeSide;
@@ -36,12 +38,18 @@ import net.minecraft.world.World;
 
 public abstract class AbstractDoor extends AbstractTemplateDoor implements IRotateDoor {
 
-    protected static IntegerProperty createHorizontalPosProperty(int width){
-        return IntegerProperty.create("horizontal_pos", 0, width-1);
+    protected static Property<Integer> createHorizontalPosProperty(int width){
+        if(width>1)
+            return IntegerProperty.create("horizontal_pos", 0, width-1);
+        else
+            return Zero.create("horizontal_pos");
     }
 
-    protected static IntegerProperty createVerticalPosProperty(int height){
-        return IntegerProperty.create("vertical_pos", 0, height-1);
+    protected static Property<Integer> createVerticalPosProperty(int height){
+        if(height>1)
+            return IntegerProperty.create("vertical_pos", 0, height-1);
+        else
+            return Zero.create("vertical_pos");
     }
 
     
@@ -50,15 +58,15 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
     public boolean rotateWithinHinge;
     @Nullable public AbstractDualDoorEdge correspondingDualDoorEdgeBlock;
 
-    public final IntegerProperty HORIZONTAL_POS;
-    public final IntegerProperty VERTICAL_POS;
+    public final Property<Integer> HORIZONTAL_POS;
+    public final Property<Integer> VERTICAL_POS;
     public final double thickness;
 
-    public AbstractDoor(Properties props, boolean rotateWithinHinge, IntegerProperty horizontalPosProp, IntegerProperty verticalPosProp, double thickness){
+    public AbstractDoor(Properties props, boolean rotateWithinHinge, Property<Integer> horizontalPosProp, Property<Integer> verticalPosProp, double thickness){
         this(props, rotateWithinHinge, horizontalPosProp, verticalPosProp, thickness, null);
     }
 
-    public AbstractDoor(Properties props, boolean rotateWithinHinge, IntegerProperty horizontalPosProp, IntegerProperty verticalPosProp, double thickness, @Nullable AbstractDualDoorEdge correspondingDualDoorEdgeBlock){
+    public AbstractDoor(Properties props, boolean rotateWithinHinge, Property<Integer> horizontalPosProp, Property<Integer> verticalPosProp, double thickness, @Nullable AbstractDualDoorEdge correspondingDualDoorEdgeBlock){
         super(props);
         this.HORIZONTAL_POS = horizontalPosProp;
         this.VERTICAL_POS = verticalPosProp;
@@ -142,14 +150,14 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
             return Triple.of(fromPos, toPos,v);
     }
 
-    public boolean toggleDoor(World world, BlockPos pos, BlockState state)throws Exception {
+    @Override
+    public boolean toggleDoor(World world, BlockPos pos, BlockState state, DoorHingeSide side)throws Exception {
         
 
         int horizontalPos = state.get(HORIZONTAL_POS);
         int verticalPos = state.get(VERTICAL_POS);
         int width = getSize(HORIZONTAL_POS);
         int height = getSize(VERTICAL_POS);
-        DoorHingeSide side = state.get(HINGE);
 
         Triple<BlockPos,BlockPos,double[][]> range = getDoorRange(state.get(FACING), pos, side, width, height, horizontalPos, verticalPos);
         ArrayList<Triple<BlockPos,BlockState,RotateTarget>> rotates = new ArrayList<>();
@@ -164,7 +172,7 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
                 return false;
             }
             RotateTarget rotateTarget = getRotateTarget(currentState,currentPos);
-            if((!rotateWithinHinge||x!=range.getLeft().getX())&&!canTogglePos(world, rotateTarget.pos))return false;
+            if(!rotateTarget.pos.equals(currentPos)&&!canTogglePos(world, rotateTarget.pos))return false;
             if(correspondingDualDoorEdgeBlock != null && currentHorizontalPos == width){
                 BlockPos edgePos = getNeighborDualDoorEdgePos(currentPos, currentState, side);
                 BlockState edgeState = world.getBlockState(edgePos);
@@ -217,8 +225,9 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
             && world.setBlockState(rotateTarget.pos, state.with(FACING, rotateTarget.facing).cycle(IS_OPENED));
     }
 
-    public int getSize(IntegerProperty p){
-        return p.getAllowedValues().size();
+    public int getSize(Property<Integer> p){
+        if(p.getAllowedValues().contains(114514))return 1;
+        else return p.getAllowedValues().size();
     }
 
     public void fillRange(World world, Triple<BlockPos,BlockPos,double[][]> range, BlockState stateTemplate)throws Exception{
@@ -229,6 +238,7 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
         });
     }
 
+    @Override
     public void onPlaced(BlockItemUseContext context, BlockState stateTemplate)throws Exception{
         Direction facing = context.getPlacementHorizontalFacing().getOpposite();
         Triple<BlockPos,BlockPos,double[][]> leftHingeRange = getDoorRange(facing, context.getPos(), DoorHingeSide.LEFT, getSize(HORIZONTAL_POS), getSize(VERTICAL_POS), 0, 0);
@@ -267,15 +277,44 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
         }
     }
 
+    @Override
     public void onHarvested(World world, BlockState state, BlockPos pos)throws Exception{
         Triple<BlockPos,BlockPos,double[][]> range = getDoorRange(state.get(FACING), pos, state.get(HINGE), getSize(HORIZONTAL_POS), getSize(VERTICAL_POS), state.get(HORIZONTAL_POS), state.get(VERTICAL_POS));
+        int width = getSize(HORIZONTAL_POS);
+        DoorHingeSide side = state.get(HINGE);
         iterateRange(range, (x,y,z)->{
             BlockPos currentPos = new BlockPos(x,y,z);
-            if(world.getBlockState(currentPos).getBlock()==this){
+            BlockState currentState = world.getBlockState(currentPos);
+            int currentHorizontalPos = Math.abs(x-range.getLeft().getX())+Math.abs(z-range.getLeft().getZ());
+            if(currentState.getBlock()==this){
                 world.setBlockState(currentPos, Blocks.AIR.getDefaultState());
+                if(correspondingDualDoorEdgeBlock != null && currentHorizontalPos == width){
+                    BlockPos edgePos = getNeighborDualDoorEdgePos(currentPos, currentState, side);
+                    BlockState edgeState = world.getBlockState(edgePos);
+                    if(edgeState.getBlock()==correspondingDualDoorEdgeBlock){
+                        world.setBlockState(edgePos, Blocks.AIR.getDefaultState());
+                    }
+                }
             }
             return true;
         });
+    }
+
+    @Override
+    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
+        if(handIn == Hand.OFF_HAND)return ActionResultType.PASS;
+        try{
+            LOGGER.info(AbstractDualDoorEdge.getSideFromHit(state, pos, hit.getHitVec()));
+            if(toggleDoor(worldIn, pos, state, state.get(HINGE))){
+                worldIn.playEvent(player, getToggleSound(state), pos, 0);
+                return ActionResultType.SUCCESS;
+            }else{
+                return ActionResultType.CONSUME;
+            }
+        }catch(Exception e){
+            LOGGER.error(e);
+            return ActionResultType.CONSUME;
+        }
     }
 
     public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {

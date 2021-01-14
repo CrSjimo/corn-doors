@@ -4,14 +4,15 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.state.IntegerProperty;
+import net.minecraft.state.Property;
 import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.DoorHingeSide;
 import net.minecraft.util.Direction;
 
 public class GlassDoor extends AbstractDoor {
     
-    public static final IntegerProperty HORIZONTAL_POS = createHorizontalPosProperty(2);
-    public static final IntegerProperty VERTICAL_POS = createVerticalPosProperty(5);
+    public static final Property<Integer> HORIZONTAL_POS = createHorizontalPosProperty(2);
+    public static final Property<Integer> VERTICAL_POS = createVerticalPosProperty(5);
     
     public GlassDoor(){
         super(Properties.create(Material.IRON).notSolid(),true,HORIZONTAL_POS,VERTICAL_POS,3);

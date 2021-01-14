@@ -31,13 +31,13 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class NaiveDoor extends AbstractDoor {
+public class DNaiveDoor extends AbstractDoor {
 
-    public static final Property<Integer> HORIZONTAL_POS = createHorizontalPosProperty(2);
+    public static final Property<Integer> HORIZONTAL_POS = createHorizontalPosProperty(1);
     public static final Property<Integer> VERTICAL_POS = createVerticalPosProperty(4);
     public static final EnumProperty<DoorWindowType> WINDOW = EnumProperty.create("window", DoorWindowType.class);
     
-    public NaiveDoor(){
+    public DNaiveDoor(){
         super(Block.Properties.create(Material.WOOD).notSolid(),false,HORIZONTAL_POS,VERTICAL_POS,3);
         this.setDefaultState(this.getDefaultState()
             .with(IS_OPENED, false)
