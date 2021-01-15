@@ -70,6 +70,11 @@ public class Matrix {
         return c;
     }
 
+    /**
+     * Get the unit vector along the given horizontal direction.
+     * @param facing Direction.
+     * @return A row matrix of the 2d unit vector.
+     */
     public static double[][] horizontalDirectionToMatrix(Direction facing){
         switch(facing){
             case NORTH: return new double[][]{{0,-1}};
@@ -80,10 +85,15 @@ public class Matrix {
         }
     }
 
+    /**
+     * Get the horizontal direction along the given row matrix of a vector.
+     * @param mat A row matrix of the 2d unit vector.
+     * @return Direction.
+     */
     public static Direction matrixToHorizontalDirection(double[][] mat){
         if(mat.length!=1)throw new ArithmeticException("Rows Exception.");
         if(mat[0].length!=2)throw new ArithmeticException("Columns Exception.");
-        if((mat[0][0]==0)==(mat[0][1]==0))throw new ArithmeticException("Matrix Exception.");
+        if((mat[0][0]==0)==(mat[0][1]==0))throw new ArithmeticException("Direction Exception.");
         return mat[0][0]==0 ? (mat[0][1]>0 ? Direction.SOUTH : Direction.NORTH) : (mat[0][0]>0 ? Direction.EAST : Direction.WEST);
     }
 
@@ -94,6 +104,13 @@ public class Matrix {
             {{ 0,-1},
             {  1, 0}};
 
+    /**
+     * Get the unit vector that points at the hinge using the given vector along the facing direction.
+     * @param u The vector along the facing direction.
+     * @param side The hinge side.
+     * <img src="https://img.imgdb.cn/item/60010a163ffa7d37b31c24df.png">
+     * @return A row matrix of the 2d unit vector.
+     */
     public static double[][] getHingeVector(double[][] u, DoorHingeSide side){
         return Matrix.mul(u,side == DoorHingeSide.LEFT?HINGE_LEFT:HINGE_RIGHT);
     }

@@ -41,6 +41,15 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
     
     public static final EnumProperty<DoorHingeSide> HINGE = BlockStateProperties.DOOR_HINGE;
 
+    /**
+     * Center of rotation is at the corner of hinge (false) or at the center of hinge (true).
+     * <p>
+     * <img src="https://img.imgdb.cn/item/600102cf3ffa7d37b318a216.png">
+     * the center of hinge
+     * <p>
+     * <img src="https://img.imgdb.cn/item/600102dd3ffa7d37b318a7dd.png">
+     * the corner of hinge
+     */
     public boolean rotateWithinHinge;
     @Nullable public AbstractDualDoorEdge correspondingDualDoorEdgeBlock;
 
@@ -64,6 +73,15 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
         return getRotateTarget(state.get(FACING), state.get(HORIZONTAL_POS), state.get(HINGE), state.get(IS_OPENED), pos);
     }
 
+    /**
+     * Get the target position of rotation.
+     * @param facing The direction along which the door faces
+     * @param horizontalPos The horizontal position of current block.
+     * @param side The hinge side.
+     * @param isOpened Whether the door is opened (determines CW/CCW). 
+     * @param pos The position of current block.
+     * @return Rotation target.
+     */
     public RotateTarget getRotateTarget(Direction facing, int horizontalPos, DoorHingeSide side, boolean isOpened, BlockPos pos){
         final double[][] rL = 
             {{ 0, 1, 0, 0},
@@ -88,12 +106,20 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
         return new RotateTarget(Matrix.matrixToHorizontalDirection(Matrix.mul(v,flag2?-1:1)),new BlockPos(target[0][0],pos.getY(),target[0][1]),side);
     }
 
+    /**
+     * Get the width of the door.
+     * @return The width.
+     */
     public int getWidth(){
         return getSize(HORIZONTAL_POS);
     }
 
+    /**
+     * Get the height of the door.
+     * @return The height.
+     */
     public int getHeight(){
-        return getHeight();
+        return getSize(VERTICAL_POS);
     }
 
     @Override
@@ -238,15 +264,4 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
         }
     }
 
-    public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
-        return true;
-     }
-   
-    public boolean causesSuffocation(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        return false;
-    }
-   
-    public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        return false;
-    }
 }

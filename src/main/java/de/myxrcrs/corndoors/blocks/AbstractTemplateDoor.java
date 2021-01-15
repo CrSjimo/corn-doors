@@ -25,10 +25,22 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
+/**
+ * The template of Corn Doors.
+ */
 public abstract class AbstractTemplateDoor extends Block {
 
+    /**
+     * Create horizontal property.
+     * <p>
+     * Horizontal position represents the distance of a door block relative to the hinge. The position starts from zero.
+     * <img src="https://img.imgdb.cn/item/600101793ffa7d37b318162b.png">
+     * @param width The width of the door.
+     * @return Horizontal position property.
+     */
     protected static Property<Integer> createHorizontalPosProperty(int width){
         if(width>1)
             return IntegerProperty.create("horizontal_pos", 0, width-1);
@@ -36,6 +48,14 @@ public abstract class AbstractTemplateDoor extends Block {
             return Zero.create("horizontal_pos");
     }
 
+    /**
+     * Create vertical property.
+     * <p>
+     * Vertical position represents the distance of a door block relative to the ground. The position starts from zero.
+     * <img src="https://img.imgdb.cn/item/600101793ffa7d37b318162b.png">
+     * @param height The height of the door.
+     * @return Vertical position property.
+     */
     protected static Property<Integer> createVerticalPosProperty(int height){
         if(height>1)
             return IntegerProperty.create("vertical_pos", 0, height-1);
@@ -46,13 +66,28 @@ public abstract class AbstractTemplateDoor extends Block {
     public static final BooleanProperty IS_OPENED = BooleanProperty.create("is_opened");
     public static final EnumProperty<Direction> FACING = HorizontalBlock.HORIZONTAL_FACING;
 
+    /**
+     * The thickness of the door model.
+     */
     public final double thickness;
 
+    /**
+     * 
+     * @param props Block properties. As the properties in {@link net.minecraft.block.Block#Block}.
+     * @param thickness The thickness of the door model.
+     */
     public AbstractTemplateDoor(Properties props,double thickness){
         super(props);
         this.thickness = thickness;
     }
 
+    /**
+     * Generate the boundary box of current door
+     * @param state Block state.
+     * @param isMiddle Whether current door is located in the middle of a block. 
+     * <img src="https://img.imgdb.cn/item/600101e43ffa7d37b31841ec.png">
+     * @return Boundary box
+     */
     public VoxelShape generateBoundaryBox(BlockState state, boolean isMiddle){
         Direction facing = state.get(FACING);
         switch(facing){
@@ -68,6 +103,11 @@ public abstract class AbstractTemplateDoor extends Block {
         }
     }
 
+    /**
+     * Get the sound of door toggling.
+     * @param stateBeforeToggled The blockstate before the door is toggled.
+     * @return
+     */
     public int getToggleSound(BlockState stateBeforeToggled){
         boolean opened = stateBeforeToggled.get(IS_OPENED);
         if(stateBeforeToggled.getMaterial()==Material.IRON){
@@ -77,11 +117,33 @@ public abstract class AbstractTemplateDoor extends Block {
         }
     }
 
+    /**
+     * Toggle door open/close.
+     * @param side The hinge side of the door, about which the door rotates or towards which the door shrinks.
+     * @return Whether the operation is successful.
+     */
     abstract public boolean toggleDoor(World world, BlockPos pos, BlockState state, DoorHingeSide side);
 
+    /**
+     * Called on the block is destroyed (before it is set to air).
+     */
     abstract public void onHarvested(World world, BlockState state, BlockPos pos);
 
+    /**
+     * Called on the block is being placed (before the position is set to the door).
+     * @param stateTemplate Template state (Default to be {@link #getDefaultState()}).
+     */
     abstract public void onPlaced(BlockItemUseContext context, BlockState stateTemplate);
+
+    /**
+     * Fill a door into the given range. 
+     * <p>
+     * Before invoked, {@link #canFillRange()} must be called first to judge whether the given range is able to be filled.
+     * @param world
+     * @param range
+     * @param stateTemplate
+     */
+    abstract public void fillRange(World world, DoorRange range, BlockState stateTemplate);
 
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
@@ -105,10 +167,18 @@ public abstract class AbstractTemplateDoor extends Block {
         }
     }
 
+    /**
+     * Judge whether the door block can be set to the target pos.
+     * @return what you think it will return.
+     */
     public static boolean canTogglePos(World world, BlockPos target){
         return world.isAirBlock(target);
     }
 
+    /**
+     * Judge whether a the door block can be filled into the range.
+     * @return what you think it will return.
+     */
     public static boolean canFillRange(World world, DoorRange range){
         return range.iterateRange((x,y,z)->{
             if(!canTogglePos(world, new BlockPos(x,y,z))){
@@ -118,6 +188,17 @@ public abstract class AbstractTemplateDoor extends Block {
         });
     }
 
+    /**
+     * Get the range according to specified parameters.
+     * @param facing The direction along which the door faces.
+     * @param pos Current block position.
+     * @param side The hinge side.
+     * @param width The width of the entire door
+     * @param height The height of the entire door
+     * @param horizontalPos The horizontal position of current block.
+     * @param verticalPos The vertical position of current block.
+     * @return The result range.
+     */
     public DoorRange getDoorRange(Direction facing, BlockPos pos, DoorHingeSide side, int width, int height, int horizontalPos, int verticalPos) {
         final double[][] hL = 
             {{ 0, 1},
@@ -137,8 +218,25 @@ public abstract class AbstractTemplateDoor extends Block {
             return DoorRange.of(fromPos, toPos,v);
     }
 
+    /**
+     * Get the size using blockstate property.
+     * @param p Horizontal or vertical position property.
+     * @return The size.
+     */
     public int getSize(Property<Integer> p){
         if(p.getAllowedValues().contains(114514))return 1;
         else return p.getAllowedValues().size();
+    }
+
+    public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
+        return true;
+     }
+   
+    public boolean causesSuffocation(BlockState state, IBlockReader worldIn, BlockPos pos) {
+        return false;
+    }
+   
+    public boolean isNormalCube(BlockState state, IBlockReader worldIn, BlockPos pos) {
+        return false;
     }
 }
