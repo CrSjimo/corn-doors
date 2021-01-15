@@ -4,6 +4,7 @@ import javax.annotation.Nullable;
 
 import org.apache.commons.lang3.tuple.Triple;
 
+import de.myxrcrs.corndoors.init.InitBlocks;
 import de.myxrcrs.corndoors.init.InitItems;
 import de.myxrcrs.corndoors.items.NaiveDoorItem;
 import de.myxrcrs.corndoors.util.RotateTarget;
@@ -38,7 +39,7 @@ public class DNaiveDoor extends AbstractDoor {
     public static final EnumProperty<DoorWindowType> WINDOW = EnumProperty.create("window", DoorWindowType.class);
     
     public DNaiveDoor(){
-        super(Block.Properties.create(Material.WOOD).notSolid(),false,HORIZONTAL_POS,VERTICAL_POS,3);
+        super(Block.Properties.create(Material.WOOD).notSolid(),false,HORIZONTAL_POS,VERTICAL_POS,3,(AbstractDualDoorEdge)InitBlocks.D_NAIVE_DOOR_EDGE.get());
         this.setDefaultState(this.getDefaultState()
             .with(IS_OPENED, false)
             .with(FACING, Direction.NORTH)
@@ -47,28 +48,6 @@ public class DNaiveDoor extends AbstractDoor {
             .with(HINGE,DoorHingeSide.LEFT)
             .with(WINDOW,DoorWindowType.GLASS));
     }
-
-    @Override
-    @Nullable
-    public BlockState getStateForPlacement(BlockItemUseContext context){
-        DoorWindowType doorWindowType = ((NaiveDoorItem)context.getItem().getItem()).doorWindowType;
-        try{
-            onPlaced(context,this.getDefaultState().with(WINDOW, doorWindowType));
-            return null;
-        }catch(Exception e){
-            LOGGER.error(e);
-            return null;
-        }
-    }
-
-    @Override
-    public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
-        switch(state.get(WINDOW)){
-            case GLASS:default: return new ItemStack(InitItems.NAIVE_DOOR_GLASS.get());
-            case FILM: return new ItemStack(InitItems.NAIVE_DOOR_FILM.get());
-            case NONE: return new ItemStack(InitItems.NAIVE_DOOR_NONE.get());
-        }
-     }
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {

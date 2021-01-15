@@ -70,6 +70,9 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
         this.VERTICAL_POS = verticalPosProp;
         this.rotateWithinHinge = rotateWithinHinge;
         this.correspondingDualDoorEdgeBlock = correspondingDualDoorEdgeBlock;
+        if(this.correspondingDualDoorEdgeBlock!=null){
+            this.correspondingDualDoorEdgeBlock.setCorrespondingDoorBlock(this);
+        }
     }
 
     public RotateTarget getRotateTarget(BlockState state, BlockPos pos){
@@ -131,7 +134,7 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
     }
 
     public BlockPos getNeighborDualDoorEdgePos(BlockPos pos, BlockState state, DoorHingeSide side){
-        double[][] a = {{pos.getX(),pos.getY()}};
+        double[][] a = {{pos.getX(),pos.getZ()}};
         double[][] u = Matrix.horizontalDirectionToMatrix(state.get(FACING));
         double[][] v = Matrix.getHingeVector(u, side == DoorHingeSide.LEFT ? DoorHingeSide.RIGHT : DoorHingeSide.LEFT);
         double[][] b = Matrix.add(a, v);
@@ -141,6 +144,8 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
     @Override
     public boolean toggleDoor(World world, BlockPos pos, BlockState state, DoorHingeSide side) {
         
+        LOGGER.info(pos);
+        LOGGER.info(side);
 
         int horizontalPos = state.get(HORIZONTAL_POS);
         int verticalPos = state.get(VERTICAL_POS);
@@ -156,20 +161,22 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
             BlockPos currentPos = new BlockPos(x,y,z);
             BlockState currentState = stateTemplate.with(HORIZONTAL_POS, currentHorizontalPos).with(VERTICAL_POS, currentVerticalPos);
             if(currentState.getBlock()!=this){
+                LOGGER.info("Harv 1");
                 this.onHarvested(world, state, pos);
                 return false;
             }
             RotateTarget rotateTarget = getRotateTarget(currentState,currentPos);
-            if(!rotateTarget.pos.equals(currentPos)&&!canTogglePos(world, rotateTarget.pos))return false;
-            if(correspondingDualDoorEdgeBlock != null && currentHorizontalPos == width){
+            if(!rotateTarget.pos.equals(currentPos)&&!canTogglePos(world, currentState,rotateTarget.pos))return false;
+            if(correspondingDualDoorEdgeBlock != null && currentHorizontalPos == width-1){
                 BlockPos edgePos = getNeighborDualDoorEdgePos(currentPos, currentState, side);
                 BlockState edgeState = world.getBlockState(edgePos);
                 if(edgeState.getBlock()!=correspondingDualDoorEdgeBlock){
+                    LOGGER.info("Harv 2");
                     this.onHarvested(world, state, pos);
                     return false;
                 }
                 RotateTarget edgeRotateTarget = getRotateTarget(currentState.get(FACING), horizontalPos+1, side, currentState.get(IS_OPENED), edgePos);
-                if(!canTogglePos(world, edgeRotateTarget.pos))return false;
+                if(!correspondingDualDoorEdgeBlock.canTogglePos(world, edgeState,edgeRotateTarget.pos))return false;
                 rotates.add(Triple.of(edgePos,edgeState,edgeRotateTarget));
             }
             rotates.add(Triple.of(currentPos,currentState,rotateTarget));
@@ -181,7 +188,6 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
             Triple<BlockPos,BlockState,RotateTarget> p = ptr.next();
             IRotateDoor door = (IRotateDoor) p.getMiddle().getBlock();
             door.toggleDoorPos(world, p.getLeft(), p.getMiddle(), p.getRight());
-            
         }
         return true;
     }
@@ -239,10 +245,11 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
             int currentHorizontalPos = Math.abs(x-range.getFrom().getX())+Math.abs(z-range.getFrom().getZ());
             if(currentState.getBlock()==this){
                 world.setBlockState(currentPos, Blocks.AIR.getDefaultState());
-                if(correspondingDualDoorEdgeBlock != null && currentHorizontalPos == width){
+                if(correspondingDualDoorEdgeBlock != null && currentHorizontalPos == width-1){
                     BlockPos edgePos = getNeighborDualDoorEdgePos(currentPos, currentState, side);
                     BlockState edgeState = world.getBlockState(edgePos);
                     if(edgeState.getBlock()==correspondingDualDoorEdgeBlock){
+                        correspondingDualDoorEdgeBlock.triggerNeighborHarvest(world, edgeState, edgePos, side == DoorHingeSide.LEFT ? DoorHingeSide.RIGHT : DoorHingeSide.LEFT);
                         world.setBlockState(edgePos, Blocks.AIR.getDefaultState());
                     }
                 }

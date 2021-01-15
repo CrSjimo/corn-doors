@@ -27,24 +27,30 @@ import net.minecraft.world.World;
 
 public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implements IRotateDoor {
 
-    public static EnumProperty<Direction> FACING = HorizontalBlock.HORIZONTAL_FACING;
     public static EnumProperty<DualDoorEdgePart> PART = EnumProperty.create("part", DualDoorEdgePart.class);
 
     public final Property<Integer> VERTICAL_POS;
 
-    public AbstractDualDoorEdge(Properties props, AbstractDoor correspondingDoorBlock, Property<Integer> VERTICAL_POS, double thickness){
+    public AbstractDualDoorEdge(Properties props, Property<Integer> VERTICAL_POS, double thickness){
         super(props,thickness);
-        this.correspondingDoorBlock = correspondingDoorBlock;
         this.VERTICAL_POS = VERTICAL_POS;
     }
 
-    protected AbstractDoor correspondingDoorBlock;
+    @Nullable protected AbstractDoor correspondingDoorBlock = null;
     public AbstractDoor getCorrespondingDoorBlock(){
         return correspondingDoorBlock;
     }
 
+    public void setCorrespondingDoorBlock(AbstractDoor door){
+        if(correspondingDoorBlock==null){
+            correspondingDoorBlock = door;
+        }else{
+            throw new UnsupportedOperationException("Corresponding door already set.");
+        }
+    }
+
     public BlockPos getNeighborDoorPos(BlockPos pos, BlockState state, DoorHingeSide side){
-        double[][] a = {{pos.getX(),pos.getY()}};
+        double[][] a = {{pos.getX(),pos.getZ()}};
         double[][] u = Matrix.horizontalDirectionToMatrix(state.get(FACING));
         double[][] v = Matrix.getHingeVector(u, side);
         double[][] b = Matrix.add(a, v);
@@ -77,19 +83,32 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
     public boolean toggleDoor(World world, BlockPos pos, BlockState state, DoorHingeSide side){
         BlockPos neighborPos = getNeighborDoorPos(pos, state, side);
         BlockState neighborState = world.getBlockState(neighborPos);
-        AbstractDoor neighborBlock = (AbstractDoor)neighborState.getBlock();
-        if(neighborBlock instanceof AbstractDoor){
-            return neighborBlock.toggleDoor(world, neighborPos, neighborState, side);
+        Block neighborBlock = neighborState.getBlock();
+        LOGGER.info(neighborPos);
+        LOGGER.info(neighborBlock.getClass().getName());
+        if(neighborBlock == correspondingDoorBlock){
+            LOGGER.info(neighborBlock.getClass().getName()+" matches");
+            return ((AbstractDoor)neighborBlock).toggleDoor(world, neighborPos, neighborState, side);
         }else{
             onHarvested(world, state, pos);
             return false;
         }
     }
 
+    @Override
+    public boolean canTogglePos(World world, BlockState state, BlockPos target){
+        BlockState targetState = world.getBlockState(target);
+        if(targetState.getBlock()!=this){
+            return super.canTogglePos(world, state, target);
+        }else{
+            return state.get(PART).getComplement() == targetState.get(PART);
+        }
+    }
+
     public boolean toggleDoorPos(World world, BlockPos pos, BlockState state, RotateTarget rotateTarget){
         DualDoorEdgePart part = DualDoorEdgePart.fromDoorHingeSide(rotateTarget.side);
-        return world.setBlockState(rotateTarget.pos, addPartTo(state, part).with(FACING, rotateTarget.facing))
-            && world.setBlockState(pos, removePartFrom(world.getBlockState(pos),part.getComplement()));
+        return world.setBlockState(rotateTarget.pos, state.with(FACING, rotateTarget.facing).with(PART,part))
+            && world.setBlockState(pos, removePartFrom(state,part));
     }
 
     public static DoorHingeSide getSideFromHit(BlockState state, BlockPos pos, Vec3d hitVec){
@@ -107,6 +126,7 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if(handIn == Hand.OFF_HAND)return ActionResultType.PASS;
         try{
+            LOGGER.info(getSideFromHit(state, pos, hit.getHitVec()));
             if(toggleDoor(worldIn, pos, state, getSideFromHit(state, pos, hit.getHitVec()))){
                 worldIn.playEvent(player, getToggleSound(state), pos, 0);
                 return ActionResultType.SUCCESS;
@@ -119,20 +139,20 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
         }
     }
 
+    public void triggerNeighborHarvest(World world, BlockState state, BlockPos pos, DoorHingeSide side){
+        BlockPos neighborPos = getNeighborDoorPos(pos, state, side);
+        BlockState neighborState = world.getBlockState(neighborPos);
+        Block neighborBlock = neighborState.getBlock();
+        if(neighborBlock == correspondingDoorBlock){
+            LOGGER.info(neighborBlock.getClass().getName()+" "+side);
+            ((AbstractDoor)neighborBlock).onHarvested(world, neighborState, neighborPos);
+        }
+    }
+
     @Override
     public void onHarvested(World world, BlockState state, BlockPos pos){
-        BlockPos neighborPosL = getNeighborDoorPos(pos, state, DoorHingeSide.LEFT);
-        BlockState neighborStateL = world.getBlockState(neighborPosL);
-        BlockPos neighborPosR = getNeighborDoorPos(pos, state, DoorHingeSide.RIGHT);
-        BlockState neighborStateR = world.getBlockState(neighborPosR);
-        AbstractDoor neighborBlockL = (AbstractDoor)neighborStateL.getBlock();
-        AbstractDoor neighborBlockR = (AbstractDoor)neighborStateR.getBlock();
-        if(neighborBlockL instanceof AbstractDoor){
-            neighborBlockL.onHarvested(world, neighborStateL, neighborPosL);
-        }
-        if(neighborBlockR instanceof AbstractDoor){
-            neighborBlockR.onHarvested(world, neighborStateR, neighborPosR);
-        }
+        triggerNeighborHarvest(world, state, pos, DoorHingeSide.LEFT);
+        triggerNeighborHarvest(world, state, pos, DoorHingeSide.RIGHT);
     }
 
     public void fillRange(World world, DoorRange range, BlockState stateTemplate){
@@ -163,6 +183,7 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
             correspondingDoorBlock.fillRange(context.getWorld(), rangeRight, correspondingDoorBlock.getDefaultState()
                 .with(AbstractDoor.FACING, facing)
                 .with(AbstractDoor.HINGE, DoorHingeSide.RIGHT));
+            fillRange(context.getWorld(), rangeMiddle, stateTemplate);
         }
     }
 

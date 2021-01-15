@@ -171,15 +171,19 @@ public abstract class AbstractTemplateDoor extends Block {
      * Judge whether the door block can be set to the target pos.
      * @return what you think it will return.
      */
-    public static boolean canTogglePos(World world, BlockPos target){
+    public boolean canTogglePos(World world, BlockPos target){
         return world.isAirBlock(target);
+    }
+
+    public boolean canTogglePos(World world, BlockState state, BlockPos target){
+        return canTogglePos(world, target);
     }
 
     /**
      * Judge whether a the door block can be filled into the range.
      * @return what you think it will return.
      */
-    public static boolean canFillRange(World world, DoorRange range){
+    public boolean canFillRange(World world, DoorRange range){
         return range.iterateRange((x,y,z)->{
             if(!canTogglePos(world, new BlockPos(x,y,z))){
                 return false;
