@@ -108,7 +108,7 @@ public class Matrix {
      * Get the unit vector that points at the hinge using the given vector along the facing direction.
      * @param u The vector along the facing direction.
      * @param side The hinge side.
-     * <img src="https://img.imgdb.cn/item/60010a163ffa7d37b31c24df.png">
+     * <img src="https://img.imgdb.cn/item/60010a163ffa7d37b31c24df.png" alt="vector diagram">
      * @return A row matrix of the 2d unit vector.
      */
     public static double[][] getHingeVector(double[][] u, DoorHingeSide side){

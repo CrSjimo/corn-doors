@@ -5,6 +5,9 @@ import javax.annotation.Nullable;
 import net.minecraft.state.properties.DoorHingeSide;
 import net.minecraft.util.IStringSerializable;
 
+/**
+ * Enum of the part property in dual door edge blockstates.
+ */
 public enum DualDoorEdgePart implements IStringSerializable {
     LEFT("left"),
     RIGHT("right"),

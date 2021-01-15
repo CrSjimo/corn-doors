@@ -2,6 +2,9 @@ package de.myxrcrs.corndoors.blocks;
 
 import net.minecraft.util.IStringSerializable;
 
+/**
+ * Windows types of Corn Doors.
+ */
 public enum DoorWindowType implements IStringSerializable {
     
     GLASS("glass"),

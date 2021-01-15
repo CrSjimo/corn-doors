@@ -2,11 +2,27 @@ package de.myxrcrs.corndoors.util;
 
 import net.minecraft.util.math.BlockPos;
 
+/**
+ * The range where a door locates.
+ */
 public class DoorRange {
 
+    /**
+     * The position of the block in the door whose bottom is adjacent to the ground and side is the hinge.
+     */
     protected final BlockPos from;
+
+    /**
+     * The position of the block on the other end of diagonal.
+     */
     protected final BlockPos to;
+
+    /**
+     * The hinge vector.
+     * @see {@link de.myxrcrs.corndoors.util.Matrix#getHingeVector(double[][], net.minecraft.state.properties.DoorHingeSide)}
+     */
     protected final double[][] dirVec;
+    
     protected DoorRange(BlockPos from, BlockPos to, double[][] dirVec){
         this.from = from;
         this.to = to;

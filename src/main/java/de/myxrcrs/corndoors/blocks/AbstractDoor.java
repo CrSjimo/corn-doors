@@ -37,6 +37,9 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
+/**
+ * Corn Doors which rotates about a fixed center.
+ */
 public abstract class AbstractDoor extends AbstractTemplateDoor implements IRotateDoor {
     
     public static final EnumProperty<DoorHingeSide> HINGE = BlockStateProperties.DOOR_HINGE;
@@ -44,10 +47,10 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
     /**
      * Center of rotation is at the corner of hinge (false) or at the center of hinge (true).
      * <p>
-     * <img src="https://img.imgdb.cn/item/600102cf3ffa7d37b318a216.png">
+     * <img src="https://img.imgdb.cn/item/600102cf3ffa7d37b318a216.png" alt="the center of hinge">
      * the center of hinge
      * <p>
-     * <img src="https://img.imgdb.cn/item/600102dd3ffa7d37b318a7dd.png">
+     * <img src="https://img.imgdb.cn/item/600102dd3ffa7d37b318a7dd.png" alt="the center of hinge">
      * the corner of hinge
      */
     public boolean rotateWithinHinge;

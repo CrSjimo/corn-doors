@@ -37,7 +37,7 @@ public abstract class AbstractTemplateDoor extends Block {
      * Create horizontal property.
      * <p>
      * Horizontal position represents the distance of a door block relative to the hinge. The position starts from zero.
-     * <img src="https://img.imgdb.cn/item/600101793ffa7d37b318162b.png">
+     * <img src="https://img.imgdb.cn/item/600101793ffa7d37b318162b.png" alt="The diagram of position properties.">
      * @param width The width of the door.
      * @return Horizontal position property.
      */
@@ -52,7 +52,7 @@ public abstract class AbstractTemplateDoor extends Block {
      * Create vertical property.
      * <p>
      * Vertical position represents the distance of a door block relative to the ground. The position starts from zero.
-     * <img src="https://img.imgdb.cn/item/600101793ffa7d37b318162b.png">
+     * <img src="https://img.imgdb.cn/item/600101793ffa7d37b318162b.png" alt="The diagram of position properties.">
      * @param height The height of the door.
      * @return Vertical position property.
      */
@@ -85,7 +85,7 @@ public abstract class AbstractTemplateDoor extends Block {
      * Generate the boundary box of current door
      * @param state Block state.
      * @param isMiddle Whether current door is located in the middle of a block. 
-     * <img src="https://img.imgdb.cn/item/600101e43ffa7d37b31841ec.png">
+     * <img src="https://img.imgdb.cn/item/600101e43ffa7d37b31841ec.png" alt="The diagram of isMiddle.">
      * @return Boundary box
      */
     public VoxelShape generateBoundaryBox(BlockState state, boolean isMiddle){
@@ -138,7 +138,7 @@ public abstract class AbstractTemplateDoor extends Block {
     /**
      * Fill a door into the given range. 
      * <p>
-     * Before invoked, {@link #canFillRange()} must be called first to judge whether the given range is able to be filled.
+     * Before invoked, {@link #canFillRange(World, DoorRange)} must be called first to judge whether the given range is able to be filled.
      * @param world
      * @param range
      * @param stateTemplate
