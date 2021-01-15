@@ -5,15 +5,15 @@ import net.minecraft.util.Direction;
 
 public class Matrix {
     
-    public static double[][] add(double[][] a, double[][] b)throws Exception{
+    public static double[][] add(double[][] a, double[][] b){
         if(a.length != b.length){
-            throw new Exception("Rows Exception.");
+            throw new ArithmeticException("Rows Exception.");
         }
         int rows = a.length, columns = a[0].length;
         double[][] c = new double[rows][columns];
         for(int i = 0 ; i < rows ; i++){
             if(a[i].length != columns || b[i].length != columns){
-                throw new Exception("Columns Exception.");
+                throw new ArithmeticException("Columns Exception.");
             }
             for(int j = 0 ; j < columns ; j++){
                 c[i][j] = a[i][j] + b[i][j];
@@ -22,15 +22,15 @@ public class Matrix {
         return c;
     }
 
-    public static double[][] sub(double[][] a, double[][] b)throws Exception{
+    public static double[][] sub(double[][] a, double[][] b){
         if(a.length != b.length){
-            throw new Exception("Rows Exception.");
+            throw new ArithmeticException("Rows Exception.");
         }
         int rows = a.length, columns = a[0].length;
         double[][] c = new double[rows][columns];
         for(int i = 0 ; i < rows ; i++){
             if(a[i].length != columns || b[i].length != columns){
-                throw new Exception("Columns Exception.");
+                throw new ArithmeticException("Columns Exception.");
             }
             for(int j = 0 ; j < columns ; j++){
                 c[i][j] = a[i][j] - b[i][j];
@@ -39,12 +39,12 @@ public class Matrix {
         return c;
     }
 
-    public static double[][] mul(double[][] a, double k)throws Exception{
+    public static double[][] mul(double[][] a, double k){
         int rows = a.length, columns = a[0].length;
         double[][] c = new double[rows][columns];
         for(int i = 0 ; i < rows ; i++){
             if(a[i].length != columns){
-                throw new Exception("Columns Exception.");
+                throw new ArithmeticException("Columns Exception.");
             }
             for(int j = 0 ; j < columns ; j++){
                 c[i][j] = a[i][j]*k;
@@ -53,11 +53,11 @@ public class Matrix {
         return c;
     }
 
-    public static double[][] mul(double[][] a, double[][] b)throws Exception{
+    public static double[][] mul(double[][] a, double[][] b){
         int rows = a.length, columns = b[0].length;
         int m = a[0].length;
         if(b.length != m){
-            throw new Exception("Rows Exception.");
+            throw new ArithmeticException("Rows Exception.");
         }
         double[][] c = new double[rows][columns];
         for(int i=0;i<rows;i++){
@@ -80,10 +80,10 @@ public class Matrix {
         }
     }
 
-    public static Direction matrixToHorizontalDirection(double[][] mat)throws Exception{
-        if(mat.length!=1)throw new Exception("Rows Exception.");
-        if(mat[0].length!=2)throw new Exception("Columns Exception.");
-        if((mat[0][0]==0)==(mat[0][1]==0))throw new Exception("Matrix Exception.");
+    public static Direction matrixToHorizontalDirection(double[][] mat){
+        if(mat.length!=1)throw new ArithmeticException("Rows Exception.");
+        if(mat[0].length!=2)throw new ArithmeticException("Columns Exception.");
+        if((mat[0][0]==0)==(mat[0][1]==0))throw new ArithmeticException("Matrix Exception.");
         return mat[0][0]==0 ? (mat[0][1]>0 ? Direction.SOUTH : Direction.NORTH) : (mat[0][0]>0 ? Direction.EAST : Direction.WEST);
     }
 
@@ -94,7 +94,7 @@ public class Matrix {
             {{ 0,-1},
             {  1, 0}};
 
-    public static double[][] getHingeVector(double[][] u, DoorHingeSide side)throws Exception{
+    public static double[][] getHingeVector(double[][] u, DoorHingeSide side){
         return Matrix.mul(u,side == DoorHingeSide.LEFT?HINGE_LEFT:HINGE_RIGHT);
     }
 
