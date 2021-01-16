@@ -23,6 +23,10 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.util.math.shapes.ISelectionContext;
+import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implements IRotateDoor {
@@ -31,8 +35,11 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
 
     public final Property<Integer> VERTICAL_POS;
 
-    public AbstractDualDoorEdge(Properties props, Property<Integer> VERTICAL_POS, double thickness){
+    public final boolean rotateWithinHinge;
+
+    public AbstractDualDoorEdge(Properties props, Property<Integer> VERTICAL_POS, boolean rotateWithinHinge,double thickness){
         super(props,thickness);
+        this.rotateWithinHinge = rotateWithinHinge;
         this.VERTICAL_POS = VERTICAL_POS;
     }
 
@@ -47,6 +54,43 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
         }else{
             throw new UnsupportedOperationException("Corresponding door already set.");
         }
+    }
+
+    @Override
+    public VoxelShape generateBoundaryBox(BlockState state, boolean isMiddle){
+        Direction facing = state.get(FACING);
+        if(state.get(PART)==DualDoorEdgePart.LEFT){
+            switch(facing){
+                case NORTH:
+                default:
+                    return isMiddle ? Block.makeCuboidShape(8, 0, 8-0.5*thickness, 16, 16, 8+0.5*thickness) : Block.makeCuboidShape(8, 0, 0, 16, 16, thickness);
+                case SOUTH:
+                    return isMiddle ? Block.makeCuboidShape(0, 0, 8-0.5*thickness, 8, 16, 8+0.5*thickness) : Block.makeCuboidShape(0, 0, 16-thickness, 8, 16, 16);
+                case EAST:
+                    return isMiddle ? Block.makeCuboidShape(8-0.5*thickness, 0, 8, 8+0.5*thickness, 16, 16) : Block.makeCuboidShape(16-thickness, 0, 8, 16, 16, 16);
+                case WEST:
+                    return isMiddle ? Block.makeCuboidShape(8-0.5*thickness, 0, 0, 8+0.5*thickness, 16, 8) : Block.makeCuboidShape(0, 0, 0, thickness, 16, 8);
+            }
+        }else if(state.get(PART)==DualDoorEdgePart.RIGHT){
+            switch(facing){
+                case NORTH:
+                default:
+                    return isMiddle ? Block.makeCuboidShape(0, 0, 8-0.5*thickness, 8, 16, 8+0.5*thickness) : Block.makeCuboidShape(0, 0, 0, 8, 16, thickness);
+                case SOUTH:
+                    return isMiddle ? Block.makeCuboidShape(8, 0, 8-0.5*thickness, 16, 16, 8+0.5*thickness) : Block.makeCuboidShape(8, 0, 16-thickness, 16, 16, 16);
+                case EAST:
+                    return isMiddle ? Block.makeCuboidShape(8-0.5*thickness, 0, 0, 8+0.5*thickness, 16, 8) : Block.makeCuboidShape(16-thickness, 0, 0, 16, 16, 8);
+                case WEST:
+                    return isMiddle ? Block.makeCuboidShape(8-0.5*thickness, 0, 8, 8+0.5*thickness, 16, 16) : Block.makeCuboidShape(0, 0, 8, thickness, 16, 16);
+            }
+        }else{
+            return super.generateBoundaryBox(state, isMiddle);
+        }
+    }
+
+    @Override
+    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
+        return generateBoundaryBox(state,rotateWithinHinge);
     }
 
     public BlockPos getNeighborDoorPos(BlockPos pos, BlockState state, DoorHingeSide side){
@@ -81,13 +125,22 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
 
     @Override
     public boolean toggleDoor(World world, BlockPos pos, BlockState state, DoorHingeSide side){
+        if(side==null){
+            BlockPos neighborPosL = getNeighborDoorPos(pos, state, DoorHingeSide.LEFT);
+            BlockState neighborStateL = world.getBlockState(neighborPosL);
+            Block neighborBlockL = neighborStateL.getBlock();
+            if(neighborBlockL == correspondingDoorBlock){
+                side=DoorHingeSide.LEFT;
+            }else{
+                side=DoorHingeSide.RIGHT;
+            }
+        }
         BlockPos neighborPos = getNeighborDoorPos(pos, state, side);
         BlockState neighborState = world.getBlockState(neighborPos);
         Block neighborBlock = neighborState.getBlock();
-        LOGGER.info(neighborPos);
-        LOGGER.info(neighborBlock.getClass().getName());
+        LOGGER.debug("ngbpos = "+neighborPos);
+        LOGGER.debug("ngbclass = "+neighborBlock.getClass().getName());
         if(neighborBlock == correspondingDoorBlock){
-            LOGGER.info(neighborBlock.getClass().getName()+" matches");
             return ((AbstractDoor)neighborBlock).toggleDoor(world, neighborPos, neighborState, side);
         }else{
             onHarvested(world, state, pos);
@@ -107,18 +160,20 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
 
     public boolean toggleDoorPos(World world, BlockPos pos, BlockState state, RotateTarget rotateTarget){
         DualDoorEdgePart part = DualDoorEdgePart.fromDoorHingeSide(rotateTarget.side);
-        return world.setBlockState(rotateTarget.pos, state.with(FACING, rotateTarget.facing).with(PART,part))
+        DualDoorEdgePart targetStatePart = addPartTo(world.getBlockState(rotateTarget.pos),part).get(PART);
+        return world.setBlockState(rotateTarget.pos, state.with(FACING, rotateTarget.facing).with(PART,targetStatePart))
             && world.setBlockState(pos, removePartFrom(state,part));
     }
 
+    @Nullable
     public static DoorHingeSide getSideFromHit(BlockState state, BlockPos pos, Vec3d hitVec){
         Vec3d vec = hitVec.subtract(pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5);
         double[][] v = Matrix.getHingeVector(Matrix.horizontalDirectionToMatrix(state.get(FACING)),DoorHingeSide.LEFT);
         double t = v[0][0]*vec.getX()+v[0][1]*vec.getZ();
-        // LOGGER.info(vec);
-        // LOGGER.info("["+v[0][0]+' '+v[0][1]+"]");
-        // LOGGER.info(t);
-        return t>=0?DoorHingeSide.LEFT:DoorHingeSide.RIGHT;
+        LOGGER.debug("hitvec = "+vec);
+        // LOGGER.debug("["+v[0][0]+' '+v[0][1]+"]");
+        LOGGER.debug("hitflag = "+t);
+        return t>0?DoorHingeSide.LEFT:t<0?DoorHingeSide.RIGHT:null;
         
     }
 
@@ -126,7 +181,7 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
     public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if(handIn == Hand.OFF_HAND)return ActionResultType.PASS;
         try{
-            LOGGER.info(getSideFromHit(state, pos, hit.getHitVec()));
+            LOGGER.debug("hitside = "+getSideFromHit(state, pos, hit.getHitVec()));
             if(toggleDoor(worldIn, pos, state, getSideFromHit(state, pos, hit.getHitVec()))){
                 worldIn.playEvent(player, getToggleSound(state), pos, 0);
                 return ActionResultType.SUCCESS;
@@ -144,7 +199,7 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
         BlockState neighborState = world.getBlockState(neighborPos);
         Block neighborBlock = neighborState.getBlock();
         if(neighborBlock == correspondingDoorBlock){
-            LOGGER.info(neighborBlock.getClass().getName()+" "+side);
+            LOGGER.debug(neighborBlock.getClass().getName()+" "+side);
             ((AbstractDoor)neighborBlock).onHarvested(world, neighborState, neighborPos);
         }
     }
@@ -155,7 +210,8 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
         triggerNeighborHarvest(world, state, pos, DoorHingeSide.RIGHT);
     }
 
-    public void fillRange(World world, DoorRange range, BlockState stateTemplate){
+    @Override
+    public void fillRange(World world, DoorRange range, BlockState stateTemplate, BlockItemUseContext context){
         range.iterateRange((x,y,z)->{
             int verticalPos = y-range.getFrom().getY();
             world.setBlockState(new BlockPos(x,y,z), stateTemplate.with(VERTICAL_POS, verticalPos));
@@ -166,8 +222,8 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
     public void onPlaced(BlockItemUseContext context, BlockState stateTemplate){
         Direction facing = context.getPlacementHorizontalFacing().getOpposite();
         BlockPos pos = context.getPos();
-        int width = correspondingDoorBlock.getWidth();
-        int height = correspondingDoorBlock.getHeight();
+        int width = correspondingDoorBlock.getWidth(null);
+        int height = correspondingDoorBlock.getHeight(null);
         double[][] a1 = {{pos.getX(),pos.getZ()}};
         double[][] v = Matrix.getHingeVector(Matrix.horizontalDirectionToMatrix(facing), DoorHingeSide.RIGHT);
         double[][] a2 = Matrix.add(a1, Matrix.mul(v, width));
@@ -179,11 +235,15 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
         if(canFill){
             correspondingDoorBlock.fillRange(context.getWorld(), rangeLeft, correspondingDoorBlock.getDefaultState()
                 .with(AbstractDoor.FACING, facing)
-                .with(AbstractDoor.HINGE, DoorHingeSide.LEFT));
+                .with(AbstractDoor.HINGE, DoorHingeSide.LEFT),
+                context
+            );
             correspondingDoorBlock.fillRange(context.getWorld(), rangeRight, correspondingDoorBlock.getDefaultState()
                 .with(AbstractDoor.FACING, facing)
-                .with(AbstractDoor.HINGE, DoorHingeSide.RIGHT));
-            fillRange(context.getWorld(), rangeMiddle, stateTemplate);
+                .with(AbstractDoor.HINGE, DoorHingeSide.RIGHT),
+                context
+            );
+            fillRange(context.getWorld(), rangeMiddle, stateTemplate.with(FACING,facing),context);
         }
     }
 

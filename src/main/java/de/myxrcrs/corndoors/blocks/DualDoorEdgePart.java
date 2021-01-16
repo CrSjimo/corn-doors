@@ -27,36 +27,50 @@ public enum DualDoorEdgePart implements IStringSerializable {
         return getName();
     }
 
-    public DualDoorEdgePart add(DualDoorEdgePart part){
-        if(part==ALL)return ALL;
-        switch(this){
-            case ALL: return ALL;
-            case LEFT: return part==RIGHT?ALL:LEFT;
-            case RIGHT: return part==LEFT?ALL:RIGHT;
-            default: return this;
+    private static int getFlag(@Nullable DualDoorEdgePart part){
+        switch(part){
+            case ALL: return 3;
+            case LEFT: return 2;
+            case RIGHT: return 1;
+            default: return 0;
         }
+    }
+
+    @Nullable
+    private static DualDoorEdgePart fromFlag(int flag){
+        if((flag&1)!=0&&(flag&2)!=0)return ALL;
+        if((flag&1)!=0)return RIGHT;
+        if((flag&2)!=0)return LEFT;
+        return null;
+    }
+
+    public DualDoorEdgePart add(DualDoorEdgePart part){
+        int p1 = getFlag(this);
+        int p2 = getFlag(part);
+        return fromFlag(p1|p2);
     }
 
     @Nullable
     public DualDoorEdgePart getComplement(){
-        switch(this){
-            case ALL: return null;
-            case LEFT: return RIGHT;
-            case RIGHT: return LEFT;
-            default: return this;
-        }
+        return fromFlag(~getFlag(this));
+    }
+
+    public boolean include(DualDoorEdgePart part){
+        int p1 = getFlag(this);
+        int p2 = getFlag(part);
+        return (p1|p2)==p1;
     }
 
     @Nullable
     public DualDoorEdgePart remove(DualDoorEdgePart part){
-        if(part==ALL)return null;
-        switch(this){
-            case ALL: return part==LEFT?RIGHT:LEFT;
-            case LEFT: return part==RIGHT?LEFT:null;
-            case RIGHT: return part==LEFT?RIGHT:null;
-            default: return this;
+        int p1 = getFlag(this);
+        int p2 = getFlag(part);
+        if((p1|p2)!=p1){
+            throw new IllegalArgumentException("Part not included.");
         }
+        return fromFlag(p1-p2);
     }
+
 
     public static DualDoorEdgePart fromDoorHingeSide(DoorHingeSide side){
         if(side == DoorHingeSide.LEFT)return LEFT;

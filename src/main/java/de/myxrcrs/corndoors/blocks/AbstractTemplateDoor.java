@@ -139,11 +139,8 @@ public abstract class AbstractTemplateDoor extends Block {
      * Fill a door into the given range. 
      * <p>
      * Before invoked, {@link #canFillRange(World, DoorRange)} must be called first to judge whether the given range is able to be filled.
-     * @param world
-     * @param range
-     * @param stateTemplate
      */
-    abstract public void fillRange(World world, DoorRange range, BlockState stateTemplate);
+    abstract public void fillRange(World world, DoorRange range, BlockState stateTemplate, BlockItemUseContext context);
 
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {

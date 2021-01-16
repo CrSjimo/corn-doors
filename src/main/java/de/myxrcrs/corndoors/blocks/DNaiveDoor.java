@@ -7,6 +7,7 @@ import org.apache.commons.lang3.tuple.Triple;
 import de.myxrcrs.corndoors.init.InitBlocks;
 import de.myxrcrs.corndoors.init.InitItems;
 import de.myxrcrs.corndoors.items.NaiveDoorItem;
+import de.myxrcrs.corndoors.util.DoorRange;
 import de.myxrcrs.corndoors.util.RotateTarget;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -47,6 +48,12 @@ public class DNaiveDoor extends AbstractDoor {
             .with(VERTICAL_POS,0)
             .with(HINGE,DoorHingeSide.LEFT)
             .with(WINDOW,DoorWindowType.GLASS));
+    }
+
+    @Override
+    public void fillRange(World world, DoorRange range, BlockState stateTemplate, BlockItemUseContext context){
+        DoorWindowType doorWindowType = ((NaiveDoorItem)context.getItem().getItem()).doorWindowType;
+        super.fillRange(world, range, stateTemplate.with(WINDOW, doorWindowType), context);
     }
 
     @Override
