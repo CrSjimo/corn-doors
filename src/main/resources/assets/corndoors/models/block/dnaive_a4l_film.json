@@ -3,7 +3,7 @@
 	"ambientocclusion": false,
 	"textures": {
 		"0": "block/stripped_dark_oak_log",
-		"1": "block/glass",
+		"1": "block/white_stained_glass",
 		"particle": "block/stripped_dark_oak_log"
 	},
 	"elements": [
