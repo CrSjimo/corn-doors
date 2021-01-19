@@ -159,8 +159,10 @@ public abstract class AbstractDoor extends AbstractIndividualDoor implements IRo
                 RotateTarget edgeRotateTarget = getRotateTarget(currentState.get(FACING), horizontalPos+1, side, currentState.get(IS_OPENED), edgePos);
                 if(!correspondingDualDoorEdgeBlock.canTogglePos(world, edgeState,edgeRotateTarget.pos))return false;
                 rotates.add(Triple.of(edgePos,edgeState,edgeRotateTarget));
+                if(!correspondingDualDoorEdgeBlock.onDidCheck(world, edgeState, edgePos))return false;
             }
             rotates.add(Triple.of(currentPos,currentState,rotateTarget));
+            if(!onDidCheck(world,currentState,currentPos))return false;
             return true;
         }))return false;
         
@@ -174,8 +176,12 @@ public abstract class AbstractDoor extends AbstractIndividualDoor implements IRo
     }
 
     public boolean toggleDoorPos(World world, BlockPos pos, BlockState state, RotateTarget rotateTarget){
-        return world.setBlockState(pos, Blocks.AIR.getDefaultState())
-            && world.setBlockState(rotateTarget.pos, state.with(FACING, rotateTarget.facing).cycle(IS_OPENED));
+        BlockState newState = state.with(FACING, rotateTarget.facing).cycle(IS_OPENED);
+        if(world.setBlockState(pos, Blocks.AIR.getDefaultState())
+            && world.setBlockState(rotateTarget.pos, newState)){
+            onDidSetNewState(world, newState, rotateTarget.pos);
+            return true;
+        }else return false;
     }
 
     @Override
@@ -197,6 +203,7 @@ public abstract class AbstractDoor extends AbstractIndividualDoor implements IRo
                         world.setBlockState(edgePos, Blocks.AIR.getDefaultState());
                     }
                 }
+                onDidHarvest(world,currentState,currentPos);
             }
         });
     }

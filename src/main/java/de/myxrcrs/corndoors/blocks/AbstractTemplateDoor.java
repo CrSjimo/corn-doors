@@ -241,6 +241,18 @@ public abstract class AbstractTemplateDoor extends Block {
         else return p.getAllowedValues().size();
     }
 
+    public boolean onDidCheck(World world,BlockState state,BlockPos pos){
+        return true;
+    }
+
+    public void onDidHarvest(World world,BlockState state,BlockPos pos){
+
+    }
+
+    public void onDidSetNewState(World world,BlockState state,BlockPos pos){
+
+    }
+
     public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {
         return true;
      }

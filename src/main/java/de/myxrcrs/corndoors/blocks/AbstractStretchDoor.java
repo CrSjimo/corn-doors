@@ -85,16 +85,25 @@ public abstract class AbstractStretchDoor extends AbstractIndividualDoor {
     }
 
     public boolean toggleDoorPos(World world, BlockState state, BlockPos pos){
+        BlockState newState;
+        boolean flag;
         if(state.get(IS_OPENED)){
-            return world.setBlockState(pos, state.with(IS_OPENED,false));
+            newState = state.with(IS_OPENED,false);
+            flag =  world.setBlockState(pos, newState);
         }else{
             if(isShrinkPart(state)){
-                return world.setBlockState(pos, Blocks.AIR.getDefaultState());
+                newState = Blocks.AIR.getDefaultState();
+                flag =  world.setBlockState(pos, newState);
             }else{
-                return world.setBlockState(pos, state.with(IS_OPENED,true));
+                newState = state.with(IS_OPENED,true);
+                flag =  world.setBlockState(pos, newState);
             }
             
         }
+        if(flag){
+            onDidSetNewState(world, newState, pos);
+            return true;
+        }else return false;
     }
 
     @Override
@@ -105,6 +114,7 @@ public abstract class AbstractStretchDoor extends AbstractIndividualDoor {
             BlockState currentState = world.getBlockState(currentPos);
             if(currentState.getBlock()==this){
                 world.setBlockState(currentPos, Blocks.AIR.getDefaultState());
+                onDidHarvest(world, state, pos);
             }
         });
 

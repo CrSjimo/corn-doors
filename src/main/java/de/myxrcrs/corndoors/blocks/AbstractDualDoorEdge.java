@@ -171,8 +171,12 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
     public boolean toggleDoorPos(World world, BlockPos pos, BlockState state, RotateTarget rotateTarget){
         DualDoorEdgePart part = DualDoorEdgePart.fromDoorHingeSide(rotateTarget.side);
         DualDoorEdgePart targetStatePart = addPartTo(world.getBlockState(rotateTarget.pos),part).get(PART);
-        return world.setBlockState(rotateTarget.pos, state.with(FACING, rotateTarget.facing).with(PART,targetStatePart))
-            && world.setBlockState(pos, removePartFrom(state,part));
+        BlockState newState = state.with(FACING, rotateTarget.facing).with(PART,targetStatePart);
+        if(world.setBlockState(rotateTarget.pos, newState)
+            && world.setBlockState(pos, removePartFrom(state,part))){
+            onDidSetNewState(world, newState, rotateTarget.pos);
+            return true;
+        }else return false;
     }
 
     @Nullable
@@ -224,7 +228,10 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
     public void fillRange(World world, DoorRange range, BlockState stateTemplate, BlockItemUseContext context){
         range.iterateRange((x,y,z)->{
             int verticalPos = y-range.getFrom().getY();
-            world.setBlockState(new BlockPos(x,y,z), stateTemplate.with(VERTICAL_POS, verticalPos));
+            BlockPos pos = new BlockPos(x,y,z);
+            BlockState state = stateTemplate.with(VERTICAL_POS, verticalPos);
+            world.setBlockState(pos, state);
+            onDidSetNewState(world, state, pos);
         });
     }
 

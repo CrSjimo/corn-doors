@@ -50,7 +50,10 @@ public abstract class AbstractIndividualDoor extends AbstractTemplateDoor {
         range.iterateRange((x,y,z)->{
             int horizontalPos = Math.abs(x-range.getFrom().getX())+Math.abs(z-range.getFrom().getZ());
             int verticalPos = y-range.getFrom().getY();
-            world.setBlockState(new BlockPos(x,y,z), setVerticalPos(setHorizontalPos(stateTemplate, horizontalPos),verticalPos));
+            BlockPos pos = new BlockPos(x,y,z);
+            BlockState state = setVerticalPos(setHorizontalPos(stateTemplate, horizontalPos),verticalPos);
+            world.setBlockState(pos, state);
+            onDidSetNewState(world, state, pos);
         });
     }
 
