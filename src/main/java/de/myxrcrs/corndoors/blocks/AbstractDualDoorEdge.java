@@ -57,6 +57,16 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
     }
 
     @Override
+    public int getWidth(BlockState state){
+        return 1;
+    }
+
+    @Override
+    public int getHeight(BlockState state){
+        return getSize(VERTICAL_POS);
+    }
+
+    @Override
     public VoxelShape generateBoundaryBox(BlockState state, boolean isMiddle){
         Direction facing = state.get(FACING);
         if(state.get(PART)==DualDoorEdgePart.LEFT){

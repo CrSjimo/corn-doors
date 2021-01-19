@@ -40,9 +40,7 @@ import net.minecraft.world.World;
 /**
  * Corn Doors which rotates about a fixed center.
  */
-public abstract class AbstractDoor extends AbstractTemplateDoor implements IRotateDoor {
-    
-    public static final EnumProperty<DoorHingeSide> HINGE = BlockStateProperties.DOOR_HINGE;
+public abstract class AbstractDoor extends AbstractIndividualDoor implements IRotateDoor {
 
     /**
      * Center of rotation is at the corner of hinge (false) or at the center of hinge (true).
@@ -55,9 +53,6 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
      */
     public boolean rotateWithinHinge;
     @Nullable public AbstractDualDoorEdge correspondingDualDoorEdgeBlock;
-
-    public final Property<Integer> HORIZONTAL_POS;
-    public final Property<Integer> VERTICAL_POS;
     
 
     public AbstractDoor(Properties props, boolean rotateWithinHinge, Property<Integer> horizontalPosProp, Property<Integer> verticalPosProp, double thickness){
@@ -65,9 +60,7 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
     }
 
     public AbstractDoor(Properties props, boolean rotateWithinHinge, Property<Integer> horizontalPosProp, Property<Integer> verticalPosProp, double thickness, @Nullable AbstractDualDoorEdge correspondingDualDoorEdgeBlock){
-        super(props,thickness);
-        this.HORIZONTAL_POS = horizontalPosProp;
-        this.VERTICAL_POS = verticalPosProp;
+        super(props,horizontalPosProp,verticalPosProp,thickness);
         this.rotateWithinHinge = rotateWithinHinge;
         if(correspondingDualDoorEdgeBlock!=null&&(getSize(correspondingDualDoorEdgeBlock.VERTICAL_POS)!=getHeight(getDefaultState())||correspondingDualDoorEdgeBlock.rotateWithinHinge!=rotateWithinHinge)){
             throw new IllegalArgumentException("Corresponding block not match.");
@@ -113,30 +106,6 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
         }
         double[][] target = Matrix.mul(new double[][]{{pos.getX(),pos.getZ(),center[0][0],center[0][1]}},flag!=flag2?rL:rR);
         return new RotateTarget(Matrix.matrixToHorizontalDirection(Matrix.mul(v,flag2?-1:1)),new BlockPos(target[0][0],pos.getY(),target[0][1]),side);
-    }
-
-    /**
-     * Get the width of the door.
-     * @return The width.
-     */
-    public int getWidth(BlockState state){
-        return getSize(HORIZONTAL_POS);
-    }
-
-    /**
-     * Get the height of the door.
-     * @return The height.
-     */
-    public int getHeight(BlockState state){
-        return getSize(VERTICAL_POS);
-    }
-
-    public BlockState setHorizontalPos(BlockState state,int pos){
-        return state.with(HORIZONTAL_POS,pos);
-    }
-
-    public BlockState setVerticalPos(BlockState state,int pos){
-        return state.with(VERTICAL_POS,pos);
     }
 
     @Override
@@ -210,46 +179,6 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
     }
 
     @Override
-    public void fillRange(World world, DoorRange range, BlockState stateTemplate, BlockItemUseContext context){
-        range.iterateRange((x,y,z)->{
-            int horizontalPos = Math.abs(x-range.getFrom().getX())+Math.abs(z-range.getFrom().getZ());
-            int verticalPos = y-range.getFrom().getY();
-            world.setBlockState(new BlockPos(x,y,z), setVerticalPos(setHorizontalPos(stateTemplate, horizontalPos),verticalPos));
-        });
-    }
-
-    @Override
-    public void onPlaced(BlockItemUseContext context, BlockState stateTemplate){
-        Direction facing = context.getPlacementHorizontalFacing().getOpposite();
-        DoorRange leftHingeRange = getDoorRange(facing, context.getPos(), DoorHingeSide.LEFT, getWidth(stateTemplate), getHeight(stateTemplate), 0, 0);
-        DoorRange rightHingeRange = getDoorRange(facing, context.getPos(), DoorHingeSide.RIGHT, getWidth(stateTemplate), getHeight(stateTemplate), 0, 0);
-        boolean canLeftHinge = canFillRange(context.getWorld(), leftHingeRange);
-        if(canLeftHinge){
-            fillRange(
-                context.getWorld(),
-                leftHingeRange,
-                stateTemplate
-                    .with(FACING, facing)
-                    .with(HINGE, DoorHingeSide.LEFT),
-                context
-            );
-            return;
-        }
-        boolean canRightHinge = canFillRange(context.getWorld(), rightHingeRange);
-        if(canRightHinge){
-            fillRange(
-                context.getWorld(),
-                rightHingeRange,
-                stateTemplate
-                    .with(FACING, facing)
-                    .with(HINGE, DoorHingeSide.RIGHT),
-                context
-            );
-            return;
-        }
-    }
-
-    @Override
     public void onHarvested(World world, BlockState state, BlockPos pos){
         DoorRange range = getDoorRange(state.get(FACING), pos, state.get(HINGE), getWidth(state), getHeight(state), state.get(HORIZONTAL_POS), state.get(VERTICAL_POS));
         int width = getWidth(state);
@@ -270,23 +199,6 @@ public abstract class AbstractDoor extends AbstractTemplateDoor implements IRota
                 }
             }
         });
-    }
-
-    @Override
-    public ActionResultType onBlockActivated(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if(handIn == Hand.OFF_HAND)return ActionResultType.PASS;
-        try{
-            LOGGER.debug(AbstractDualDoorEdge.getSideFromHit(state, pos, hit.getHitVec()));
-            if(toggleDoor(worldIn, pos, state, state.get(HINGE))){
-                worldIn.playEvent(player, getToggleSound(state), pos, 0);
-                return ActionResultType.SUCCESS;
-            }else{
-                return ActionResultType.CONSUME;
-            }
-        }catch(Exception e){
-            LOGGER.error(e);
-            return ActionResultType.CONSUME;
-        }
     }
 
 }

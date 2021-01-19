@@ -118,6 +118,18 @@ public abstract class AbstractTemplateDoor extends Block {
     }
 
     /**
+     * Get the width of the door.
+     * @return The width.
+     */
+    abstract int getWidth(BlockState state);
+
+    /**
+     * Get the height of the door.
+     * @return The height.
+     */
+    abstract int getHeight(BlockState state);
+
+    /**
      * Toggle door open/close.
      * @param side The hinge side of the door, about which the door rotates or towards which the door shrinks.
      * @return Whether the operation is successful.
