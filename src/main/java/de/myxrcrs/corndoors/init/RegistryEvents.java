@@ -12,9 +12,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 public class RegistryEvents {
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
-        RenderTypeLookup.setRenderLayer(InitBlocks.NAIVE_DOOR.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(InitBlocks.GLASS_DOOR.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(InitBlocks.D_NAIVE_DOOR.get(), RenderType.getTranslucent());
-        RenderTypeLookup.setRenderLayer(InitBlocks.D_NAIVE_DOOR_EDGE.get(), RenderType.getTranslucent());
+        InitBlocks[] blockRegs = InitBlocks.class.getEnumConstants();
+        for(int i=0;i<blockRegs.length;i++){
+            RenderTypeLookup.setRenderLayer(blockRegs[i].get(), RenderType.getTranslucent());
+        }
     }
 }
