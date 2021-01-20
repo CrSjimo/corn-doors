@@ -249,8 +249,8 @@ public abstract class AbstractTemplateDoor extends Block {
 
     }
 
-    public void onDidSetNewState(World world,BlockState state,BlockPos pos){
-
+    public BlockState onWillSetNewState(World world,BlockState state,BlockPos pos){
+        return state;
     }
 
     public boolean propagatesSkylightDown(BlockState state, IBlockReader reader, BlockPos pos) {

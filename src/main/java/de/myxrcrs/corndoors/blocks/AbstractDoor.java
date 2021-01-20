@@ -177,11 +177,9 @@ public abstract class AbstractDoor extends AbstractIndividualDoor implements IRo
 
     public boolean toggleDoorPos(World world, BlockPos pos, BlockState state, RotateTarget rotateTarget){
         BlockState newState = state.with(FACING, rotateTarget.facing).cycle(IS_OPENED);
-        if(world.setBlockState(pos, Blocks.AIR.getDefaultState())
-            && world.setBlockState(rotateTarget.pos, newState)){
-            onDidSetNewState(world, newState, rotateTarget.pos);
-            return true;
-        }else return false;
+        newState = onWillSetNewState(world, newState, rotateTarget.pos);
+        return world.setBlockState(pos, Blocks.AIR.getDefaultState())
+            && world.setBlockState(rotateTarget.pos, newState);
     }
 
     @Override
@@ -201,6 +199,7 @@ public abstract class AbstractDoor extends AbstractIndividualDoor implements IRo
                     if(edgeState.getBlock()==correspondingDualDoorEdgeBlock){
                         correspondingDualDoorEdgeBlock.triggerNeighborHarvest(world, edgeState, edgePos, side == DoorHingeSide.LEFT ? DoorHingeSide.RIGHT : DoorHingeSide.LEFT);
                         world.setBlockState(edgePos, Blocks.AIR.getDefaultState());
+                        correspondingDualDoorEdgeBlock.onDidHarvest(world, edgeState, edgePos);
                     }
                 }
                 onDidHarvest(world,currentState,currentPos);

@@ -26,7 +26,7 @@ public abstract class AbstractStretchDoor extends AbstractIndividualDoor {
     }
 
     public boolean isShrinkPart(BlockState state) {
-        return state.get(HORIZONTAL_POS) > fixedPartSize;
+        return state.get(HORIZONTAL_POS) >= fixedPartSize;
     }
 
     public BlockState setHorizontalPos(BlockState state, int pos) {
@@ -49,14 +49,15 @@ public abstract class AbstractStretchDoor extends AbstractIndividualDoor {
         if(!range.iterateRange((x,y,z)->{
             int currentHorizontalPos = Math.abs(x-range.getFrom().getX())+Math.abs(z-range.getFrom().getZ());
             int currentVerticalPos = y-range.getFrom().getY();
+            BlockPos currentPos = new BlockPos(x,y,z);
             BlockState currentState = setVerticalPos(setHorizontalPos(stateTemplate, currentHorizontalPos),currentVerticalPos);
-            if(isShrinkPart(currentState)){
+            if(!state.get(IS_OPENED)||!isShrinkPart(currentState)){
                 if(currentState.getBlock()!=this){
                     this.onHarvested(world, state, pos);
                     return false;
                 }
-                if(!canTogglePos(world, currentState, pos))return false;
             }
+            if(!canTogglePos(world, currentState, currentPos))return false;
             return true;
         })){
             return false;
@@ -77,33 +78,24 @@ public abstract class AbstractStretchDoor extends AbstractIndividualDoor {
 
     @Override
     public boolean canTogglePos(World world, BlockState state, BlockPos target) {
-        if(state.get(IS_OPENED)){
-            return super.canTogglePos(world, target);
-        }else{
-            return world.getBlockState(target).getBlock() == this;
-        }
+        return state.getBlock()==this||world.isAirBlock(target);
     }
 
     public boolean toggleDoorPos(World world, BlockState state, BlockPos pos){
         BlockState newState;
-        boolean flag;
         if(state.get(IS_OPENED)){
             newState = state.with(IS_OPENED,false);
-            flag =  world.setBlockState(pos, newState);
+            return world.setBlockState(pos, onWillSetNewState(world, newState, pos));
         }else{
             if(isShrinkPart(state)){
                 newState = Blocks.AIR.getDefaultState();
-                flag =  world.setBlockState(pos, newState);
+                return world.setBlockState(pos, onWillSetNewState(world, newState, pos));
             }else{
                 newState = state.with(IS_OPENED,true);
-                flag =  world.setBlockState(pos, newState);
+                return world.setBlockState(pos, onWillSetNewState(world, newState, pos));
             }
             
         }
-        if(flag){
-            onDidSetNewState(world, newState, pos);
-            return true;
-        }else return false;
     }
 
     @Override
@@ -114,7 +106,7 @@ public abstract class AbstractStretchDoor extends AbstractIndividualDoor {
             BlockState currentState = world.getBlockState(currentPos);
             if(currentState.getBlock()==this){
                 world.setBlockState(currentPos, Blocks.AIR.getDefaultState());
-                onDidHarvest(world, state, pos);
+                onDidHarvest(world, currentState, pos);
             }
         });
 
