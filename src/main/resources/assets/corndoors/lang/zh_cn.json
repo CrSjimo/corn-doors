@@ -1,0 +1,6 @@
+{
+    "commands.toggleDoor.toobig": "指定区域内的方块太多（最大值为%s，指定值为%s）",
+    "commands.toggleDoor.failed": "没有门被打开或关闭",
+    "commands.toggleDoor.successOne": "成功打开或关闭了最近的一个门",
+    "commands.toggleDoor.successAll": "成功打开或关闭了范围内的%s个门"
+}

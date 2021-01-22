@@ -1,0 +1,6 @@
+{
+    "commands.toggleDoor.toobig": "Too many blocks in the specified area (maximum %s, specified %s)",
+    "commands.toggleDoor.failed": "No doors were toggled",
+    "commands.toggleDoor.successOne": "Successfully toggled the nearest door",
+    "commands.toggleDoor.successAll": "Successfully toggled %s door(s) within"
+}
