@@ -1,6 +1,5 @@
 package de.myxrcrs.corndoors.blocks;
 
-import de.myxrcrs.corndoors.util.DoorRange;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.BlockItemUseContext;

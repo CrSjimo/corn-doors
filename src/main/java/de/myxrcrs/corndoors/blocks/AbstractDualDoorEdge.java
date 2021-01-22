@@ -4,9 +4,7 @@ import javax.annotation.Nullable;
 
 import org.apache.commons.lang3.tuple.Triple;
 
-import de.myxrcrs.corndoors.util.DoorRange;
 import de.myxrcrs.corndoors.util.Matrix;
-import de.myxrcrs.corndoors.util.RotateTarget;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -259,6 +257,11 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
             );
             fillRange(context.getWorld(), rangeMiddle, stateTemplate.with(FACING,facing),context);
         }
+    }
+
+    @Nullable
+    public DoorRoot getDoorRoot(World world, BlockState state, BlockPos pos){
+        return null;
     }
 
 

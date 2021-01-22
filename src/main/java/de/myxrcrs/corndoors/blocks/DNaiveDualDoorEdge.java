@@ -5,7 +5,6 @@ import javax.annotation.Nullable;
 import de.myxrcrs.corndoors.init.InitBlocks;
 import de.myxrcrs.corndoors.init.InitItems;
 import de.myxrcrs.corndoors.items.NaiveDoorItem;
-import de.myxrcrs.corndoors.util.DoorRange;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;

@@ -9,9 +9,6 @@ import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 
 import de.myxrcrs.corndoors.util.Matrix;
-import de.myxrcrs.corndoors.util.BooleanRangeIterationConsumer;
-import de.myxrcrs.corndoors.util.DoorRange;
-import de.myxrcrs.corndoors.util.RotateTarget;
 import de.myxrcrs.corndoors.util.Zero;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRenderType;

@@ -5,8 +5,6 @@ import javax.annotation.Nullable;
 import org.apache.commons.lang3.tuple.Triple;
 
 import de.myxrcrs.corndoors.util.Matrix;
-import de.myxrcrs.corndoors.util.BooleanRangeIterationConsumer;
-import de.myxrcrs.corndoors.util.DoorRange;
 import de.myxrcrs.corndoors.util.Zero;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -32,6 +30,120 @@ import net.minecraft.world.World;
  * The template of Corn Doors.
  */
 public abstract class AbstractTemplateDoor extends Block {
+
+    public static class DoorRoot {
+
+        protected DoorRoot(BlockState state,BlockPos pos){
+            if(!(state.getBlock() instanceof AbstractTemplateDoor)){
+                throw new IllegalArgumentException("State is not door.");
+            }
+            rootState = state;
+            rootPos = pos;
+        }
+
+        public static DoorRoot of(BlockState state,BlockPos pos){
+            return new DoorRoot(state,pos);
+        }
+
+        protected final BlockState rootState;
+        protected final BlockPos rootPos;
+
+        public BlockState getState(){
+            return rootState;
+        }
+
+        public BlockPos getPos(){
+            return rootPos;
+        }
+
+        @Override
+        public int hashCode(){
+            return rootPos.hashCode();
+        }
+
+        @Override
+        public boolean equals(Object obj){
+            if(!(obj instanceof DoorRoot))return false;
+            return hashCode() == obj.hashCode();
+        }
+
+    }
+
+    /**
+     * The range where a door locates.
+     */
+    public static class DoorRange {
+
+        public interface RangeIterationConsumer {
+            void iterate(int x,int y,int z);
+        }
+
+        public interface BooleanRangeIterationConsumer {
+            boolean iterate(int x,int y,int z);
+        }
+
+        /**
+         * The position of the block in the door whose bottom is adjacent to the ground and side is the hinge.
+         */
+        protected final BlockPos from;
+
+        /**
+         * The position of the block on the other end of diagonal.
+         */
+        protected final BlockPos to;
+
+        /**
+         * The hinge vector.
+         * @see {@link de.myxrcrs.corndoors.util.Matrix#getHingeVector(double[][], net.minecraft.state.properties.DoorHingeSide)}
+         */
+        protected final double[][] dirVec;
+        
+        protected DoorRange(BlockPos from, BlockPos to, double[][] dirVec){
+            this.from = from;
+            this.to = to;
+            this.dirVec = dirVec;
+        }
+
+        public static DoorRange of(BlockPos from, BlockPos to, double[][] dirVec){
+            return new DoorRange(from, to, dirVec);
+        }
+
+        public BlockPos getFrom(){
+            return this.from;
+        }
+
+        public BlockPos getTo(){
+            return this.to;
+        }
+
+        public double[][] getDirVec(){
+            return this.dirVec;
+        }
+
+        public boolean iterateRange(RangeIterationConsumer func){
+            return iterateRange((x,y,z)->{
+                func.iterate(x, y, z);
+                return true;
+            });
+        }
+
+        public boolean iterateRange(BooleanRangeIterationConsumer func){
+            boolean xOnce = false;
+            for(int x = from.getX() ; x != to.getX() || (dirVec[0][0]==0&&!xOnce) ; x-=(int)dirVec[0][0]){
+                for(int y = from.getY() ; y != to.getY() ; y++){
+                    boolean zOnce = false;
+                    for(int z = from.getZ(); z != to.getZ() || (dirVec[0][1]==0&&!zOnce) ; z-=(int)dirVec[0][1]){
+                        if(!func.iterate(x, y, z))return false;
+                        zOnce = true;
+                    }
+                }
+                xOnce = true;
+            }
+            return true;
+        }
+    }
+
+
 
     /**
      * Create horizontal property.
@@ -153,6 +265,9 @@ public abstract class AbstractTemplateDoor extends Block {
      * Before invoked, {@link #canFillRange(World, DoorRange)} must be called first to judge whether the given range is able to be filled.
      */
     abstract public void fillRange(World world, DoorRange range, BlockState stateTemplate, BlockItemUseContext context);
+
+    @Nullable
+    abstract public DoorRoot getDoorRoot(World world, BlockState state, BlockPos pos);
 
     @Override
     public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {

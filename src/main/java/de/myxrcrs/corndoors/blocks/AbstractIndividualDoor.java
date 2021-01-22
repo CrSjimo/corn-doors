@@ -1,6 +1,5 @@
 package de.myxrcrs.corndoors.blocks;
 
-import de.myxrcrs.corndoors.util.DoorRange;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
@@ -85,6 +84,21 @@ public abstract class AbstractIndividualDoor extends AbstractTemplateDoor {
             );
             return;
         }
+    }
+
+
+    @Override
+    public DoorRoot getDoorRoot(World world, BlockState state, BlockPos pos){
+        DoorRange range = getDoorRange(
+            state.get(FACING),
+            pos,
+            state.get(HINGE),
+            getWidth(state),
+            getHeight(state),
+            state.get(HORIZONTAL_POS),
+            state.get(VERTICAL_POS)
+        );
+        return DoorRoot.of(world.getBlockState(range.getFrom()),range.getFrom());
     }
 
     @Override
