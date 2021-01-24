@@ -41,6 +41,12 @@ public class ToggleAllDoorsWithinCommand {
                 .executes((context)->{
                     return toggleAllDoorsWithin(context.getSource(),BlockPosArgument.getBlockPos(context, "from"), BlockPosArgument.getBlockPos(context, "to"),context.getSource().getWorld(),null);
                 })
+
+                    .then(Commands.literal("toggle")
+                    .executes((context)->{
+                        return toggleAllDoorsWithin(context.getSource(),BlockPosArgument.getBlockPos(context, "from"), BlockPosArgument.getBlockPos(context, "to"),context.getSource().getWorld(),null);
+                    }))
+
                     .then(Commands.literal("open")
                     .executes((context)->{
                         return toggleAllDoorsWithin(context.getSource(),BlockPosArgument.getBlockPos(context, "from"), BlockPosArgument.getBlockPos(context, "to"),context.getSource().getWorld(),true);
@@ -84,8 +90,11 @@ public class ToggleAllDoorsWithinCommand {
                     (isToggleOpen && !currentState.get(AbstractTemplateDoor.IS_OPENED)) ||
                     (!isToggleOpen && currentState.get(AbstractTemplateDoor.IS_OPENED))
                 ){
-                    if(doorBlock.toggleDoor(world, currentPos, currentState, currentState.get(BlockStateProperties.DOOR_HINGE)))
+                    if(doorBlock.toggleDoor(world, currentPos, currentState, currentState.get(BlockStateProperties.DOOR_HINGE))){
+                        world.playEvent(doorBlock.getToggleSound(currentState), currentPos, 0);
                         i++;
+                    }
+                        
                 }
                 
             }

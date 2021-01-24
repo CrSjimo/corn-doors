@@ -39,16 +39,25 @@ public class ToggleDoorNearCommand {
                 .then(Commands.argument("radius", IntegerArgumentType.integer(0, 15)).executes((context) -> {
                     return toggleDoorNear(context.getSource(),BlockPosArgument.getBlockPos(context, "pos"),
                             IntegerArgumentType.getInteger(context, "radius"), context.getSource().getWorld(), null);
-                }).then(Commands.literal("open").executes((context) -> {
-                    return toggleDoorNear(context.getSource(),BlockPosArgument.getBlockPos(context, "pos"),
-                            IntegerArgumentType.getInteger(context, "radius"), context.getSource().getWorld(), true);
-                }))
+                })
 
-                        .then(Commands.literal("close").executes((context) -> {
-                            return toggleDoorNear(context.getSource(),BlockPosArgument.getBlockPos(context, "pos"),
-                                    IntegerArgumentType.getInteger(context, "radius"), context.getSource().getWorld(),
-                                    false);
-                        }))
+                
+                    .then(Commands.literal("toggle").executes((context)->{
+                        return toggleDoorNear(context.getSource(),BlockPosArgument.getBlockPos(context, "pos"),
+                                IntegerArgumentType.getInteger(context, "radius"), context.getSource().getWorld(), null);
+                    }))
+
+                
+                    .then(Commands.literal("open").executes((context) -> {
+                        return toggleDoorNear(context.getSource(),BlockPosArgument.getBlockPos(context, "pos"),
+                                IntegerArgumentType.getInteger(context, "radius"), context.getSource().getWorld(), true);
+                    }))
+
+                    .then(Commands.literal("close").executes((context) -> {
+                        return toggleDoorNear(context.getSource(),BlockPosArgument.getBlockPos(context, "pos"),
+                                IntegerArgumentType.getInteger(context, "radius"), context.getSource().getWorld(),
+                                false);
+                    }))
 
                 ));
         dispatcher.register(cmd);
@@ -83,6 +92,7 @@ public class ToggleDoorNearCommand {
                     (!isToggleOpen && currentState.get(AbstractTemplateDoor.IS_OPENED))
                 ){
                     if(doorBlock.toggleDoor(world, currentPos, currentState, currentState.get(BlockStateProperties.DOOR_HINGE))){
+                        world.playEvent(doorBlock.getToggleSound(currentState), currentPos, 0);
                         source.sendFeedback(new TranslationTextComponent("commands.toggleDoor.successOne"), true);
                         return 1;
                     }
