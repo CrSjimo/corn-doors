@@ -2,5 +2,20 @@
     "commands.toggleDoor.toobig": "指定区域内的方块太多（最大值为%s，指定值为%s）",
     "commands.toggleDoor.failed": "没有门被打开或关闭",
     "commands.toggleDoor.successOne": "成功打开或关闭了最近的一个门",
-    "commands.toggleDoor.successAll": "成功打开或关闭了范围内的%s个门"
+    "commands.toggleDoor.successAll": "成功打开或关闭了范围内的%s个门",
+
+    "itemGroup.corndoors": "充满玉米味的门",
+
+    "item.corndoors.naive_door_glass": "平凡的门（玻璃窗）",
+    "item.corndoors.naive_door_film": "平凡的门（镀膜窗）",
+    "item.corndoors.naive_door_none": "平凡的门（无窗）",
+    "item.corndoors.d_naive_door_glass": "平凡的双开门（玻璃窗）",
+    "item.corndoors.d_naive_door_film": "平凡的双开门（镀膜窗）",
+    "item.corndoors.d_naive_door_none": "平凡的双开门（无窗）",
+    
+    "block.corndoors.naive_door": "平凡的门",
+    "block.corndoors.d_naive_door": "平凡的双开门",
+    "block.corndoors.d_naive_door_edge": "平凡的双开门的双开部分",
+    "block.corndoors.glass_door": "玻璃门",
+    "block.corndoors.stretch_gate": "伸缩门"
 }

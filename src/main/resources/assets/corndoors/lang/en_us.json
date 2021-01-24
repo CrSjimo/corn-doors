@@ -2,5 +2,20 @@
     "commands.toggleDoor.toobig": "Too many blocks in the specified area (maximum %s, specified %s)",
     "commands.toggleDoor.failed": "No doors were toggled",
     "commands.toggleDoor.successOne": "Successfully toggled the nearest door",
-    "commands.toggleDoor.successAll": "Successfully toggled %s door(s) within"
+    "commands.toggleDoor.successAll": "Successfully toggled %s door(s) within",
+
+    "itemGroup.corndoors": "Corn Doors",
+
+    "item.corndoors.naive_door_glass": "Naïve Door (Glass Window)",
+    "item.corndoors.naive_door_film": "Naïve Door (Filmed Window)",
+    "item.corndoors.naive_door_none": "Naïve Door (Windowless)",
+    "item.corndoors.d_naive_door_glass": "Naïve Dual Door (Glass Window)",
+    "item.corndoors.d_naive_door_film": "Naïve Dual Door (Filmed Window)",
+    "item.corndoors.d_naive_door_none": "Naïve Dual Door (Windowless)",
+    
+    "block.corndoors.naive_door": "Naïve Door",
+    "block.corndoors.d_naive_door": "Naïve Dual Door",
+    "block.corndoors.d_naive_door_edge": "Naïve Dual Door Edge",
+    "block.corndoors.glass_door": "Glass Door",
+    "block.corndoors.stretch_gate": "Stretch Gate"
 }
