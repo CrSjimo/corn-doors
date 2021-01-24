@@ -39,7 +39,7 @@
             "model":"corndoors:block/dnaive_a4r"
         },
         "vertical_pos=2,hinge=right,facing=north,window=film":{
-            "model":"corndoors:block/dnaive_a3r"
+            "model":"corndoors:block/dnaive_a3r_film"
         },
         "vertical_pos=3,hinge=right,facing=north,window=film":{
             "model":"corndoors:block/dnaive_a4r_film"
@@ -105,7 +105,7 @@
             "y":90
         },
         "vertical_pos=2,hinge=right,facing=east,window=film":{
-            "model":"corndoors:block/dnaive_a3r",
+            "model":"corndoors:block/dnaive_a3r_film",
             "y":90
         },
         "vertical_pos=3,hinge=right,facing=east,window=film":{
@@ -175,7 +175,7 @@
             "y":180
         },
         "vertical_pos=2,hinge=right,facing=south,window=film":{
-            "model":"corndoors:block/dnaive_a3r",
+            "model":"corndoors:block/dnaive_a3r_film",
             "y":180
         },
         "vertical_pos=3,hinge=right,facing=south,window=film":{
@@ -245,7 +245,7 @@
             "y":270
         },
         "vertical_pos=2,hinge=right,facing=west,window=film":{
-            "model":"corndoors:block/dnaive_a3r",
+            "model":"corndoors:block/dnaive_a3r_film",
             "y":270
         },
         "vertical_pos=3,hinge=right,facing=west,window=film":{

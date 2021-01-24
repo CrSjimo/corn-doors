@@ -61,6 +61,17 @@
 				"south": {"uv": [1, 0, 3, 16], "texture": "#1"},
 				"west": {"uv": [1, 0, 3, 16], "texture": "#1"}
 			}
+		},
+		{
+			"from": [2, 0, 12.5],
+			"to": [4, 16, 14.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [3, 8, 8]},
+			"faces": {
+				"north": {"uv": [1, 0, 3, 16], "texture": "#1"},
+				"east": {"uv": [1, 0, 3, 16], "texture": "#1"},
+				"south": {"uv": [1, 0, 3, 16], "texture": "#1"},
+				"west": {"uv": [1, 0, 3, 16], "texture": "#1"}
+			}
 		}
 	]
 }

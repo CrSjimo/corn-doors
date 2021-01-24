@@ -1,5 +1,5 @@
 {
-	"parent": "corndoors:item/door_item",
+	"parent": "corndoors:item/d_naive_door",
 	"ambientocclusion": false,
 	"textures": {
 		"particle": "block/stripped_dark_oak_log",
@@ -283,25 +283,25 @@
 			}
 		},
 		{
-			"from": [7.16667, 10, 16.33333],
-			"to": [8, 10.33333, 16.66667],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 24, 8]},
+			"from": [6, 10, 16.33333],
+			"to": [6.83333, 10.33333, 16.66667],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 10.16667, 16.5]},
 			"faces": {
 				"north": {"uv": [1, 2, 4, 3], "texture": "#1_18_1"},
-				"east": {"uv": [1, 2, 2, 3], "texture": "#1_18_1"},
 				"south": {"uv": [1, 2, 4, 3], "texture": "#1_18_1"},
+				"west": {"uv": [1, 2, 2, 3], "texture": "#1_18_1"},
 				"up": {"uv": [1, 2, 4, 3], "rotation": 180, "texture": "#1_18_1"},
 				"down": {"uv": [1, 2, 4, 3], "rotation": 180, "texture": "#1_18_1"}
 			}
 		},
 		{
-			"from": [7.16667, 10, 14.33333],
-			"to": [8, 10.33333, 14.66667],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 24, 8]},
+			"from": [6, 10, 14.33333],
+			"to": [6.83333, 10.33333, 14.66667],
+			"rotation": {"angle": 0, "axis": "y", "origin": [7, 10.16667, 14.5]},
 			"faces": {
 				"north": {"uv": [1, 2, 4, 3], "texture": "#1_18_1"},
-				"east": {"uv": [1, 2, 2, 3], "texture": "#1_18_1"},
 				"south": {"uv": [1, 2, 4, 3], "texture": "#1_18_1"},
+				"west": {"uv": [1, 2, 2, 3], "texture": "#1_18_1"},
 				"up": {"uv": [1, 2, 4, 3], "rotation": 180, "texture": "#1_18_1"},
 				"down": {"uv": [1, 2, 4, 3], "rotation": 180, "texture": "#1_18_1"}
 			}

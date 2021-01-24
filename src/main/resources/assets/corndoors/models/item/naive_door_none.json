@@ -1,5 +1,5 @@
 {
-	"parent": "corndoors:item/door_item",
+	"parent": "corndoors:item/naive_door",
 	"ambientocclusion": false,
 	"textures": {
 		"0": "block/stripped_dark_oak_log",
@@ -129,25 +129,25 @@
 			}
 		},
 		{
-			"from": [13.0625, 11.25, 16.375],
-			"to": [14, 11.625, 16.75],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 24, 8]},
+			"from": [11.75, 11.25, 16.375],
+			"to": [12.6875, 11.625, 16.75],
+			"rotation": {"angle": 0, "axis": "y", "origin": [12.875, 11.4375, 16.5625]},
 			"faces": {
 				"north": {"uv": [1, 2, 3.5, 3], "texture": "#16_1"},
-				"east": {"uv": [1, 2, 2, 3], "texture": "#16_1"},
 				"south": {"uv": [1, 2, 3.5, 3], "texture": "#16_1"},
+				"west": {"uv": [1, 2, 2, 3], "texture": "#16_1"},
 				"up": {"uv": [1, 2, 3.5, 3], "rotation": 180, "texture": "#16_1"},
 				"down": {"uv": [1, 2, 3.5, 3], "rotation": 180, "texture": "#16_1"}
 			}
 		},
 		{
-			"from": [13.0625, 11.25, 14.125],
-			"to": [14, 11.625, 14.5],
-			"rotation": {"angle": 0, "axis": "y", "origin": [8, 24, 8]},
+			"from": [11.75, 11.25, 14.125],
+			"to": [12.6875, 11.625, 14.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [12.875, 11.4375, 14.3125]},
 			"faces": {
 				"north": {"uv": [1, 2, 3.5, 3], "texture": "#16_1"},
-				"east": {"uv": [1, 2, 2, 3], "texture": "#16_1"},
 				"south": {"uv": [1, 2, 3.5, 3], "texture": "#16_1"},
+				"west": {"uv": [1, 2, 2, 3], "texture": "#16_1"},
 				"up": {"uv": [1, 2, 3.5, 3], "rotation": 180, "texture": "#16_1"},
 				"down": {"uv": [1, 2, 3.5, 3], "rotation": 180, "texture": "#16_1"}
 			}
