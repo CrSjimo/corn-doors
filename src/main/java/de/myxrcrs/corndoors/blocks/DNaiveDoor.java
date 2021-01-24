@@ -31,7 +31,7 @@ import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class DNaiveDoor extends AbstractDoor {
+public class DNaiveDoor extends AbstractDoorWithDualDoorEdge {
 
     public static final Property<Integer> HORIZONTAL_POS = createHorizontalPosProperty(1);
     public static final Property<Integer> VERTICAL_POS = createVerticalPosProperty(4);
