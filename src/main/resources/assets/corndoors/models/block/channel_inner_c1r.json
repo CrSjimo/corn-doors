@@ -1,0 +1,21 @@
+{
+	"parent": "minecraft:block/block",
+	"ambientocclusion": false,
+	"textures": {
+		"0": "corndoors:block/corn_iron_block",
+		"particle": "corndoors:block/corn_iron_block"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 6.5],
+			"to": [8, 16, 9.5],
+			"rotation": {"angle": 0, "axis": "y", "origin": [0, 8, 14]},
+			"faces": {
+				"north": {"uv": [0, 0, 8, 16], "texture": "#0"},
+				"east": {"uv": [6.5, 0, 9.5, 16], "texture": "#0"},
+				"south": {"uv": [8, 0, 16, 16], "texture": "#0"},
+				"down": {"uv": [8, 6.5, 16, 9.5], "texture": "#0"}
+			}
+		}
+	]
+}
