@@ -153,7 +153,7 @@ public abstract class AbstractDoor extends AbstractIndividualDoor implements IRo
                     this.onHarvested(world, state, pos);
                     return false;
                 }
-                RotateTarget edgeRotateTarget = getRotateTarget(currentState.get(FACING), horizontalPos+1, side, currentState.get(IS_OPENED), edgePos);
+                RotateTarget edgeRotateTarget = getRotateTarget(currentState.get(FACING), currentHorizontalPos+1, side, currentState.get(IS_OPENED), edgePos);
                 if(!correspondingDualDoorEdgeBlock.canTogglePos(world, edgeState,edgeRotateTarget.pos))return false;
                 rotates.add(Triple.of(edgePos,edgeState,edgeRotateTarget));
                 if(!correspondingDualDoorEdgeBlock.onDidCheck(world, edgeState, edgePos))return false;
