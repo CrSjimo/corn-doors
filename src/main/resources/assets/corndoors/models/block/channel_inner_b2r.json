@@ -1,5 +1,6 @@
 {
 	"parent": "minecraft:block/block",
+	"ambientocclusion": false,
 	"textures": {
 		"0": "block/glass",
 		"1": "corndoors:block/corn_iron_block",
@@ -21,8 +22,11 @@
 			"to": [8, 16, 9],
 			"faces": {
 				"north": {"uv": [4, 4, 12, 16], "texture": "#0"},
-				"south": {"uv": [4, 4, 12, 16], "texture": "#0"}
-			}
+				"south": {"uv": [4, 4, 12, 16], "texture": "#0"},
+				"east": {"uv": [1, 1, 2, 2], "texture": "#0"},
+				"west": {"uv": [1, 1, 2, 2], "texture": "#0"},
+				"up": {"uv": [1, 1, 2, 2], "texture": "#0"},
+				"down": {"uv": [1, 1, 2, 2], "texture": "#0"}			}
 		},
 		{
 			"from": [8, 4, 7],
@@ -30,8 +34,11 @@
 			"rotation": {"angle": 0, "axis": "y", "origin": [16, 8, 8]},
 			"faces": {
 				"north": {"uv": [4, 4, 12, 16], "texture": "#0"},
-				"south": {"uv": [4, 4, 12, 16], "texture": "#0"}
-			}
+				"south": {"uv": [4, 4, 12, 16], "texture": "#0"},
+				"east": {"uv": [1, 1, 2, 2], "texture": "#0"},
+				"west": {"uv": [1, 1, 2, 2], "texture": "#0"},
+				"up": {"uv": [1, 1, 2, 2], "texture": "#0"},
+				"down": {"uv": [1, 1, 2, 2], "texture": "#0"}			}
 		},
 		{
 			"from": [10, 14, 6.5],

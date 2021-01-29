@@ -24,7 +24,9 @@ public enum InitItems {
     D_NAIVE_DOOR_FILM("d_naive_door_film",()->new NaiveDoorItem(DoorWindowType.FILM,InitBlocks.D_NAIVE_DOOR_EDGE.get(),new Item.Properties().group(CornDoors.ITEM_GROUP))),
     D_NAIVE_DOOR_NONE("d_naive_door_none",()->new NaiveDoorItem(DoorWindowType.NONE,InitBlocks.D_NAIVE_DOOR_EDGE.get(),new Item.Properties().group(CornDoors.ITEM_GROUP))),
 
-    STRETCH_GATE("stretch_gate",()->new BlockItem(InitBlocks.STRETCH_GATE.get(),new Item.Properties().group(CornDoors.ITEM_GROUP)));
+    STRETCH_GATE("stretch_gate",()->new BlockItem(InitBlocks.STRETCH_GATE.get(),new Item.Properties().group(CornDoors.ITEM_GROUP))),
+
+    CHANNEL_INNER_DOOR("channel_inner_door",()->new BlockItem(InitBlocks.CHANNEL_INNER_DOOR_EDGE.get(),new Item.Properties().group(CornDoors.ITEM_GROUP)));
 
     public static final void initialize(){
         // You NEVER need to know how this method works.

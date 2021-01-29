@@ -3,11 +3,7 @@ package de.myxrcrs.corndoors.init;
 import java.util.function.Supplier;
 
 import de.myxrcrs.corndoors.CornDoors;
-import de.myxrcrs.corndoors.blocks.DNaiveDoor;
-import de.myxrcrs.corndoors.blocks.DNaiveDualDoorEdge;
-import de.myxrcrs.corndoors.blocks.GlassDoor;
-import de.myxrcrs.corndoors.blocks.NaiveDoor;
-import de.myxrcrs.corndoors.blocks.StretchGate;
+import de.myxrcrs.corndoors.blocks.*;
 import net.minecraft.block.Block;
 import net.minecraftforge.fml.RegistryObject;
 
@@ -17,7 +13,9 @@ public enum InitBlocks {
     GLASS_DOOR("glass_door",GlassDoor::new),
     D_NAIVE_DOOR_EDGE("d_naive_door_edge", DNaiveDualDoorEdge::new),
     D_NAIVE_DOOR("d_naive_door",DNaiveDoor::new),
-    STRETCH_GATE("stretch_gate",StretchGate::new);
+    STRETCH_GATE("stretch_gate",StretchGate::new),
+    CHANNEL_INNER_DOOR_EDGE("channel_inner_door_edge",ChannelInnerDualDoor::new),
+    CHANNEL_INNER_DOOR("channel_inner_door",ChannelInnerDoor::new);
 
     public static final void initialize(){
         // You NEVER need to know how this method works.
