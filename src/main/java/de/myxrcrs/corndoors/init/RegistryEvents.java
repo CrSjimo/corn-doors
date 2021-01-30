@@ -13,8 +13,9 @@ public class RegistryEvents {
     @SubscribeEvent
     public static void onRenderTypeSetup(FMLClientSetupEvent event) {
         InitBlocks[] blockRegs = InitBlocks.class.getEnumConstants();
-        for(int i=0;i<blockRegs.length;i++){
-            RenderTypeLookup.setRenderLayer(blockRegs[i].get(), RenderType.getTranslucent());
+        for(InitBlocks blockReg:blockRegs){
+            if(blockReg.renderType==null)continue;
+            RenderTypeLookup.setRenderLayer(blockReg.get(), blockReg.renderType);
         }
     }
 }
