@@ -1,5 +1,5 @@
 {
-	"parent": "corndoors:block/channel_inner_glass_noside",
+	"parent": "minecraft:block/block",
 	"textures": {
 		"0": "corndoors:block/corn_iron_block",
 		"particle": "corndoors:block/corn_iron_block"

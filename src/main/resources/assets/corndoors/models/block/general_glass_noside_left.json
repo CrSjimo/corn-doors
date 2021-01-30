@@ -1,0 +1,64 @@
+{
+	"parent": "minecraft:block/block",
+	"ambientocclusion": false,
+	"textures": {
+		"0": "block/glass",
+		"particle": "block/glass"
+	},
+	"elements": [
+		{
+			"from": [8, 1, 7],
+			"to": [15, 15, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [15, 5, 8]},
+			"faces": {
+				"north": {"uv": [1, 1, 8, 15], "texture": "#0"},
+				"south": {"uv": [8, 1, 15, 15], "texture": "#0"}
+			}
+		},
+		{
+			"from": [15, 15, 7],
+			"to": [16, 16, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [23, 23, 15]},
+			"faces": {
+				"north": {"uv": [1, 1, 2, 2], "texture": "#0"},
+				"south": {"uv": [14, 1, 15, 2], "texture": "#0"}
+			}
+		},
+		{
+			"from": [15, 0, 7],
+			"to": [16, 1, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [23, 8, 15]},
+			"faces": {
+				"north": {"uv": [1, 14, 2, 15], "texture": "#0"},
+				"south": {"uv": [14, 14, 15, 15], "texture": "#0"}
+			}
+		},
+		{
+			"from": [8, 0, 7],
+			"to": [15, 1, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, 8, 15]},
+			"faces": {
+				"north": {"uv": [1, 14, 8, 15], "texture": "#0"},
+				"south": {"uv": [8, 14, 15, 15], "texture": "#0"}
+			}
+		},
+		{
+			"from": [8, 15, 7],
+			"to": [15, 16, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [9, 23, 15]},
+			"faces": {
+				"north": {"uv": [1, 1, 8, 2], "texture": "#0"},
+				"south": {"uv": [8, 1, 15, 2], "texture": "#0"}
+			}
+		},
+		{
+			"from": [15, 1, 7],
+			"to": [16, 15, 9],
+			"rotation": {"angle": 0, "axis": "y", "origin": [23, 9, 16]},
+			"faces": {
+				"north": {"uv": [14, 1, 15, 15], "texture": "#0"},
+				"south": {"uv": [1, 1, 2, 15], "texture": "#0"}
+			}
+		}
+	]
+}

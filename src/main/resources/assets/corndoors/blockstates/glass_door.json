@@ -1,338 +1,980 @@
 {
-    "variants": {
-
-        "vertical_pos=0,horizontal_pos=0,hinge=right,facing=north" :{
-            "model":"corndoors:block/glass_a1r_b1l"
-        },
-        "vertical_pos=1,horizontal_pos=0,hinge=right,facing=north" :{
-            "model":"corndoors:block/glass_a2r_a4r"
-        },
-        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=north" :{
-            "model":"corndoors:block/glass_a3r"
-        },
-        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=north" :{
-            "model":"corndoors:block/glass_a2r_a4r"
-        },
-        "vertical_pos=4,horizontal_pos=0,hinge=right,facing=north" :{
-            "model":"corndoors:block/glass_a5r_b5l"
-        },
-
-        "vertical_pos=0,horizontal_pos=1,hinge=right,facing=north" :{
-            "model":"corndoors:block/glass_a1l_b1r"
-        },
-        "vertical_pos=1,horizontal_pos=1,hinge=right,facing=north" :{
-            "model":"corndoors:block/glass_b2r"
-        },
-        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=north" :{
-            "model":"corndoors:block/glass_b3r"
-        },
-        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=north" :{
-            "model":"corndoors:block/glass_b4r"
-        },
-        "vertical_pos=4,horizontal_pos=1,hinge=right,facing=north" :{
-            "model":"corndoors:block/glass_a5l_b5r"
-        },
-
-
-
-        "vertical_pos=0,horizontal_pos=0,hinge=right,facing=east" :{
-            "model":"corndoors:block/glass_a1r_b1l",
-            "y":90
-        },
-        "vertical_pos=1,horizontal_pos=0,hinge=right,facing=east" :{
-            "model":"corndoors:block/glass_a2r_a4r",
-            "y":90
-        },
-        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=east" :{
-            "model":"corndoors:block/glass_a3r",
-            "y":90
-        },
-        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=east" :{
-            "model":"corndoors:block/glass_a2r_a4r",
-            "y":90
-        },
-        "vertical_pos=4,horizontal_pos=0,hinge=right,facing=east" :{
-            "model":"corndoors:block/glass_a5r_b5l",
-            "y":90
-        },
-        
-        "vertical_pos=0,horizontal_pos=1,hinge=right,facing=east" :{
-            "model":"corndoors:block/glass_a1l_b1r",
-            "y":90
-        },
-        "vertical_pos=1,horizontal_pos=1,hinge=right,facing=east" :{
-            "model":"corndoors:block/glass_b2r",
-            "y":90
-        },
-        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=east" :{
-            "model":"corndoors:block/glass_b3r",
-            "y":90
-        },
-        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=east" :{
-            "model":"corndoors:block/glass_b4r",
-            "y":90
-        },
-        "vertical_pos=4,horizontal_pos=1,hinge=right,facing=east" :{
-            "model":"corndoors:block/glass_a5l_b5r",
-            "y":90
-        },
-
-
-
-        "vertical_pos=0,horizontal_pos=0,hinge=right,facing=south" :{
-            "model":"corndoors:block/glass_a1r_b1l",
-            "y":180
-        },
-        "vertical_pos=1,horizontal_pos=0,hinge=right,facing=south" :{
-            "model":"corndoors:block/glass_a2r_a4r",
-            "y":180
-        },
-        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=south" :{
-            "model":"corndoors:block/glass_a3r",
-            "y":180
-        },
-        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=south" :{
-            "model":"corndoors:block/glass_a2r_a4r",
-            "y":180
-        },
-        "vertical_pos=4,horizontal_pos=0,hinge=right,facing=south" :{
-            "model":"corndoors:block/glass_a5r_b5l",
-            "y":180
-        },
-        
-        "vertical_pos=0,horizontal_pos=1,hinge=right,facing=south" :{
-            "model":"corndoors:block/glass_a1l_b1r",
-            "y":180
-        },
-        "vertical_pos=1,horizontal_pos=1,hinge=right,facing=south" :{
-            "model":"corndoors:block/glass_b2r",
-            "y":180
-        },
-        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=south" :{
-            "model":"corndoors:block/glass_b3r",
-            "y":180
-        },
-        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=south" :{
-            "model":"corndoors:block/glass_b4r",
-            "y":180
-        },
-        "vertical_pos=4,horizontal_pos=1,hinge=right,facing=south" :{
-            "model":"corndoors:block/glass_a5l_b5r",
-            "y":180
-        },
-
-
-
-        "vertical_pos=0,horizontal_pos=0,hinge=right,facing=west" :{
-            "model":"corndoors:block/glass_a1r_b1l",
-            "y":270
-        },
-        "vertical_pos=1,horizontal_pos=0,hinge=right,facing=west" :{
-            "model":"corndoors:block/glass_a2r_a4r",
-            "y":270
-        },
-        "vertical_pos=2,horizontal_pos=0,hinge=right,facing=west" :{
-            "model":"corndoors:block/glass_a3r",
-            "y":270
-        },
-        "vertical_pos=3,horizontal_pos=0,hinge=right,facing=west" :{
-            "model":"corndoors:block/glass_a2r_a4r",
-            "y":270
-        },
-        "vertical_pos=4,horizontal_pos=0,hinge=right,facing=west" :{
-            "model":"corndoors:block/glass_a5r_b5l",
-            "y":270
-        },
-        
-        "vertical_pos=0,horizontal_pos=1,hinge=right,facing=west" :{
-            "model":"corndoors:block/glass_a1l_b1r",
-            "y":270
-        },
-        "vertical_pos=1,horizontal_pos=1,hinge=right,facing=west" :{
-            "model":"corndoors:block/glass_b2r",
-            "y":270
-        },
-        "vertical_pos=2,horizontal_pos=1,hinge=right,facing=west" :{
-            "model":"corndoors:block/glass_b3r",
-            "y":270
-        },
-        "vertical_pos=3,horizontal_pos=1,hinge=right,facing=west" :{
-            "model":"corndoors:block/glass_b4r",
-            "y":270
-        },
-        "vertical_pos=4,horizontal_pos=1,hinge=right,facing=west" :{
-            "model":"corndoors:block/glass_a5l_b5r",
-            "y":270
-        },
-
-
-
-
-
-
-
-        "vertical_pos=0,horizontal_pos=0,hinge=left,facing=north" :{
-            "model":"corndoors:block/glass_a1l_b1r"
-        },
-        "vertical_pos=1,horizontal_pos=0,hinge=left,facing=north" :{
-            "model":"corndoors:block/glass_a2l_a4l"
-        },
-        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=north" :{
-            "model":"corndoors:block/glass_a3l"
-        },
-        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=north" :{
-            "model":"corndoors:block/glass_a2l_a4l"
-        },
-        "vertical_pos=4,horizontal_pos=0,hinge=left,facing=north" :{
-            "model":"corndoors:block/glass_a5l_b5r"
-        },
-        
-        "vertical_pos=0,horizontal_pos=1,hinge=left,facing=north" :{
-            "model":"corndoors:block/glass_a1r_b1l"
-        },
-        "vertical_pos=1,horizontal_pos=1,hinge=left,facing=north" :{
-            "model":"corndoors:block/glass_b2l"
-        },
-        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=north" :{
-            "model":"corndoors:block/glass_b3l"
-        },
-        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=north" :{
-            "model":"corndoors:block/glass_b4l"
-        },
-        "vertical_pos=4,horizontal_pos=1,hinge=left,facing=north" :{
-            "model":"corndoors:block/glass_a5r_b5l"
-        },
-        
-        
-        
-        "vertical_pos=0,horizontal_pos=0,hinge=left,facing=east" :{
-            "model":"corndoors:block/glass_a1l_b1r",
-            "y":90
-        },
-        "vertical_pos=1,horizontal_pos=0,hinge=left,facing=east" :{
-            "model":"corndoors:block/glass_a2l_a4l",
-            "y":90
-        },
-        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=east" :{
-            "model":"corndoors:block/glass_a3l",
-            "y":90
-        },
-        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=east" :{
-            "model":"corndoors:block/glass_a2l_a4l",
-            "y":90
-        },
-        "vertical_pos=4,horizontal_pos=0,hinge=left,facing=east" :{
-            "model":"corndoors:block/glass_a5l_b5r",
-            "y":90
-        },
-        
-        "vertical_pos=0,horizontal_pos=1,hinge=left,facing=east" :{
-            "model":"corndoors:block/glass_a1r_b1l",
-            "y":90
-        },
-        "vertical_pos=1,horizontal_pos=1,hinge=left,facing=east" :{
-            "model":"corndoors:block/glass_b2l",
-            "y":90
-        },
-        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=east" :{
-            "model":"corndoors:block/glass_b3l",
-            "y":90
-        },
-        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=east" :{
-            "model":"corndoors:block/glass_b4l",
-            "y":90
-        },
-        "vertical_pos=4,horizontal_pos=1,hinge=left,facing=east" :{
-            "model":"corndoors:block/glass_a5r_b5l",
-            "y":90
-        },
-        
-        
-        
-        "vertical_pos=0,horizontal_pos=0,hinge=left,facing=south" :{
-            "model":"corndoors:block/glass_a1l_b1r",
-            "y":180
-        },
-        "vertical_pos=1,horizontal_pos=0,hinge=left,facing=south" :{
-            "model":"corndoors:block/glass_a2l_a4l",
-            "y":180
-        },
-        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=south" :{
-            "model":"corndoors:block/glass_a3l",
-            "y":180
-        },
-        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=south" :{
-            "model":"corndoors:block/glass_a2l_a4l",
-            "y":180
-        },
-        "vertical_pos=4,horizontal_pos=0,hinge=left,facing=south" :{
-            "model":"corndoors:block/glass_a5l_b5r",
-            "y":180
-        },
-        
-        "vertical_pos=0,horizontal_pos=1,hinge=left,facing=south" :{
-            "model":"corndoors:block/glass_a1r_b1l",
-            "y":180
-        },
-        "vertical_pos=1,horizontal_pos=1,hinge=left,facing=south" :{
-            "model":"corndoors:block/glass_b2l",
-            "y":180
-        },
-        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=south" :{
-            "model":"corndoors:block/glass_b3l",
-            "y":180
-        },
-        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=south" :{
-            "model":"corndoors:block/glass_b4l",
-            "y":180
-        },
-        "vertical_pos=4,horizontal_pos=1,hinge=left,facing=south" :{
-            "model":"corndoors:block/glass_a5r_b5l",
-            "y":180
-        },
-        
-        
-        
-        "vertical_pos=0,horizontal_pos=0,hinge=left,facing=west" :{
-            "model":"corndoors:block/glass_a1l_b1r",
-            "y":270
-        },
-        "vertical_pos=1,horizontal_pos=0,hinge=left,facing=west" :{
-            "model":"corndoors:block/glass_a2l_a4l",
-            "y":270
-        },
-        "vertical_pos=2,horizontal_pos=0,hinge=left,facing=west" :{
-            "model":"corndoors:block/glass_a3l",
-            "y":270
-        },
-        "vertical_pos=3,horizontal_pos=0,hinge=left,facing=west" :{
-            "model":"corndoors:block/glass_a2l_a4l",
-            "y":270
-        },
-        "vertical_pos=4,horizontal_pos=0,hinge=left,facing=west" :{
-            "model":"corndoors:block/glass_a5l_b5r",
-            "y":270
-        },
-        
-        "vertical_pos=0,horizontal_pos=1,hinge=left,facing=west" :{
-            "model":"corndoors:block/glass_a1r_b1l",
-            "y":270
-        },
-        "vertical_pos=1,horizontal_pos=1,hinge=left,facing=west" :{
-            "model":"corndoors:block/glass_b2l",
-            "y":270
-        },
-        "vertical_pos=2,horizontal_pos=1,hinge=left,facing=west" :{
-            "model":"corndoors:block/glass_b3l",
-            "y":270
-        },
-        "vertical_pos=3,horizontal_pos=1,hinge=left,facing=west" :{
-            "model":"corndoors:block/glass_b4l",
-            "y":270
-        },
-        "vertical_pos=4,horizontal_pos=1,hinge=left,facing=west" :{
-            "model":"corndoors:block/glass_a5r_b5l",
-            "y":270
+    "multipart": [
+        {
+            "when": {
+                "facing": "north"
+            },
+            "apply": {
+                "model": "corndoors:block/general_glass_noside",
+                "y": 0
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 0,
+                "facing": "north",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a1l_b1r"
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 1,
+                "facing": "north",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a2l_a4l"
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 2,
+                "facing": "north",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a3l"
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 3,
+                "facing": "north",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a2l_a4l"
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 4,
+                "facing": "north",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a5l_b5r"
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 0,
+                "facing": "north",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a1r_b1l"
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 1,
+                "facing": "north",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b2l"
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 2,
+                "facing": "north",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b3l"
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 3,
+                "facing": "north",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b4l"
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 4,
+                "facing": "north",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a5r_b5l"
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 0,
+                "facing": "north",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a1r_b1l"
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 1,
+                "facing": "north",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a2r_a4r"
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 2,
+                "facing": "north",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a3r"
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 3,
+                "facing": "north",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a2r_a4r"
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 4,
+                "facing": "north",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a5r_b5l"
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 0,
+                "facing": "north",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a1l_b1r"
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 1,
+                "facing": "north",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b2r"
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 2,
+                "facing": "north",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b3r"
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 3,
+                "facing": "north",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b4r"
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 4,
+                "facing": "north",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a5l_b5r"
+            }
+        },
+        {
+            "when": {
+                "facing": "east"
+            },
+            "apply": {
+                "model": "corndoors:block/general_glass_noside",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 0,
+                "facing": "east",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a1l_b1r",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 1,
+                "facing": "east",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a2l_a4l",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 2,
+                "facing": "east",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a3l",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 3,
+                "facing": "east",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a2l_a4l",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 4,
+                "facing": "east",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a5l_b5r",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 0,
+                "facing": "east",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a1r_b1l",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 1,
+                "facing": "east",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b2l",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 2,
+                "facing": "east",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b3l",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 3,
+                "facing": "east",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b4l",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 4,
+                "facing": "east",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a5r_b5l",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 0,
+                "facing": "east",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a1r_b1l",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 1,
+                "facing": "east",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a2r_a4r",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 2,
+                "facing": "east",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a3r",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 3,
+                "facing": "east",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a2r_a4r",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 4,
+                "facing": "east",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a5r_b5l",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 0,
+                "facing": "east",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a1l_b1r",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 1,
+                "facing": "east",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b2r",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 2,
+                "facing": "east",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b3r",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 3,
+                "facing": "east",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b4r",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 4,
+                "facing": "east",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a5l_b5r",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "facing": "south"
+            },
+            "apply": {
+                "model": "corndoors:block/general_glass_noside",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 0,
+                "facing": "south",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a1l_b1r",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 1,
+                "facing": "south",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a2l_a4l",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 2,
+                "facing": "south",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a3l",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 3,
+                "facing": "south",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a2l_a4l",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 4,
+                "facing": "south",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a5l_b5r",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 0,
+                "facing": "south",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a1r_b1l",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 1,
+                "facing": "south",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b2l",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 2,
+                "facing": "south",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b3l",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 3,
+                "facing": "south",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b4l",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 4,
+                "facing": "south",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a5r_b5l",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 0,
+                "facing": "south",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a1r_b1l",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 1,
+                "facing": "south",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a2r_a4r",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 2,
+                "facing": "south",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a3r",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 3,
+                "facing": "south",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a2r_a4r",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 4,
+                "facing": "south",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a5r_b5l",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 0,
+                "facing": "south",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a1l_b1r",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 1,
+                "facing": "south",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b2r",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 2,
+                "facing": "south",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b3r",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 3,
+                "facing": "south",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b4r",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 4,
+                "facing": "south",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a5l_b5r",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "facing": "west"
+            },
+            "apply": {
+                "model": "corndoors:block/general_glass_noside",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 0,
+                "facing": "west",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a1l_b1r",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 1,
+                "facing": "west",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a2l_a4l",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 2,
+                "facing": "west",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a3l",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 3,
+                "facing": "west",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a2l_a4l",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 4,
+                "facing": "west",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a5l_b5r",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 0,
+                "facing": "west",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a1r_b1l",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 1,
+                "facing": "west",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b2l",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 2,
+                "facing": "west",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b3l",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 3,
+                "facing": "west",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b4l",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 4,
+                "facing": "west",
+                "hinge": "left"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a5r_b5l",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 0,
+                "facing": "west",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a1r_b1l",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 1,
+                "facing": "west",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a2r_a4r",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 2,
+                "facing": "west",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a3r",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 3,
+                "facing": "west",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a2r_a4r",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 0,
+                "vertical_pos": 4,
+                "facing": "west",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a5r_b5l",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 0,
+                "facing": "west",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a1l_b1r",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 1,
+                "facing": "west",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b2r",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 2,
+                "facing": "west",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b3r",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 3,
+                "facing": "west",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_b4r",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "horizontal_pos": 1,
+                "vertical_pos": 4,
+                "facing": "west",
+                "hinge": "right"
+            },
+            "apply": {
+                "model": "corndoors:block/glass_a5l_b5r",
+                "y": 270
+            }
         }
-    }
+    ]
 }
