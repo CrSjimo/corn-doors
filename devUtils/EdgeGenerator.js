@@ -8,7 +8,7 @@ class EdgeGenerator{
     static hinges = ['left','right'];
     static modelPath = "src/main/resources/assets/corndoors/models/block";
 
-    static generate(file,height,hKey){
+    static generate(file,height,hKey,opt){
         let files = fs.readdirSync(this.modelPath).filter(v=>new RegExp(file).test(v));
         //console.log(files);
         let matched = {};
@@ -20,6 +20,18 @@ class EdgeGenerator{
         let obj = {multipart:[]};
         for(let [key,angle] of this.dirs){
             for(let hinge of this.hinges){
+                if(opt=='--apply-glass'){
+                    obj.multipart.push({
+                        when:{
+                            facing:key,
+                            part:`${hinge}|all`
+                        },
+                        apply:{
+                            model: `corndoors:block/general_glass_noside_${hinge}`,
+                            y:angle
+                        }
+                    })
+                }
                 for(let j=1;j<=height;j++){
                     let a = {
                         when:{
