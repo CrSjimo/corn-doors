@@ -66,10 +66,18 @@ abstract public class AbstractPanel extends Block{
         return generateBoundaryBox(state);
     }
 
+    public BlockState onPlacedThenSetState(BlockItemUseContext context,BlockState stateTemplate){
+        BlockState hitState = context.getWorld().getBlockState(context.getPos().offset(context.getFace().getOpposite()));
+        if(hitState.getBlock()==this){
+            return stateTemplate.with(FACING,hitState.get(FACING));
+        }
+        return stateTemplate.with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+    }
+
     @Override
     @Nullable
     public BlockState getStateForPlacement(BlockItemUseContext context){
-        return getDefaultState().with(FACING, context.getPlacementHorizontalFacing().getOpposite());
+        return onPlacedThenSetState(context,getDefaultState());
     }
 
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
