@@ -1,0 +1,35 @@
+{
+    "variants":{
+        "facing=south,texture_direction=vertical":{
+            "model":"corndoors:block/naive_panel_v"
+        },
+        "facing=west,texture_direction=vertical":{
+            "model":"corndoors:block/naive_panel_v",
+            "y":90
+        },
+        "facing=north,texture_direction=vertical":{
+            "model":"corndoors:block/naive_panel_v",
+            "y":180
+        },
+        "facing=east,texture_direction=vertical":{
+            "model":"corndoors:block/naive_panel_v",
+            "y":270
+        },
+
+        "facing=south,texture_direction=horizontal":{
+            "model":"corndoors:block/naive_panel_h"
+        },
+        "facing=west,texture_direction=horizontal":{
+            "model":"corndoors:block/naive_panel_h",
+            "y":90
+        },
+        "facing=north,texture_direction=horizontal":{
+            "model":"corndoors:block/naive_panel_h",
+            "y":180
+        },
+        "facing=east,texture_direction=horizontal":{
+            "model":"corndoors:block/naive_panel_h",
+            "y":270
+        }
+    }
+}
