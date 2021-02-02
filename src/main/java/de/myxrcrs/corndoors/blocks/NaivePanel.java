@@ -1,7 +1,5 @@
 package de.myxrcrs.corndoors.blocks;
 
-import javax.annotation.Nullable;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -13,7 +11,7 @@ import net.minecraft.util.IStringSerializable;
 
 public class NaivePanel extends AbstractPanel {
 
-    enum TextureDirection implements IStringSerializable{
+    public enum TextureDirection implements IStringSerializable{
         HORIZONTAL("horizontal"),
         VERTICAL("vertical");
         private final String name;
@@ -38,11 +36,8 @@ public class NaivePanel extends AbstractPanel {
     }
 
     @Override
-    @Nullable
-    public BlockState getStateForPlacement(BlockItemUseContext context){
-        return getDefaultState()
-            .with(FACING, context.getPlacementHorizontalFacing().getOpposite())
-            .with(TEXTURE_DIRECTION, TextureDirection.fromFace(context.getFace()));
+    public BlockState onPlacedThenSetState(BlockItemUseContext context,BlockState stateTemplate){
+        return super.onPlacedThenSetState(context,stateTemplate.with(TEXTURE_DIRECTION, TextureDirection.fromFace(context.getFace())));
     }
 
     @Override
