@@ -2,18 +2,16 @@ package de.myxrcrs.corndoors.blocks;
 
 import javax.annotation.Nullable;
 
-import org.apache.commons.lang3.tuple.Triple;
-
 import de.myxrcrs.corndoors.util.Matrix;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.HorizontalBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.Property;
+import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.DoorHingeSide;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
@@ -23,7 +21,6 @@ import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
@@ -33,12 +30,11 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
 
     public final Property<Integer> VERTICAL_POS;
 
-    public final boolean rotateWithinHinge;
-
-    public AbstractDualDoorEdge(Properties props, Property<Integer> VERTICAL_POS, boolean rotateWithinHinge,double thickness){
-        super(props,thickness);
-        this.rotateWithinHinge = rotateWithinHinge;
+    public AbstractDualDoorEdge(Properties props, Property<Integer> VERTICAL_POS, double thickness,boolean isMiddle){
+        super(props,thickness,isMiddle);
         this.VERTICAL_POS = VERTICAL_POS;
+        this.setDefaultState(this.getDefaultState()
+            .with(PART, DualDoorEdgePart.ALL));
     }
 
     @Nullable protected AbstractDoor correspondingDoorBlock = null;
@@ -65,7 +61,7 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
     }
 
     @Override
-    public VoxelShape generateBoundaryBox(BlockState state, boolean isMiddle){
+    public VoxelShape generateBoundaryBox(BlockState state){
         Direction facing = state.get(FACING);
         if(state.get(PART)==DualDoorEdgePart.LEFT){
             switch(facing){
@@ -92,13 +88,8 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
                     return isMiddle ? Block.makeCuboidShape(8-0.5*thickness, 0, 8, 8+0.5*thickness, 16, 16) : Block.makeCuboidShape(0, 0, 8, thickness, 16, 16);
             }
         }else{
-            return super.generateBoundaryBox(state, isMiddle);
+            return super.generateBoundaryBox(state);
         }
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return generateBoundaryBox(state,rotateWithinHinge);
     }
 
     public BlockPos getNeighborDoorPos(BlockPos pos, BlockState state, DoorHingeSide side){
@@ -265,4 +256,8 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
     }
 
 
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        super.fillStateContainer(builder);
+        builder.add(PART);
+    }
 }

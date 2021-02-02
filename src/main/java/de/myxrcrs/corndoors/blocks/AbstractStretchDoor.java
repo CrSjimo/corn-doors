@@ -2,12 +2,8 @@ package de.myxrcrs.corndoors.blocks;
 
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.EnumProperty;
 import net.minecraft.state.Property;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoorHingeSide;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
@@ -15,12 +11,11 @@ import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
 public abstract class AbstractStretchDoor extends AbstractIndividualDoor {
-    public final boolean isMiddle;
+
     public final int fixedPartSize;
 
-    public AbstractStretchDoor(Properties props, Property<Integer> HORIZONTAL_POS, Property<Integer> VERTICAL_POS, boolean isMiddle, double thickness, int fixedPartSize) {
-        super(props, HORIZONTAL_POS, VERTICAL_POS, thickness);
-        this.isMiddle = isMiddle;
+    public AbstractStretchDoor(Properties props, Property<Integer> HORIZONTAL_POS, Property<Integer> VERTICAL_POS, double thickness, boolean isMiddle, int fixedPartSize) {
+        super(props, HORIZONTAL_POS, VERTICAL_POS, thickness, isMiddle);
         this.fixedPartSize = fixedPartSize;
     }
 
@@ -68,11 +63,6 @@ public abstract class AbstractStretchDoor extends AbstractIndividualDoor {
             BlockPos currentPos = new BlockPos(x,y,z);
             return toggleDoorPos(world, currentState, currentPos);
         });
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return generateBoundaryBox(state,isMiddle);
     }
 
     @Override

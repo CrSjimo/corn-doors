@@ -12,6 +12,8 @@ import net.minecraftforge.fml.RegistryObject;
 
 public enum InitBlocks {
 
+    NAIVE_PANEL("naive_panel",NaivePanel::new),
+
     NAIVE_DOOR("naive_door",NaiveDoor::new,RenderType.getTranslucent()),
     GLASS_DOOR("glass_door",GlassDoor::new,RenderType.getCutout()),
     D_NAIVE_DOOR_EDGE("d_naive_door_edge", DNaiveDualDoorEdge::new,RenderType.getTranslucent()),

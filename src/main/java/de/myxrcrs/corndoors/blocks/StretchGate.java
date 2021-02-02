@@ -6,8 +6,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.Property;
 import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.DoorHingeSide;
-import net.minecraft.util.Direction;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -50,13 +48,10 @@ public class StretchGate extends AbstractStretchDoor {
     public static final EnumProperty<HorizontalModelType> HORIZONTAL_MODEL_TYPE = EnumProperty.create("h_type", HorizontalModelType.class);
     public static final EnumProperty<VerticalModelType> VERTICAL_MODEL_TYPE = EnumProperty.create("v_type", VerticalModelType.class);
     public StretchGate(){
-        super(Properties.create(Material.IRON),HORIZONTAL_POS,VERTICAL_POS,true,8,3);
+        super(Properties.create(Material.IRON),HORIZONTAL_POS,VERTICAL_POS,8,true,3);
         this.setDefaultState(this.getDefaultState()
-            .with(IS_OPENED, false)
-            .with(FACING, Direction.NORTH)
             .with(HORIZONTAL_POS,0)
             .with(VERTICAL_POS,0)
-            .with(HINGE,DoorHingeSide.LEFT)
             .with(HORIZONTAL_MODEL_TYPE, HorizontalModelType.NORMAL)
             .with(VERTICAL_MODEL_TYPE, VerticalModelType.BODY));
         
@@ -82,6 +77,7 @@ public class StretchGate extends AbstractStretchDoor {
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(IS_OPENED,FACING,VERTICAL_POS,HORIZONTAL_POS,HINGE,HORIZONTAL_MODEL_TYPE,VERTICAL_MODEL_TYPE);
+        super.fillStateContainer(builder);
+        builder.add(HORIZONTAL_POS,VERTICAL_POS,HORIZONTAL_MODEL_TYPE,VERTICAL_MODEL_TYPE);
     }
 }

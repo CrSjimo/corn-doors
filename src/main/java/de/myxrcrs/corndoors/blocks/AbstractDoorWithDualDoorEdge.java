@@ -7,15 +7,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 
 public abstract class AbstractDoorWithDualDoorEdge extends AbstractDoor {
-    public AbstractDoorWithDualDoorEdge(Properties props, boolean rotateWithinHinge,
-            Property<Integer> horizontalPosProp, Property<Integer> verticalPosProp, double thickness) {
-        super(props, rotateWithinHinge, horizontalPosProp, verticalPosProp, thickness);
-    }
 
-    public AbstractDoorWithDualDoorEdge(Properties props, boolean rotateWithinHinge,
-            Property<Integer> horizontalPosProp, Property<Integer> verticalPosProp, double thickness,
-            AbstractDualDoorEdge correspondingDualDoorEdgeBlock) {
-        super(props, rotateWithinHinge, horizontalPosProp, verticalPosProp, thickness, correspondingDualDoorEdgeBlock);
+    public AbstractDoorWithDualDoorEdge(Properties props, Property<Integer> horizontalPosProp, Property<Integer> verticalPosProp, AbstractDualDoorEdge correspondingDualDoorEdgeBlock) {
+        super(props, horizontalPosProp, verticalPosProp, correspondingDualDoorEdgeBlock);
     }
 
     public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state){

@@ -1,10 +1,12 @@
 package de.myxrcrs.corndoors.blocks;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.Property;
+import net.minecraft.state.StateContainer;
 import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoorHingeSide;
 import net.minecraft.util.ActionResultType;
@@ -20,10 +22,12 @@ public abstract class AbstractIndividualDoor extends AbstractTemplateDoor {
     public final Property<Integer> VERTICAL_POS;
     public static final EnumProperty<DoorHingeSide> HINGE = BlockStateProperties.DOOR_HINGE;
 
-    public AbstractIndividualDoor(Properties props, Property<Integer> HORIZONTAL_POS, Property<Integer> VERTICAL_POS, double thickness) {
-        super(props, thickness);
+    public AbstractIndividualDoor(Properties props, Property<Integer> HORIZONTAL_POS, Property<Integer> VERTICAL_POS, double thickness, boolean isMiddle) {
+        super(props, thickness,isMiddle);
         this.HORIZONTAL_POS = HORIZONTAL_POS;
         this.VERTICAL_POS = VERTICAL_POS;
+        this.setDefaultState(this.getDefaultState()
+            .with(HINGE,DoorHingeSide.LEFT));
     }
 
     @Override
@@ -116,5 +120,10 @@ public abstract class AbstractIndividualDoor extends AbstractTemplateDoor {
             LOGGER.error(e);
             return ActionResultType.CONSUME;
         }
+    }
+    
+    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
+        super.fillStateContainer(builder);
+        builder.add(HINGE);
     }
 }

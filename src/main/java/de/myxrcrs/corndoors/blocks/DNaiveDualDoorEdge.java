@@ -1,8 +1,5 @@
 package de.myxrcrs.corndoors.blocks;
 
-import javax.annotation.Nullable;
-
-import de.myxrcrs.corndoors.init.InitBlocks;
 import de.myxrcrs.corndoors.init.InitItems;
 import de.myxrcrs.corndoors.items.NaiveDoorItem;
 import net.minecraft.block.Block;
@@ -13,7 +10,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.state.EnumProperty;
 import net.minecraft.state.Property;
 import net.minecraft.state.StateContainer;
-import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
@@ -24,12 +20,9 @@ public class DNaiveDualDoorEdge extends AbstractDualDoorEdge {
     public static final EnumProperty<DoorWindowType> WINDOW = DNaiveDoor.WINDOW;
 
     public DNaiveDualDoorEdge(){
-        super(Properties.create(Material.WOOD),VERTICAL_POS,false,3);
+        super(Properties.create(Material.WOOD),VERTICAL_POS,3,false);
         this.setDefaultState(this.getDefaultState()
-            .with(IS_OPENED, false)
-            .with(FACING, Direction.NORTH)
             .with(VERTICAL_POS, 0)
-            .with(PART, DualDoorEdgePart.ALL)
             .with(WINDOW, DoorWindowType.GLASS));
     }
 
@@ -50,7 +43,8 @@ public class DNaiveDualDoorEdge extends AbstractDualDoorEdge {
 
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
-        builder.add(IS_OPENED,FACING,PART,VERTICAL_POS,WINDOW);
+        super.fillStateContainer(builder);
+        builder.add(VERTICAL_POS,WINDOW);
     }
 
 }

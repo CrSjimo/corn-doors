@@ -2,33 +2,18 @@ package de.myxrcrs.corndoors.blocks;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.function.Consumer;
+
 import javax.annotation.Nullable;
 
-import org.apache.commons.lang3.tuple.Pair;
 import org.apache.commons.lang3.tuple.Triple;
 
 import de.myxrcrs.corndoors.util.Matrix;
-import de.myxrcrs.corndoors.util.Zero;
-import net.minecraft.block.Block;
-import net.minecraft.block.BlockRenderType;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.block.HorizontalBlock;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.BlockItemUseContext;
-import net.minecraft.state.BooleanProperty;
-import net.minecraft.state.EnumProperty;
-import net.minecraft.state.IntegerProperty;
 import net.minecraft.state.Property;
-import net.minecraft.state.StateContainer;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.state.properties.DoorHingeSide;
-import net.minecraft.util.ActionResultType;
 import net.minecraft.util.Direction;
-import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
 import net.minecraft.world.IBlockReader;
@@ -48,18 +33,20 @@ public abstract class AbstractDoor extends AbstractIndividualDoor implements IRo
      * <img src="https://img.imgdb.cn/item/600102dd3ffa7d37b318a7dd.png" alt="the center of hinge">
      * the corner of hinge
      */
-    public boolean rotateWithinHinge;
     @Nullable public AbstractDualDoorEdge correspondingDualDoorEdgeBlock;
     
 
-    public AbstractDoor(Properties props, boolean rotateWithinHinge, Property<Integer> horizontalPosProp, Property<Integer> verticalPosProp, double thickness){
-        this(props, rotateWithinHinge, horizontalPosProp, verticalPosProp, thickness, null);
+    public AbstractDoor(Properties props, Property<Integer> horizontalPosProp, Property<Integer> verticalPosProp, double thickness, boolean isMiddle){
+        this(props, horizontalPosProp, verticalPosProp, thickness, isMiddle, null);
     }
 
-    public AbstractDoor(Properties props, boolean rotateWithinHinge, Property<Integer> horizontalPosProp, Property<Integer> verticalPosProp, double thickness, @Nullable AbstractDualDoorEdge correspondingDualDoorEdgeBlock){
-        super(props,horizontalPosProp,verticalPosProp,thickness);
-        this.rotateWithinHinge = rotateWithinHinge;
-        if(correspondingDualDoorEdgeBlock!=null&&(getSize(correspondingDualDoorEdgeBlock.VERTICAL_POS)!=getHeight(getDefaultState())||correspondingDualDoorEdgeBlock.rotateWithinHinge!=rotateWithinHinge)){
+    public AbstractDoor(Properties props, Property<Integer> horizontalPosProp, Property<Integer> verticalPosProp, AbstractDualDoorEdge correspondingDualDoorEdgeBlock){
+        this(props, horizontalPosProp, verticalPosProp, correspondingDualDoorEdgeBlock.thickness, correspondingDualDoorEdgeBlock.isMiddle, correspondingDualDoorEdgeBlock);
+    }
+
+    protected AbstractDoor(Properties props, Property<Integer> horizontalPosProp, Property<Integer> verticalPosProp, double thickness, boolean isMiddle, @Nullable AbstractDualDoorEdge correspondingDualDoorEdgeBlock){
+        super(props,horizontalPosProp,verticalPosProp,thickness, isMiddle);
+        if(correspondingDualDoorEdgeBlock!=null&&(getSize(correspondingDualDoorEdgeBlock.VERTICAL_POS)!=getHeight(getDefaultState()))){
             throw new IllegalArgumentException("Corresponding block not match.");
         }
         this.correspondingDualDoorEdgeBlock = correspondingDualDoorEdgeBlock;
@@ -98,16 +85,11 @@ public abstract class AbstractDoor extends AbstractIndividualDoor implements IRo
         boolean flag2 = isOpened;
         double[][] v = Matrix.getHingeVector(u, side);
         double[][] center = Matrix.add(a,Matrix.mul(v,horizontalPos));
-        if(!rotateWithinHinge){
+        if(!isMiddle){
             center = Matrix.add(center,Matrix.mul(Matrix.add(u,v),0.5));
         }
         double[][] target = Matrix.mul(new double[][]{{pos.getX(),pos.getZ(),center[0][0],center[0][1]}},flag!=flag2?rL:rR);
         return new RotateTarget(Matrix.matrixToHorizontalDirection(Matrix.mul(v,flag2?-1:1)),new BlockPos(target[0][0],pos.getY(),target[0][1]),side);
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return generateBoundaryBox(state,rotateWithinHinge);
     }
 
     public BlockPos getNeighborDualDoorEdgePos(BlockPos pos, BlockState state, DoorHingeSide side){
