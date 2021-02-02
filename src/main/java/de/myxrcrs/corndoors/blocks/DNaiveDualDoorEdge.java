@@ -1,7 +1,7 @@
 package de.myxrcrs.corndoors.blocks;
 
 import de.myxrcrs.corndoors.init.InitItems;
-import de.myxrcrs.corndoors.items.NaiveDoorItem;
+import de.myxrcrs.corndoors.items.PropertiedBlockItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -28,17 +28,13 @@ public class DNaiveDualDoorEdge extends AbstractDualDoorEdge {
 
     @Override
     public void fillRange(World world, DoorRange range, BlockState stateTemplate, BlockItemUseContext context){
-        DoorWindowType doorWindowType = ((NaiveDoorItem)context.getItem().getItem()).doorWindowType;
+        DoorWindowType doorWindowType = ((PropertiedBlockItem<DoorWindowType>)context.getItem().getItem()).property;
         super.fillRange(world, range, stateTemplate.with(WINDOW, doorWindowType), context);
     }
 
     @Override
     public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
-        switch(state.get(WINDOW)){
-            case GLASS:default: return new ItemStack(InitItems.D_NAIVE_DOOR_GLASS.get());
-            case FILM: return new ItemStack(InitItems.D_NAIVE_DOOR_FILM.get());
-            case NONE: return new ItemStack(InitItems.D_NAIVE_DOOR_NONE.get());
-        }
+        return new ItemStack(InitItems.find(this,state.get(WINDOW)));
     }
 
     @Override
