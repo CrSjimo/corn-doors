@@ -2,10 +2,9 @@
 	"parent": "minecraft:block/block",
 	"ambientocclusion": false,
 	"textures": {
-		"0": "block/glass",
 		"1": "block/iron_block",
 		"2": "block/blue_concrete",
-		"particle": "block/glass"
+		"particle": "block/iron_block"
 	},
 	"elements": [
 		{
