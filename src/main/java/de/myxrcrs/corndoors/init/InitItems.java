@@ -24,6 +24,8 @@ public enum InitItems {
     GLASS_PANEL_NONE(InitBlocks.GLASS_PANEL,BeltType.NONE),
     GLASS_PANEL_BLUE(InitBlocks.GLASS_PANEL,BeltType.BLUE),
 
+    CORN_IRON_PANEL(InitBlocks.CORN_IRON_PANEL),
+
     NAIVE_DOOR_GLASS(InitBlocks.NAIVE_DOOR,DoorWindowType.GLASS),
     NAIVE_DOOR_FILM(InitBlocks.NAIVE_DOOR,DoorWindowType.FILM),
     NAIVE_DOOR_NONE(InitBlocks.NAIVE_DOOR,DoorWindowType.NONE),
@@ -36,7 +38,7 @@ public enum InitItems {
 
     STRETCH_GATE(InitBlocks.STRETCH_GATE),
 
-    CHANNEL_INNER_DOOR(InitBlocks.CHANNEL_INNER_DOOR);
+    CHANNEL_INNER_DOOR(InitBlocks.CHANNEL_INNER_DOOR_EDGE);
 
     public static final void initialize(){
         // You NEVER need to know how this method works.

@@ -1,0 +1,22 @@
+{
+	"parent": "minecraft:block/block",
+	"ambientocclusion": false,
+	"textures": {
+		"1": "block/polished_andesite",
+		"particle": "block/polished_andesite"
+	},
+	"elements": [
+		{
+			"from": [0, -16, 0],
+			"to": [16, 0, 3],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, -8, 7.5]},
+			"faces": {
+				"north": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"east": {"uv": [13, 0, 16, 16], "texture": "#1"},
+				"south": {"uv": [0, 0, 16, 16], "texture": "#1"},
+				"west": {"uv": [0, 0, 3, 16], "texture": "#1"},
+				"down": {"uv": [0, 13, 16, 16], "texture": "#1"}
+			}
+		}
+	]
+}

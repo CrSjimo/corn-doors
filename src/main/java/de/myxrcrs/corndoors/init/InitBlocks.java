@@ -13,7 +13,8 @@ import net.minecraftforge.fml.RegistryObject;
 public enum InitBlocks {
 
     NAIVE_PANEL("naive_panel",NaivePanel::new),
-    GLASS_PANEL("glass_panel",GlassPanel::new),
+    GLASS_PANEL("glass_panel",GlassPanel::new,RenderType.getCutout()),
+    CORN_IRON_PANEL("corn_iron_panel",CornIronPanel::new),
 
     NAIVE_DOOR("naive_door",NaiveDoor::new,RenderType.getTranslucent()),
     GLASS_DOOR("glass_door",GlassDoor::new,RenderType.getCutout()),
