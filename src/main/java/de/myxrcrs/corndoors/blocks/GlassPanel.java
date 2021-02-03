@@ -30,7 +30,7 @@ public class GlassPanel extends AbstractPanel {
     public static final EnumProperty<BeltType> BELT_TYPE = EnumProperty.create("belt_type", BeltType.class);
 
     public GlassPanel(){
-        super(Properties.create(Material.GLASS),3,false);
+        super(Properties.create(Material.GLASS),3,true);
     }
 
     @Override
