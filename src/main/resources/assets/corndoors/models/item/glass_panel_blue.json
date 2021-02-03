@@ -1,0 +1,26 @@
+{
+	"parent": "minecraft:block/block",
+	"textures": {
+		"0": "corndoors:block/glass_noside",
+		"2": "block/blue_concrete",
+		"particle": "corndoors:block/glass_noside"
+	},
+	"elements": [
+		{
+			"from": [0, 0, 7],
+			"to": [16, 16, 9],
+			"faces": {
+				"north": {"texture": "#0"},
+				"south": {"texture": "#0"}
+			}
+		},
+		{
+			"from": [0, 6, 7],
+			"to": [16, 10, 9],
+			"faces": {
+				"north": {"texture": "#2"},
+				"south": {"texture": "#2"}
+			}
+		}
+	]
+}

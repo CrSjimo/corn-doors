@@ -1,0 +1,17 @@
+{
+	"parent": "minecraft:block/block",
+	"ambientocclusion": false,
+	"textures": {
+		"2": "block/blue_concrete"
+	},
+	"elements": [
+		{
+			"from": [0, 6, 7],
+			"to": [16, 10, 9],
+			"faces": {
+				"north": {"uv": [0, 6, 16, 10], "texture": "#2"},
+				"south": {"uv": [0, 6, 16, 10], "texture": "#2"}
+			}
+		}
+	]
+}
