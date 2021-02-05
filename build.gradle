@@ -13,7 +13,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'eclipse'
 apply plugin: 'maven-publish'
 
-version = '0.0.1b3-pre'
+version = '0.0.1b4-pre'
 group = 'de.myxrcrs.corndoors' // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = 'corndoors'
 
