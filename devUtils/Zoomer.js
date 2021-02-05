@@ -19,8 +19,8 @@ class Zoomer{
         [x0,y0,z0]=[x0,y0,z0].map(i=>parseFloat(i));
         const obj = JSON.parse(fs.readFileSync(path).toString());
         for(let i in obj.elements){
-            obj.elements[i].from = translate(obj.elements[i].from,x0,y0,z0,ratio);
-            obj.elements[i].to = translate(obj.elements[i].to,x0,y0,z0,ratio);
+            obj.elements[i].from = this.translate(obj.elements[i].from,x0,y0,z0,ratio);
+            obj.elements[i].to = this.translate(obj.elements[i].to,x0,y0,z0,ratio);
         }
         fs.writeFileSync(path,JSON.stringify(obj,undefined,4));
     }
