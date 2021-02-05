@@ -9,9 +9,9 @@
     "item.corndoors.naive_door_glass": "Naïve Door (Glass Window)",
     "item.corndoors.naive_door_film": "Naïve Door (Filmed Window)",
     "item.corndoors.naive_door_none": "Naïve Door (Windowless)",
-    "item.corndoors.d_naive_door_glass": "Naïve Dual Door (Glass Window)",
-    "item.corndoors.d_naive_door_film": "Naïve Dual Door (Filmed Window)",
-    "item.corndoors.d_naive_door_none": "Naïve Dual Door (Windowless)",
+    "item.corndoors.d_naive_door_edge_glass": "Naïve Dual Door (Glass Window)",
+    "item.corndoors.d_naive_door_edge_film": "Naïve Dual Door (Filmed Window)",
+    "item.corndoors.d_naive_door_edge_none": "Naïve Dual Door (Windowless)",
     
     "block.corndoors.naive_door": "Naïve Door",
     "block.corndoors.d_naive_door": "Naïve Dual Door",

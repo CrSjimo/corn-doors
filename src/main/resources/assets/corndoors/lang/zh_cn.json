@@ -9,9 +9,9 @@
     "item.corndoors.naive_door_glass": "平凡的门（玻璃窗）",
     "item.corndoors.naive_door_film": "平凡的门（镀膜窗）",
     "item.corndoors.naive_door_none": "平凡的门（无窗）",
-    "item.corndoors.d_naive_door_glass": "平凡的双开门（玻璃窗）",
-    "item.corndoors.d_naive_door_film": "平凡的双开门（镀膜窗）",
-    "item.corndoors.d_naive_door_none": "平凡的双开门（无窗）",
+    "item.corndoors.d_naive_door_edge_glass": "平凡的双开门（玻璃窗）",
+    "item.corndoors.d_naive_door_edge_film": "平凡的双开门（镀膜窗）",
+    "item.corndoors.d_naive_door_edge_none": "平凡的双开门（无窗）",
     
     "block.corndoors.naive_door": "平凡的门",
     "block.corndoors.d_naive_door": "平凡的双开门",

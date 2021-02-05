@@ -17,7 +17,7 @@ public class CornIronPanel extends AbstractPanel {
     public static final BooleanProperty NEAR_ANDESITE = BooleanProperty.create("near_andesite");
 
     public CornIronPanel(){
-        super(Properties.create(Material.IRON),3,false);
+        super(Properties.create(Material.IRON),5.001,false);
     }
 
     public boolean getNearAndesite(IWorld world,BlockPos pos,Direction facing){

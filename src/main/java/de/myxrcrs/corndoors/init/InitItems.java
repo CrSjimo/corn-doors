@@ -32,13 +32,15 @@ public enum InitItems {
 
     GLASS_DOOR(InitBlocks.GLASS_DOOR),
 
-    D_NAIVE_DOOR_GLASS(InitBlocks.D_NAIVE_DOOR,DoorWindowType.GLASS),
-    D_NAIVE_DOOR_FILM(InitBlocks.D_NAIVE_DOOR,DoorWindowType.FILM),
-    D_NAIVE_DOOR_NONE(InitBlocks.D_NAIVE_DOOR,DoorWindowType.NONE),
+    D_NAIVE_DOOR_GLASS(InitBlocks.D_NAIVE_DOOR_EDGE,DoorWindowType.GLASS),
+    D_NAIVE_DOOR_FILM(InitBlocks.D_NAIVE_DOOR_EDGE,DoorWindowType.FILM),
+    D_NAIVE_DOOR_NONE(InitBlocks.D_NAIVE_DOOR_EDGE,DoorWindowType.NONE),
 
     STRETCH_GATE(InitBlocks.STRETCH_GATE),
 
-    CHANNEL_INNER_DOOR(InitBlocks.CHANNEL_INNER_DOOR_EDGE);
+    CHANNEL_INNER_DOOR(InitBlocks.CHANNEL_INNER_DOOR_EDGE),
+
+    CHANNEL_OUTER_DOOR(InitBlocks.CHANNEL_OUTER_DOOR_EDGE);
 
     public static final void initialize(){
         // You NEVER need to know how this method works.

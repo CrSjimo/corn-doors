@@ -1,5 +1,5 @@
 {
-	"parent": "corndoors:item/d_naive_door",
+	"parent": "corndoors:item/d_naive_door_edge",
 	"ambientocclusion": false,
 	"textures": {
 		"0": "block/stripped_dark_oak_log",
