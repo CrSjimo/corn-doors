@@ -190,10 +190,10 @@ public abstract class AbstractTemplateDoor extends AbstractPanel {
      */
     public int getToggleSound(BlockState stateBeforeToggled){
         boolean opened = stateBeforeToggled.get(IS_OPENED);
-        if(stateBeforeToggled.getMaterial()==Material.IRON){
-            return opened ? 1011 : 1005;
-        }else{
+        if(stateBeforeToggled.getMaterial()==Material.WOOD){
             return opened ? 1012 : 1006;
+        }else{
+            return opened ? 1011 : 1005;
         }
     }
 
