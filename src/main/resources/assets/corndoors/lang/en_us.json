@@ -12,10 +12,12 @@
     "item.corndoors.d_naive_door_edge_glass": "Naïve Dual Door (Glass Window)",
     "item.corndoors.d_naive_door_edge_film": "Naïve Dual Door (Filmed Window)",
     "item.corndoors.d_naive_door_edge_none": "Naïve Dual Door (Windowless)",
-    
-    "block.corndoors.naive_door": "Naïve Door",
-    "block.corndoors.d_naive_door": "Naïve Dual Door",
-    "block.corndoors.d_naive_door_edge": "Naïve Dual Door Edge",
     "block.corndoors.glass_door": "Glass Door",
-    "block.corndoors.stretch_gate": "Stretch Gate"
+    "block.corndoors.stretch_gate": "Stretch Gate",
+    "block.corndoors.channel_inner_door_edge": "3F Channel Door (Inner)",
+    "block.corndoors.channel_outer_door_edge": "3F Channel Door (Outer)",
+    "block.corndoors.naive_panel": "Naïve Panel",
+    "item.corndoors.glass_panel_none": "Glass Panel (Beltless)",
+    "item.corndoors.glass_panel_blue": "Glass Panel (Blue Belt)",
+    "block.corndoors.corn_iron_panel": "Corn Iron Panel"
 }
