@@ -1,0 +1,434 @@
+{
+    "multipart": [
+        {
+            "when": {
+                "vertical_pos": 0,
+                "facing": "north",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c1l"
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 1,
+                "facing": "north",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c2l"
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 2,
+                "facing": "north",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c3l"
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 3,
+                "facing": "north",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c4l"
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 4,
+                "facing": "north",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c5l"
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 0,
+                "facing": "north",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c1r"
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 1,
+                "facing": "north",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c2r"
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 2,
+                "facing": "north",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c3r"
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 3,
+                "facing": "north",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c4r"
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 4,
+                "facing": "north",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c5r"
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 0,
+                "facing": "east",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c1l",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 1,
+                "facing": "east",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c2l",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 2,
+                "facing": "east",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c3l",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 3,
+                "facing": "east",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c4l",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 4,
+                "facing": "east",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c5l",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 0,
+                "facing": "east",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c1r",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 1,
+                "facing": "east",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c2r",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 2,
+                "facing": "east",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c3r",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 3,
+                "facing": "east",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c4r",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 4,
+                "facing": "east",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c5r",
+                "y": 90
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 0,
+                "facing": "south",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c1l",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 1,
+                "facing": "south",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c2l",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 2,
+                "facing": "south",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c3l",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 3,
+                "facing": "south",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c4l",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 4,
+                "facing": "south",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c5l",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 0,
+                "facing": "south",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c1r",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 1,
+                "facing": "south",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c2r",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 2,
+                "facing": "south",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c3r",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 3,
+                "facing": "south",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c4r",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 4,
+                "facing": "south",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c5r",
+                "y": 180
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 0,
+                "facing": "west",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c1l",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 1,
+                "facing": "west",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c2l",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 2,
+                "facing": "west",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c3l",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 3,
+                "facing": "west",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c4l",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 4,
+                "facing": "west",
+                "part": "left|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c5l",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 0,
+                "facing": "west",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c1r",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 1,
+                "facing": "west",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c2r",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 2,
+                "facing": "west",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c3r",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 3,
+                "facing": "west",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c4r",
+                "y": 270
+            }
+        },
+        {
+            "when": {
+                "vertical_pos": 4,
+                "facing": "west",
+                "part": "right|all"
+            },
+            "apply": {
+                "model": "corndoors:block/channel_outer_c5r",
+                "y": 270
+            }
+        }
+    ]
+}

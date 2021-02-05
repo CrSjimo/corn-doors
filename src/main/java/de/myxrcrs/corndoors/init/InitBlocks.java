@@ -22,7 +22,9 @@ public enum InitBlocks {
     D_NAIVE_DOOR("d_naive_door",DNaiveDoor::new,RenderType.getTranslucent()),
     STRETCH_GATE("stretch_gate",StretchGate::new,RenderType.getCutout()),
     CHANNEL_INNER_DOOR_EDGE("channel_inner_door_edge",ChannelInnerDualDoor::new,RenderType.getCutout()),
-    CHANNEL_INNER_DOOR("channel_inner_door",ChannelInnerDoor::new,RenderType.getCutout());
+    CHANNEL_INNER_DOOR("channel_inner_door",ChannelInnerDoor::new,RenderType.getCutout()),
+    CHANNEL_OUTER_DOOR_EDGE("channel_outer_door_edge",ChannelOuterDualDoor::new,RenderType.getCutout()),
+    CHANNEL_OUTER_DOOR("channel_outer_door",ChannelOuterDoor::new,RenderType.getCutout());
 
     public static final void initialize(){
         // You NEVER need to know how this method works.
