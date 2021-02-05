@@ -23,7 +23,7 @@ class NormalGenerator{
         //console.log(matched);
         let obj = opt=='--apply-glass'?{multipart:[]}:{variants:{}};
         for(let [key,angle] of this.dirs){
-            obj.multipart.push({
+            if(opt=='--apply-glass')obj.multipart.push({
                 when:{facing:key},
                 apply:{
                     model:'corndoors:block/general_glass_noside',
@@ -58,7 +58,7 @@ class NormalGenerator{
     }
 
     static main(args){
-        this.generate(...args.slice(2))
+        this.generate(...args.slice(2));
     }
 }
 
