@@ -31,6 +31,8 @@ public class GlassPanel extends AbstractPanel {
 
     public GlassPanel(){
         super(Properties.create(Material.GLASS),3,true);
+        this.setDefaultState(this.getDefaultState()
+            .with(BELT_TYPE,BeltType.NONE));
     }
 
     @Override

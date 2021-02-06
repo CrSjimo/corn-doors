@@ -2,7 +2,8 @@
     "multipart": [
         {
             "when":{
-                "facing":"south"
+                "facing":"south",
+                "type":"double"
             },
             "apply":{
                 "model":"corndoors:block/corn_iron_panel"
@@ -10,7 +11,8 @@
         },
         {
             "when":{
-                "facing":"west"
+                "facing":"west",
+                "type":"double"
             },
             "apply":{
                 "model":"corndoors:block/corn_iron_panel",
@@ -19,7 +21,8 @@
         },
         {
             "when":{
-                "facing":"north"
+                "facing":"north",
+                "type":"double"
             },
             "apply":{
                 "model":"corndoors:block/corn_iron_panel",
@@ -28,10 +31,93 @@
         },
         {
             "when":{
-                "facing":"east"
+                "facing":"east",
+                "type":"double"
             },
             "apply":{
                 "model":"corndoors:block/corn_iron_panel",
+                "y":270
+            }
+        },
+
+
+        {
+            "when":{
+                "facing":"south",
+                "type":"top"
+            },
+            "apply":{
+                "model":"corndoors:block/corn_iron_panel_glass_top"
+            }
+        },
+        {
+            "when":{
+                "facing":"west",
+                "type":"top"
+            },
+            "apply":{
+                "model":"corndoors:block/corn_iron_panel_glass_top",
+                "y":90
+            }
+        },
+        {
+            "when":{
+                "facing":"north",
+                "type":"top"
+            },
+            "apply":{
+                "model":"corndoors:block/corn_iron_panel_glass_top",
+                "y":180
+            }
+        },
+        {
+            "when":{
+                "facing":"east",
+                "type":"top"
+            },
+            "apply":{
+                "model":"corndoors:block/corn_iron_panel_glass_top",
+                "y":270
+            }
+        },
+
+
+        {
+            "when":{
+                "facing":"south",
+                "type":"bottom"
+            },
+            "apply":{
+                "model":"corndoors:block/corn_iron_panel_glass_bottom"
+            }
+        },
+        {
+            "when":{
+                "facing":"west",
+                "type":"bottom"
+            },
+            "apply":{
+                "model":"corndoors:block/corn_iron_panel_glass_bottom",
+                "y":90
+            }
+        },
+        {
+            "when":{
+                "facing":"north",
+                "type":"bottom"
+            },
+            "apply":{
+                "model":"corndoors:block/corn_iron_panel_glass_bottom",
+                "y":180
+            }
+        },
+        {
+            "when":{
+                "facing":"east",
+                "type":"bottom"
+            },
+            "apply":{
+                "model":"corndoors:block/corn_iron_panel_glass_bottom",
                 "y":270
             }
         },

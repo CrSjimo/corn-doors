@@ -14,11 +14,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class NaiveDoor extends AbstractDoor {
+public class NaiveDoor extends AbstractDoor implements INaiveDoor {
 
     public static final Property<Integer> HORIZONTAL_POS = createHorizontalPosProperty(2);
     public static final Property<Integer> VERTICAL_POS = createVerticalPosProperty(4);
-    public static final EnumProperty<DoorWindowType> WINDOW = EnumProperty.create("window", DoorWindowType.class);
     
     public NaiveDoor(){
         super(Block.Properties.create(Material.WOOD).notSolid(),HORIZONTAL_POS,VERTICAL_POS,3,false);

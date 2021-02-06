@@ -11,11 +11,10 @@ import net.minecraft.state.Property;
 import net.minecraft.state.StateContainer;
 import net.minecraft.world.World;
 
-public class DNaiveDoor extends AbstractDoorWithDualDoorEdge {
+public class DNaiveDoor extends AbstractDoorWithDualDoorEdge implements INaiveDoor {
 
     public static final Property<Integer> HORIZONTAL_POS = createHorizontalPosProperty(1);
     public static final Property<Integer> VERTICAL_POS = createVerticalPosProperty(4);
-    public static final EnumProperty<DoorWindowType> WINDOW = EnumProperty.create("window", DoorWindowType.class);
     
     public DNaiveDoor(){
         super(Block.Properties.create(Material.WOOD).notSolid(),HORIZONTAL_POS,VERTICAL_POS,(AbstractDualDoorEdge)InitBlocks.D_NAIVE_DOOR_EDGE.get());

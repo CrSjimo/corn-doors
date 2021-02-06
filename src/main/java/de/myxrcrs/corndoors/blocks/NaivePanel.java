@@ -33,6 +33,8 @@ public class NaivePanel extends AbstractPanel {
 
     public NaivePanel(){
         super(Properties.create(Material.WOOD),3,false);
+        this.setDefaultState(this.getDefaultState()
+            .with(TEXTURE_DIRECTION,TextureDirection.HORIZONTAL));
     }
 
     @Override

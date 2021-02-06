@@ -5,6 +5,7 @@ import com.mojang.brigadier.CommandDispatcher;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import de.myxrcrs.corndoors.blocks.INaiveDoor.DoorWindowType;
 import de.myxrcrs.corndoors.command.ToggleAllDoorsWithinCommand;
 import de.myxrcrs.corndoors.command.ToggleDoorNearCommand;
 import de.myxrcrs.corndoors.init.InitBlocks;
@@ -60,7 +61,7 @@ public class CornDoors
     public static final ItemGroup ITEM_GROUP = new ItemGroup("corndoors") {
         @Override
         public ItemStack createIcon() {
-            return new ItemStack(InitItems.NAIVE_DOOR_GLASS.get());
+            return new ItemStack(InitItems.NAIVE_DOOR.get(DoorWindowType.GLASS));
         }
     };
 }

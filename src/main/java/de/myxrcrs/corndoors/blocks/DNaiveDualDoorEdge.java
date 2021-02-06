@@ -14,10 +14,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class DNaiveDualDoorEdge extends AbstractDualDoorEdge {
+public class DNaiveDualDoorEdge extends AbstractDualDoorEdge implements INaiveDoor {
     
     public static final Property<Integer> VERTICAL_POS = createVerticalPosProperty(4);
-    public static final EnumProperty<DoorWindowType> WINDOW = DNaiveDoor.WINDOW;
 
     public DNaiveDualDoorEdge(){
         super(Properties.create(Material.WOOD),VERTICAL_POS,3,false);

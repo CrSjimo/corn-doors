@@ -14,7 +14,7 @@ public class RegistryEvents {
         InitBlocks[] blockRegs = InitBlocks.class.getEnumConstants();
         for(InitBlocks blockReg:blockRegs){
             if(blockReg.renderType==null)continue;
-            RenderTypeLookup.setRenderLayer(blockReg.get(), blockReg.renderType);
+            RenderTypeLookup.setRenderLayer(blockReg.get(), blockReg.renderType.getRenderType());
         }
     }
 }

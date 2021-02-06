@@ -1,23 +1,57 @@
 package de.myxrcrs.corndoors.blocks;
 
+import de.myxrcrs.corndoors.init.InitItems;
+import de.myxrcrs.corndoors.items.PropertiedBlockItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItemUseContext;
+import net.minecraft.item.ItemStack;
 import net.minecraft.state.BooleanProperty;
+import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.util.Direction;
+import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 
 public class CornIronPanel extends AbstractPanel {
 
+    public static enum CornIronPanelType implements IStringSerializable{
+        TOP("top"),
+        BOTTOM("bottom"),
+        DOUBLE("double"),
+        NONE("none");
+
+        private final String name;
+
+        CornIronPanelType(String name){
+            this.name=name;
+        }
+
+        @Override
+        public String getName() {
+            return name;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+
     public static final BooleanProperty NEAR_ANDESITE = BooleanProperty.create("near_andesite");
+
+    public static final EnumProperty<CornIronPanelType> TYPE = EnumProperty.create("type", CornIronPanelType.class);
 
     public CornIronPanel(){
         super(Properties.create(Material.IRON),5.001,false);
+        this.setDefaultState(this.getDefaultState()
+            .with(NEAR_ANDESITE,false)
+            .with(TYPE, CornIronPanelType.DOUBLE));
     }
 
     public boolean getNearAndesite(IWorld world,BlockPos pos,Direction facing){
@@ -46,9 +80,17 @@ public class CornIronPanel extends AbstractPanel {
     }
 
     @Override
+    public ItemStack getItem(IBlockReader worldIn, BlockPos pos, BlockState state) {
+        return new ItemStack(InitItems.find(this,state.get(TYPE)));
+    }
+
+    @Override
     public BlockState onPlacedThenSetState(BlockItemUseContext context,BlockState stateTemplate){
         BlockState state = super.onPlacedThenSetState(context, stateTemplate);
-        return state.with(NEAR_ANDESITE, getNearAndesite(context.getWorld(), context.getPos(), state.get(FACING)));
+        CornIronPanelType type = ((PropertiedBlockItem<CornIronPanelType>)context.getItem().getItem()).property;
+        return state
+            .with(TYPE, type)
+            .with(NEAR_ANDESITE, getNearAndesite(context.getWorld(), context.getPos(), state.get(FACING)));
     }
 
     @Override
@@ -59,6 +101,6 @@ public class CornIronPanel extends AbstractPanel {
     @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> builder) {
         super.fillStateContainer(builder);
-        builder.add(NEAR_ANDESITE);
+        builder.add(NEAR_ANDESITE,TYPE);
     }
 }
