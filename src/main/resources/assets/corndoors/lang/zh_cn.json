@@ -19,5 +19,8 @@
     "block.corndoors.naive_panel": "平凡的门板",
     "item.corndoors.glass_panel_none": "玻璃门板（无条带）",
     "item.corndoors.glass_panel_blue": "玻璃门板（蓝色条带）",
-    "block.corndoors.corn_iron_panel": "玉米合金门板"
+    "item.corndoors.corn_iron_panel_none": "玉米合金门板（无窗）",
+    "item.corndoors.corn_iron_panel_top": "玉米合金门板（顶部窗）",
+    "item.corndoors.corn_iron_panel_bottom": "玉米合金门板（底部窗）",
+    "item.corndoors.corn_iron_panel_full": "玉米合金（划掉）玻璃门板"
 }

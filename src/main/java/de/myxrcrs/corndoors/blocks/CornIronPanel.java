@@ -23,7 +23,7 @@ public class CornIronPanel extends AbstractPanel {
     public static enum CornIronPanelType implements IStringSerializable{
         TOP("top"),
         BOTTOM("bottom"),
-        DOUBLE("double"),
+        FULL("full"),
         NONE("none");
 
         private final String name;
@@ -51,7 +51,7 @@ public class CornIronPanel extends AbstractPanel {
         super(Properties.create(Material.IRON),5.001,false);
         this.setDefaultState(this.getDefaultState()
             .with(NEAR_ANDESITE,false)
-            .with(TYPE, CornIronPanelType.DOUBLE));
+            .with(TYPE, CornIronPanelType.NONE));
     }
 
     public boolean getNearAndesite(IWorld world,BlockPos pos,Direction facing){

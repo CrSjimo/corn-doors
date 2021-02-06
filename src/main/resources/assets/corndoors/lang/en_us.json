@@ -19,5 +19,8 @@
     "block.corndoors.naive_panel": "Naïve Panel",
     "item.corndoors.glass_panel_none": "Glass Panel (Beltless)",
     "item.corndoors.glass_panel_blue": "Glass Panel (Blue Belt)",
-    "block.corndoors.corn_iron_panel": "Corn Iron Panel"
+    "item.corndoors.corn_iron_panel_none": "Corn Iron Panel (Windowless)",
+    "item.corndoors.corn_iron_panel_top": "Corn Iron Panel (Top Window)",
+    "item.corndoors.corn_iron_panel_bottom": "Corn Iron Panel (Bottom Window)",
+    "item.corndoors.corn_iron_panel_full": "Corn Iron Panel (Window)"
 }

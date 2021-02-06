@@ -3,7 +3,7 @@
         {
             "when":{
                 "facing":"south",
-                "type":"double"
+                "type":"none"
             },
             "apply":{
                 "model":"corndoors:block/corn_iron_panel"
@@ -12,7 +12,7 @@
         {
             "when":{
                 "facing":"west",
-                "type":"double"
+                "type":"none"
             },
             "apply":{
                 "model":"corndoors:block/corn_iron_panel",
@@ -22,7 +22,7 @@
         {
             "when":{
                 "facing":"north",
-                "type":"double"
+                "type":"none"
             },
             "apply":{
                 "model":"corndoors:block/corn_iron_panel",
@@ -32,7 +32,7 @@
         {
             "when":{
                 "facing":"east",
-                "type":"double"
+                "type":"none"
             },
             "apply":{
                 "model":"corndoors:block/corn_iron_panel",
@@ -118,6 +118,47 @@
             },
             "apply":{
                 "model":"corndoors:block/corn_iron_panel_glass_bottom",
+                "y":270
+            }
+        },
+
+
+        {
+            "when":{
+                "facing":"south",
+                "type":"full"
+            },
+            "apply":{
+                "model":"corndoors:block/corn_iron_panel_glass_full"
+            }
+        },
+        {
+            "when":{
+                "facing":"west",
+                "type":"full"
+            },
+            "apply":{
+                "model":"corndoors:block/corn_iron_panel_glass_full",
+                "y":90
+            }
+        },
+        {
+            "when":{
+                "facing":"north",
+                "type":"full"
+            },
+            "apply":{
+                "model":"corndoors:block/corn_iron_panel_glass_full",
+                "y":180
+            }
+        },
+        {
+            "when":{
+                "facing":"east",
+                "type":"full"
+            },
+            "apply":{
+                "model":"corndoors:block/corn_iron_panel_glass_full",
                 "y":270
             }
         },
