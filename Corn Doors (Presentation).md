@@ -52,20 +52,20 @@ graph LR
 	IRotateDoor-.->AbstractDualDoorEdge
 ```
 
-| 注册属性名                | 方块id                    | 有无对应物品                      | 方块类                 | 渲染类型    |
-| ------------------------- | ------------------------- | --------------------------------- | ---------------------- | ----------- |
-| `NAIVE_PANEL`             | `naive_panel`             | ✔                                 | `NaivePanel`           | 默认        |
-| `GLASS_PANEL`             | `glass_panel`             | ✔<br/>`GlassPanel.BeltType`       | `GlassPanel`           | Cutout      |
-| `CORN_IRON_PANEL`         | `corn_iron_panel`         | ✔                                 | `CornIronPanel`        | 默认        |
-| `NAIVE_DOOR`              | `naive_door`              | ✔<br/>`INaiveDoor.DoorWindowType` | `NaiveDoor`            | Translucent |
-| `GLASS_DOOR`              | `glass_door`              | ✔                                 | `GlassDoor`            | Cutout      |
-| `D_NAIVE_DOOR_EDGE`       | `d_naive_door_edge`       | ✔<br>`INaiveDoor.DoorWindowType`  | `DNaiveDualDoorEdge`   | Translucent |
-| `D_NAIVE_DOOR`            | `d_naive_door`            | ❌                                 | `DNaiveDoor`           | Translucent |
-| `STRETCH_GATE`            | `stretch_gate`            | ✔                                 | `StretchGate`          | Cutout      |
-| `CHANNEL_INNER_DOOR_EDGE` | `channel_inner_door_edge` | ✔                                 | `ChannelInnerDualDoor` | Cutout      |
-| `CHANNEL_INNER_DOOR`      | `channel_inner_door`      | ❌                                 | `ChannelInnerDoor`     | Cutout      |
-| `CHANNEL_OUTER_DOOR_EDGE` | `channel_outer_door_edge` | ✔                                 | `ChannelOuterDualDoor` | Cutout      |
-| `CHANNEL_OUTER_DOOR`      | `channel_outer_door`      | ❌                                 | `ChannelOuterDoor`     | Cutout      |
+| 注册属性名                | 方块id                    | 有无对应物品                          | 方块类                 | 渲染类型    |
+| ------------------------- | ------------------------- | ------------------------------------- | ---------------------- | ----------- |
+| `NAIVE_PANEL`             | `naive_panel`             | ✔                                     | `NaivePanel`           | 默认        |
+| `GLASS_PANEL`             | `glass_panel`             | ✔<br/>`GlassPanel.BeltType`           | `GlassPanel`           | Cutout      |
+| `CORN_IRON_PANEL`         | `corn_iron_panel`         | ✔<br>`CornIronPanel.CornIronPanelType | `CornIronPanel`        | Cutout      |
+| `NAIVE_DOOR`              | `naive_door`              | ✔<br/>`INaiveDoor.DoorWindowType`     | `NaiveDoor`            | Translucent |
+| `GLASS_DOOR`              | `glass_door`              | ✔                                     | `GlassDoor`            | Cutout      |
+| `D_NAIVE_DOOR_EDGE`       | `d_naive_door_edge`       | ✔<br>`INaiveDoor.DoorWindowType`      | `DNaiveDualDoorEdge`   | Translucent |
+| `D_NAIVE_DOOR`            | `d_naive_door`            | ❌                                     | `DNaiveDoor`           | Translucent |
+| `STRETCH_GATE`            | `stretch_gate`            | ✔                                     | `StretchGate`          | Cutout      |
+| `CHANNEL_INNER_DOOR_EDGE` | `channel_inner_door_edge` | ✔                                     | `ChannelInnerDualDoor` | Cutout      |
+| `CHANNEL_INNER_DOOR`      | `channel_inner_door`      | ❌                                     | `ChannelInnerDoor`     | Cutout      |
+| `CHANNEL_OUTER_DOOR_EDGE` | `channel_outer_door_edge` | ✔                                     | `ChannelOuterDualDoor` | Cutout      |
+| `CHANNEL_OUTER_DOOR`      | `channel_outer_door`      | ❌                                     | `ChannelOuterDoor`     | Cutout      |
 
 关于方块注册的更多内容，请参见[InitBlocks.java](src/main/java/de/myxrcrs/corndoors/init/InitBlocks.java)
 
@@ -85,6 +85,7 @@ graph LR
 | `TEXTURE_DIRECTION`     | `texture_direction` | `NaivePanel`                           | `de.my.co.bl.Na.TextureDirection`                   | 木质纹理方向                                 | 放置时                       |
 | `BELT_TYPE`             | `belt_type`         | `GlassPanel`                           | `de.my.co.bl.Gl.BeltType`                           | 玻璃门板的条带类型（蓝色条带或无条带）       | 物品类型                     |
 | `NEAR_ANDESITE`         | `near_andesite`     | `CornIronPanel`                        | `boolean`                                           | 门板下前方是否为平滑安山岩                   | 放置时/方块更新              |
+| `TYPE`                  | `type`              | `CornIronPanel`                        | `de.my.co.bl.co.CornIronPanelType`                  | 门板的窗户类型（无窗，顶部，底部或充满）     | 物品类型                     |
 
 # 命令`/toggledoor`
 
