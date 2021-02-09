@@ -18,7 +18,7 @@ public class NaivePanel extends AbstractPanel {
         TextureDirection(String name){
             this.name = name;
         }
-        public String getName(){return name;}
+        public String getString(){return name;}
         public String toString(){return name;}
         public static TextureDirection fromFace(Direction face){
             if(face==Direction.UP||face==Direction.DOWN){

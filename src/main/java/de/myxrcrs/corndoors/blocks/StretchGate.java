@@ -19,7 +19,7 @@ public class StretchGate extends AbstractStretchDoor {
         HorizontalModelType(String name){
             this.name=name;
         }
-        public String getName(){
+        public String getString(){
             return name;
         }
         public String toString(){
@@ -35,7 +35,7 @@ public class StretchGate extends AbstractStretchDoor {
         VerticalModelType(String name){
             this.name=name;
         }
-        public String getName(){
+        public String getString(){
             return name;
         }
         public String toString(){

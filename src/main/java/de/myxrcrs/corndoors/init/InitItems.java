@@ -77,7 +77,7 @@ public enum InitItems {
         Map<T,RegistryObject<Item>> map = new HashMap<>();
         for(T property:clazz.getEnumConstants()){
             map.put(property,CornDoors.ITEMS.register(
-                blockReg.reg.getId().getPath()+'_'+property.getName(),
+                blockReg.reg.getId().getPath()+'_'+property.getString(),
                 ()->new PropertiedBlockItem<T>(property,blockReg.get(),new Item.Properties().group(CornDoors.ITEM_GROUP))
             ));
         }

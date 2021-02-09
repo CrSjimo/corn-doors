@@ -19,10 +19,8 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.IStringSerializable;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
-import net.minecraft.world.IBlockReader;
+import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
 
 public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implements IRotateDoor {
@@ -41,12 +39,12 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
 
         public String name;
 
-        public String getName(){
+        public String getString(){
             return name;
         }
 
         public String toString(){
-            return getName();
+            return getString();
         }
 
         private static int getFlag(@Nullable DualDoorEdgePart part){
@@ -243,8 +241,8 @@ public abstract class AbstractDualDoorEdge extends AbstractTemplateDoor implemen
     }
 
     @Nullable
-    public static DoorHingeSide getSideFromHit(BlockState state, BlockPos pos, Vec3d hitVec){
-        Vec3d vec = hitVec.subtract(pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5);
+    public static DoorHingeSide getSideFromHit(BlockState state, BlockPos pos, Vector3d hitVec){
+        Vector3d vec = hitVec.subtract(pos.getX()+0.5,pos.getY()+0.5,pos.getZ()+0.5);
         double[][] v = Matrix.getHingeVector(Matrix.horizontalDirectionToMatrix(state.get(FACING)),DoorHingeSide.LEFT);
         double t = v[0][0]*vec.getX()+v[0][1]*vec.getZ();
         LOGGER.debug("hitvec = "+vec);

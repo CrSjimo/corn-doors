@@ -19,7 +19,7 @@ public interface INaiveDoor {
             this.name = name;
         }
 
-        public String getName(){
+        public String getString(){
             return name;
         }
 

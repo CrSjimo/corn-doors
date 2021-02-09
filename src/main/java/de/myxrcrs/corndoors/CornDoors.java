@@ -16,9 +16,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -31,8 +31,8 @@ public class CornDoors
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public static final DeferredRegister<Block> BLOCKS = new DeferredRegister<>(ForgeRegistries.BLOCKS, MOD_ID);
-    public static final DeferredRegister<Item> ITEMS = new DeferredRegister<>(ForgeRegistries.ITEMS, CornDoors.MOD_ID);
+    public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MOD_ID);
+    public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CornDoors.MOD_ID);
 
     public CornDoors() {
 
@@ -48,9 +48,9 @@ public class CornDoors
     @Mod.EventBusSubscriber
     public static class CommandEventHandler {
         @SubscribeEvent
-        public static void onServerStaring(FMLServerStartingEvent event) {
+        public static void onCommandsRegister(RegisterCommandsEvent event) {
             LOGGER.debug("HELLO server starting.");
-            CommandDispatcher<CommandSource> dispatcher = event.getCommandDispatcher();
+            CommandDispatcher<CommandSource> dispatcher = event.getDispatcher();
             ToggleDoorNearCommand.register(dispatcher);
             ToggleAllDoorsWithinCommand.register(dispatcher);
 

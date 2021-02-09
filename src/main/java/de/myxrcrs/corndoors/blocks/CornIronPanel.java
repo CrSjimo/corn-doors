@@ -33,7 +33,7 @@ public class CornIronPanel extends AbstractPanel {
         }
 
         @Override
-        public String getName() {
+        public String getString() {
             return name;
         }
 

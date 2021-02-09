@@ -1,21 +1,16 @@
 package de.myxrcrs.corndoors.command;
 
-import java.util.Set;
 import java.util.TreeSet;
 
 import javax.annotation.Nullable;
 
-import com.mojang.brigadier.Command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
-import com.mojang.brigadier.builder.RequiredArgumentBuilder;
-import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.exceptions.SimpleCommandExceptionType;
 
 import org.apache.commons.lang3.tuple.Pair;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -85,7 +80,7 @@ public class ToggleDoorNearCommand {
             BlockPos currentPos = p.getLeft();
             BlockState currentState = p.getRight();
             AbstractTemplateDoor doorBlock = (AbstractTemplateDoor)currentState.getBlock();
-            if(currentState.has(BlockStateProperties.DOOR_HINGE)){
+            if(currentState.hasProperty(BlockStateProperties.DOOR_HINGE)){
                 if(
                     (isToggleOpen==null) || 
                     (isToggleOpen && !currentState.get(AbstractTemplateDoor.IS_OPENED)) ||

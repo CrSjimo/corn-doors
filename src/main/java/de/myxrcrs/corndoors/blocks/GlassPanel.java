@@ -23,7 +23,7 @@ public class GlassPanel extends AbstractPanel {
         BeltType(String name){
             this.name = name;
         }
-        public String getName(){return name;}
+        public String getString(){return name;}
         public String toString(){return name;}
     }
 
