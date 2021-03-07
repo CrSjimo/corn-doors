@@ -2,7 +2,6 @@
 	"parent": "minecraft:block/block",
 	"ambientocclusion": false,
 	"textures": {
-		"0": "block/glass",
 		"1": "corndoors:block/corn_iron_block",
 		"particle": "block/glass"
 	},
@@ -44,8 +43,8 @@
 			}
 		},
 		{
-			"from": [15, 2, 6.5],
-			"to": [16, 12, 7],
+			"from": [15, 0, 6.501],
+			"to": [16, 6, 6.999],
 			"rotation": {"angle": 0, "axis": "y", "origin": [15, 6.36364, 8]},
 			"faces": {
 				"north": {"uv": [8, 4, 9, 14], "texture": "#1"},
@@ -57,14 +56,14 @@
 			}
 		},
 		{
-			"from": [11, 6, 6.501],
+			"from": [0, 6, 6.501],
 			"to": [16, 7, 6.999],
 			"rotation": {"angle": 0, "axis": "y", "origin": [15, 6.36364, 8]},
 			"faces": {
-				"north": {"uv": [8, 9, 13, 10], "texture": "#1"},
-				"south": {"uv": [3, 9, 8, 10], "texture": "#1"},
-				"up": {"uv": [3, 6.501, 8, 6.999], "texture": "#1"},
-				"down": {"uv": [3, 9.001, 8, 9.499], "texture": "#1"}
+				"north": {"uv": [0, 9, 16, 10], "texture": "#1"},
+				"south": {"uv": [0, 9, 16, 10], "texture": "#1"},
+				"up": {"uv": [0, 6.501, 16, 6.999], "texture": "#1"},
+				"down": {"uv": [0, 9.001, 16, 9.499], "texture": "#1"}
 			}
 		},
 		{
@@ -93,8 +92,8 @@
 			}
 		},
 		{
-			"from": [15, 2, 9],
-			"to": [16, 12, 9.5],
+			"from": [15, 0, 9.001],
+			"to": [16, 6, 9.499],
 			"rotation": {"angle": 0, "axis": "y", "origin": [15, 6.36364, 8]},
 			"faces": {
 				"north": {"uv": [8, 4, 9, 14], "texture": "#1"},
@@ -106,14 +105,14 @@
 			}
 		},
 		{
-			"from": [11, 6, 9.001],
+			"from": [0, 6, 9.001],
 			"to": [16, 7, 9.499],
 			"rotation": {"angle": 0, "axis": "y", "origin": [15, 6.36364, 8]},
 			"faces": {
-				"north": {"uv": [8, 9, 13, 10], "texture": "#1"},
-				"south": {"uv": [3, 9, 8, 10], "texture": "#1"},
-				"up": {"uv": [3, 9.001, 8, 9.499], "texture": "#1"},
-				"down": {"uv": [3, 6.501, 8, 6.999], "texture": "#1"}
+				"north": {"uv": [0, 9, 16, 10], "texture": "#1"},
+				"south": {"uv": [0, 9, 16, 10], "texture": "#1"},
+				"up": {"uv": [0, 9.001, 16, 9.499], "texture": "#1"},
+				"down": {"uv": [0, 6.501, 16, 6.999], "texture": "#1"}
 			}
 		}
 	],
@@ -130,7 +129,7 @@
 				{
 					"name": "group",
 					"origin": [19, 17, 17],
-					"children": [7, 8, 9, 10]
+					"children": [7, 8]
 				}
 			]
 		}

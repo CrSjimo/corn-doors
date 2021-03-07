@@ -2,7 +2,6 @@
 	"parent": "minecraft:block/block",
 	"ambientocclusion": false,
 	"textures": {
-		"0": "block/glass",
 		"1": "corndoors:block/corn_iron_block",
 		"particle": "block/glass"
 	},
@@ -42,17 +41,6 @@
 			}
 		},
 		{
-			"from": [12, 6, 6.501],
-			"to": [16, 7, 6.999],
-			"rotation": {"angle": 0, "axis": "y", "origin": [17, 6.36364, 8]},
-			"faces": {
-				"north": {"uv": [8, 9, 12, 10], "texture": "#1"},
-				"south": {"uv": [4, 9, 8, 10], "texture": "#1"},
-				"up": {"uv": [4, 6.501, 8, 6.999], "texture": "#1"},
-				"down": {"uv": [4, 9.001, 8, 9.499], "texture": "#1"}
-			}
-		},
-		{
 			"from": [12, 1, 9],
 			"to": [16, 2, 9.5],
 			"rotation": {"angle": 0, "axis": "y", "origin": [17, 6.36364, 8]},
@@ -61,17 +49,6 @@
 				"south": {"uv": [4, 14, 8, 15], "texture": "#1"},
 				"up": {"uv": [4, 9, 8, 9.5], "texture": "#1"},
 				"down": {"uv": [4, 6.5, 8, 7], "texture": "#1"}
-			}
-		},
-		{
-			"from": [12, 6, 9.001],
-			"to": [16, 7, 9.499],
-			"rotation": {"angle": 0, "axis": "y", "origin": [17, 6.36364, 8]},
-			"faces": {
-				"north": {"uv": [8, 9, 12, 10], "texture": "#1"},
-				"south": {"uv": [4, 9, 8, 10], "texture": "#1"},
-				"up": {"uv": [4, 9.001, 8, 9.499], "texture": "#1"},
-				"down": {"uv": [4, 6.501, 8, 6.999], "texture": "#1"}
 			}
 		}
 	],
@@ -83,12 +60,12 @@
 				{
 					"name": "group",
 					"origin": [19, 17, 17],
-					"children": [3, 4]
+					"children": [3]
 				},
 				{
 					"name": "group",
 					"origin": [19, 17, 17],
-					"children": [5, 6]
+					"children": []
 				}
 			]
 		}

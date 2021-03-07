@@ -2,8 +2,8 @@
 	"parent": "minecraft:block/block",
 	"ambientocclusion": false,
 	"textures": {
-		"1": "block/iron_block",
-		"particle": "block/iron_block"
+		"1": "block/coal_block",
+		"particle": "block/coal_block"
 	},
 	"elements": [
 		{

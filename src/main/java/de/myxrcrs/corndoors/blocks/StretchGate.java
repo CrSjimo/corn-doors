@@ -43,12 +43,12 @@ public class StretchGate extends AbstractStretchDoor {
         }
     }
 
-    public static final Property<Integer> HORIZONTAL_POS = createHorizontalPosProperty(10);
+    public static final Property<Integer> HORIZONTAL_POS = createHorizontalPosProperty(22);
     public static final Property<Integer> VERTICAL_POS = createVerticalPosProperty(3);
     public static final EnumProperty<HorizontalModelType> HORIZONTAL_MODEL_TYPE = EnumProperty.create("h_type", HorizontalModelType.class);
     public static final EnumProperty<VerticalModelType> VERTICAL_MODEL_TYPE = EnumProperty.create("v_type", VerticalModelType.class);
     public StretchGate(){
-        super(Properties.create(Material.IRON),HORIZONTAL_POS,VERTICAL_POS,8,true,3);
+        super(Properties.create(Material.IRON),HORIZONTAL_POS,VERTICAL_POS,8,true,6);
         this.setDefaultState(this.getDefaultState()
             .with(HORIZONTAL_POS,0)
             .with(VERTICAL_POS,0)
