@@ -1,0 +1,20 @@
+{
+    "variants": {
+        "facing=north":{
+            "model": "corndoors:block/iron_panel",
+            "y": 0
+        },
+        "facing=east":{
+            "model": "corndoors:block/iron_panel",
+            "y": 90
+        },
+        "facing=south":{
+            "model": "corndoors:block/iron_panel",
+            "y": 180
+        },
+        "facing=west":{
+            "model": "corndoors:block/iron_panel",
+            "y": 270
+        }
+    }
+}

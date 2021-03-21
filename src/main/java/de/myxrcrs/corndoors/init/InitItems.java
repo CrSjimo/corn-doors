@@ -44,7 +44,11 @@ public enum InitItems {
 
     CHANNEL_INNER_DOOR(InitBlocks.CHANNEL_INNER_DOOR_EDGE),
 
-    CHANNEL_OUTER_DOOR(InitBlocks.CHANNEL_OUTER_DOOR_EDGE);
+    CHANNEL_OUTER_DOOR(InitBlocks.CHANNEL_OUTER_DOOR_EDGE),
+    
+    IRON_4B_DOOR(InitBlocks.IRON_4B_DOOR_EDGE),
+    
+    IRON_5B_DOOR(InitBlocks.IRON_5B_DOOR_EDGE),;
 
     public static final void initialize(){
         // You NEVER need to know how this method works.

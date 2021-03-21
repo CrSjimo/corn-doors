@@ -1,0 +1,94 @@
+{
+    "multipart": [
+        {
+            "when": {"part": "left|all", "facing": "north"},
+            "apply": {
+                "model": "corndoors:block/iron_panel_left",
+                "y": 0
+            }
+        },
+        {
+            "when": {"part": "left|all", "facing": "north", "vertical_pos": 1},
+            "apply": {
+                "model": "corndoors:block/iron_handle",
+                "y": 0
+            }
+        },
+        {
+            "when": {"part": "right|all", "facing": "north"},
+            "apply": {
+                "model": "corndoors:block/iron_panel_right",
+                "y": 0
+            }
+        },
+
+
+        {
+            "when": {"part": "left|all", "facing": "east"},
+            "apply": {
+                "model": "corndoors:block/iron_panel_left",
+                "y": 90
+            }
+        },
+        {
+            "when": {"part": "left|all", "facing": "east", "vertical_pos": 1},
+            "apply": {
+                "model": "corndoors:block/iron_handle",
+                "y": 90
+            }
+        },
+        {
+            "when": {"part": "right|all", "facing": "east"},
+            "apply": {
+                "model": "corndoors:block/iron_panel_right",
+                "y": 90
+            }
+        },
+
+
+        {
+            "when": {"part": "left|all", "facing": "south"},
+            "apply": {
+                "model": "corndoors:block/iron_panel_left",
+                "y": 180
+            }
+        },
+        {
+            "when": {"part": "left|all", "facing": "south", "vertical_pos": 1},
+            "apply": {
+                "model": "corndoors:block/iron_handle",
+                "y": 180
+            }
+        },
+        {
+            "when": {"part": "right|all", "facing": "south"},
+            "apply": {
+                "model": "corndoors:block/iron_panel_right",
+                "y": 180
+            }
+        },
+
+
+        {
+            "when": {"part": "left|all", "facing": "west"},
+            "apply": {
+                "model": "corndoors:block/iron_panel_left",
+                "y": 270
+            }
+        },
+        {
+            "when": {"part": "left|all", "facing": "west", "vertical_pos": 1},
+            "apply": {
+                "model": "corndoors:block/iron_handle",
+                "y": 270
+            }
+        },
+        {
+            "when": {"part": "right|all", "facing": "west"},
+            "apply": {
+                "model": "corndoors:block/iron_panel_right",
+                "y": 270
+            }
+        }
+    ]
+}
